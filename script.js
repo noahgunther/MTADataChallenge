@@ -1,3 +1,13 @@
+// Todo:
+// - Get the rest of the data needed from MTA datasets.
+// - Figure out what live data is possible to access and include.
+// - Create CSS for tile divs (use color of popular subway line)
+// - Create CSS for "signs" (info panels)
+// - Create CSS for live data (old style LCD cells)
+// - Create graphics for: MTA/NG logo, subway header, bus header, subway cars, buses, motor cars, parking spots, subway line logos, bus line logos, general MTA seasoning
+// - Write script for subway cars / buses / cars / parking spots layout and scroll or animation
+// - Other stuff: have a roosevelt island tram go by (include stats?), include map graphics for station highlighting
+
 import './style.css'
 
 window.addEventListener("load", init, false);
