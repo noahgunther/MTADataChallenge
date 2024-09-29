@@ -1,6 +1,96 @@
 body {
     font-family: 'Helvetica', 'Arial', sans-serif;
     font-weight: bold;
+    font-size: 16px;
     background-image: url(./media/tile.png);
     background-repeat: repeat;
+}
+
+.panel {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 0px;
+    width: 60%;
+    max-width: 800px;
+    min-width: 550px;
+    color: white;
+    background-color: rgb(22, 22, 22);
+    overflow: hidden;
+    box-shadow: 5px 10px 10px rgb(73, 73, 73);
+}
+
+.panelline {
+    margin-left: 0px;
+    margin-top: 20px;
+    width: 200%;
+    height: 3px;
+    background-color: white;
+}
+
+.paneltitle {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    margin-left: 8px;
+    font-size: 40px;
+}
+
+.paneltext {
+    margin-top: 0px;
+    margin-left: 8px;
+}
+
+.panelsublogo {
+    width: 40px;
+    height: 40px;
+}
+
+.panellink {
+    color: white;
+    text-decoration: none;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.footermiddle {
+    width: 38%;
+    background-color: rgb(235, 0, 8);
+    top: 0px;
+}
+
+.footerright {
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    top: 0px;
+}
+
+.footerexit {
+    width: 100%;
+    height: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 35px;
+    font-size: 100px;
+    line-height: 80px;
+}
+
+.footerarrow {
+    padding: 5px;
+    height: 95px;
+}
+
+.footerlogos {
+    margin: 10px;
+}
+
+.footersublogo {
+    right: 0px;
+    width: 40px;
+    height: 40px;
 }

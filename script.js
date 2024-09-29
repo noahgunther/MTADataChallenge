@@ -1,12 +1,15 @@
 // Todo:
 // - Get the rest of the data needed from MTA datasets.
+// - Add data for most popular stops in each borough?
 // - Figure out what live data is possible to access and include.
+// - Add commas to big numbers
 // - Create CSS for tile divs (use color of popular subway line)
-// - Create CSS for "signs" (info panels)
 // - Create CSS for live data (old style LCD cells)
+// - Add drop downs for more info / sources (e.g. number of individual riders estimated at two trips per rider. source: mta.whatever)
 // - Create graphics for: MTA/NG logo, subway header, bus header, subway cars, buses, motor cars, parking spots, subway line logos, bus line logos, general MTA seasoning
 // - Write script for subway cars / buses / cars / parking spots layout and scroll or animation
-// - Other stuff: have a roosevelt island tram go by (include stats?), include map graphics for station highlighting
+// - Create JS for "back to top"
+// - Other stuff: have a roosevelt island tram go by (include stats?), include map graphics or google maps link for station highlighting
 
 import './style.css'
 
@@ -14,7 +17,7 @@ window.addEventListener("load", init, false);
 
 function init() {
 
-    function dateConstructor(subStart, range) {
+    /*function dateConstructor(subStart, range) {
         const dates = [];
         for (let i=0; i<range; i++) {
             const date = new Date();
@@ -28,10 +31,10 @@ function init() {
             subStart++;
         }
         return dates;
-    }
+    }*/
 
-    function loadData(element, dates) {
-        let dateString = '';
+    function loadData(element) {
+        /*let dateString = '';
         for (let i=0; i<dates.length; i++) {
             dateString += "date='" + dates[i];
             if (i != dates.length-1) {
@@ -40,7 +43,7 @@ function init() {
             else {
                 dateString += "'";
             }
-        }
+        }*/
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {
             const response = JSON.parse(this.responseText);
@@ -52,10 +55,11 @@ function init() {
             if (element == 'subway') document.getElementById(element).innerHTML = totalRidership;
             else if (element == 'bus') document.getElementById(element).innerHTML = totalRidership;
         }
-        xhttp.open("GET", "http://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$where=" + dateString);
+        //xhttp.open("GET", "http://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$where=" + dateString);
+        xhttp.open("GET", "http://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$limit=7&$order=date+DESC");
         xhttp.send();
     }
 
-    loadData('subway', dateConstructor(5, 7));
-    loadData('bus', dateConstructor(5, 7));
+    loadData('subway');
+    loadData('bus');
 }
