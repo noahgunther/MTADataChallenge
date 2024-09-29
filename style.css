@@ -4,6 +4,8 @@ body {
     font-size: 16px;
     background-image: url(./media/tile.png);
     background-repeat: repeat;
+    overflow-x: hidden;
+    margin: 0px;
 }
 
 .panel {
@@ -93,4 +95,17 @@ body {
     right: 0px;
     width: 40px;
     height: 40px;
+}
+
+.end {
+    bottom: 0px;
+    height: 150px;
+    width: 100%;
+    background-image: url(./media/wood.png);
+}
+
+.caution {
+    top: 0px;
+    height: 15%;
+    background: repeating-linear-gradient(45deg, #ffd900, #ffd900 20px, #000000 20px, #000000 40px);
 }
