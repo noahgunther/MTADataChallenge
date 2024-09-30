@@ -8,12 +8,29 @@
 
     <body>
 
+        <!--Start-->
+        <div class="start"></div>
+        <div class="warningstrip"></div>
+
         <!--Title-->
         <div class="headerborder1">
             <div class="headerborder0">
                 <div class="titlepanel">
                     <div class="panelline"></div>
                     <p class="paneltitle">Lately on the MTA</p>
+                    
+                    <p class="paneltext">Every day in New York City, people ride the subway over three million times, and ride a bus over a million times.</p>
+                    <p class="paneltext">This website presents data collected and distributed by the MTA. More info and extensive data collections available at <a class="panellink" style="text-decoration: underline;" href="https://data.ny.gov" target="_blank">ny.data.gov</a>.</p>
+                    
+                    <a class="panellink" href="https://data.ny.gov" target="_blank">
+                        <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
+                        <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">Data from data.ny.gov</p>
+                    </a>
+                    <a class="panellink" href="https://noahgunther.com" target="_blank">
+                        <img class="sublogo" src="./media/subwayG.png" alt="Subway G line logo" style="float: right; margin-left: 0px;"></img>
+                        <img class="sublogo" src="./media/subwayN.png" alt="Subway N line logo" style="float: right; margin-right: 5px;"></img>
+                        <p class="panelsmalltext" style="float: right; margin-top: 22px; text-decoration: underline;">Created by Noah Gunther, 2024</p>
+                    </a>
                 </div>
             </div>
         </div>
@@ -24,13 +41,20 @@
             <p class="paneltitle">Today</p>
             <p class="paneltext">So far today, people have entered the New York City subway XXXXXXX times.</p>
             <p class="paneltext">People have boarded a bus in New York City XXXXXXX times today.</p>
+            <a class="panellink" href="https://api.mta.info/#/" target="_blank">
+                <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
+                <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">Realtime MTA data</p>
+            </a>
         </div>
+
+        <!--Tile divider-->
+        <div class="tilediv"></div>
 
         <!--Subway-->
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">The Past Week on the Subway</p>
-            <p class="paneltext">This past week, people rode the NYC Subway a total of <text id="subwayweeklyridership"></text> times, collectively paying $<text id="subwayweeklyfaretotal"></text> at $2.90 a fare.</p>
+            <p class="paneltext">This past week, people rode the NYC Subway a total of <text id="subwayweeklyridership"></text> times, collectively paying $<text id="subwayweeklyfaretotal"></text> in fares.</p>
             <p class="paneltext">The most popular day of the week was XXXday, the XXth. XXXXXXX people rode the subway that day.</p>
             <p class="paneltext">There were XXX subway cars in service this past week. All those cars would look something like this:</p>
             <p class="paneltext">The most popular line was the X, with a ridership of XXXXXX, and the most popular stop was XXXXXX in XXX(borough) where XXXXXX people boarded the train.</p>
@@ -39,13 +63,20 @@
             <p class="paneltext">In Manhattan, the busiest stop was XXXXXX</p>
             <p class="paneltext">In Queens, the busiest stop was XXXXXX</p>
             <p class="paneltext">On Staten Island, the busiest stop was XXXXXX</p>
+            <a class="panellink" href="https://data.ny.gov" target="_blank">
+                <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
+                <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">New York City Subway data</p>
+            </a>
         </div>
+
+        <!--Tile divider-->
+        <div class="tilediv"></div>
 
         <!--Bus-->
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">The Past Week on the Bus</p>
-            <p class="paneltext">This past week, people rode the bus in NYC a total of <text id="busweeklyridership"></text> times, collectively paying $<text id="busweeklyfaretotal"></text> at $2.90 a fare.</p>
+            <p class="paneltext">This past week, people rode the bus in NYC a total of <text id="busweeklyridership"></text> times, collectively paying $<text id="busweeklyfaretotal"></text> in fares.</p>
             <p class="paneltext">The most popular day of the week was XXXday, the XXth. XXXXXXX people rode the bus that day.</p>
             <p class="paneltext">There were XXX buses in service this past week. All those buses might look something like this:</p>
             <p class="paneltext">The most popular bus route was the XXXXXX, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people boarded the bus.</p>
@@ -54,7 +85,14 @@
             <p class="paneltext">In Manhattan, the busiest stop was XXXXXX</p>
             <p class="paneltext">In Queens, the busiest stop was XXXXXX</p>
             <p class="paneltext">On Staten Island, the busiest stop was XXXXXX</p>
+            <a class="panellink" href="https://data.ny.gov" target="_blank">
+                <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
+                <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">New York City Bus data</p>
+            </a>
         </div>
+
+        <!--Tile divider-->
+        <div class="tilediv"></div>
 
         <!--Cars-->
         <div class="panel">
@@ -63,7 +101,14 @@
             <p class="paneltext">If all those people who rode the subway or the bus this past week had driven a car instead, it might look something like this:</p>
             <p class="paneltext">And all the parking spaces they would need would look a little like this:</p>
             <p class="paneltext">In total, there are XXXX parking spaces for personal vehicles in NYC, or about XX% the number of people taking public transit.</p>
+            <a class="panellink" href="https://data.ny.gov" target="_blank">
+                <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
+                <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">DMV Parking Data</p>
+            </a>
         </div>
+
+        <!--Tile divider-->
+        <div class="tilediv"></div>
 
         <!--Year-->
         <div class="panel">
@@ -71,7 +116,12 @@
             <p class="paneltitle">The Past Year</p>
             <p class="paneltext">Over the past year, the most popular subway line has been the X, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people have boarded the train.</p>
             <p class="paneltext">The most popular bus route in the past year was the XXXXXX, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people boarded the bus.</p>
-            <p class="paneltext">All together, people rode the NYC subway XXXXXXXXX times in the past year, and people rode the NYC bus XXXXXXXX times.</p>
+            <p class="paneltext">All together, people rode the NYC subway <text id="subwayyearlyridership"></text> times over the past year! People rode the NYC bus <text id="busyearlyridership"></text> times!</p>
+            <p class="paneltext">That's an average of <text id="subwaydailyridershipavg"></text> rides per day on the subway, and <text id="busdailyridershipavg"></text> per day on the bus.</p>
+            <a class="panellink" href="https://data.ny.gov" target="_blank">
+                <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
+                <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">MTA data</p>
+            </a>
         </div>
 
         <!--Footer-->
@@ -79,14 +129,14 @@
             <div class="panelline"></div>
             <div class="footer">
                 <div class="footerleft">
-                    <img class="footerarrow" src="./media/arrowUp.png"></img>
+                    <img class="footerarrow" src="./media/arrowUp.png" alt="Up arrow"></img>
                 </div>
                 <div class="footermiddle">
                     <div class="footerexit">Top</div>
                 </div>
                 <div class="footerright">
                     <p class="paneltitle">Lately on the MTA</p>
-                    <a class="panellink" href="http://noahgunther.com" target="_blank">
+                    <a class="panellink" href="https://noahgunther.com" target="_blank">
                         <p class="paneltext" style="text-decoration: underline;">Created by Noah Gunther, 2024</p>
                         <div class="footerlogos">
                             <img class="footersublogo" src="./media/subwayN.png" alt="Subway N line logo"></img>

@@ -1,11 +1,26 @@
 body {
     font-family: 'Helvetica', 'Arial', sans-serif;
     font-weight: bold;
-    font-size: 16px;
     background-image: url(./media/tile.png);
     background-repeat: repeat;
     overflow-x: hidden;
     margin: 0px;
+}
+
+.start{
+    top: 0px;
+    height: 150px;
+    width: 100%;
+    background-image: url(./media/warningStrip.png);
+    background-size: 235px;
+    border-bottom: solid rgb(182, 151, 28) 2px;
+}
+
+.warningstrip {
+    top: 0px;
+    height: 35px;
+    background-image: url(./media/warningStripEdge.png);
+    box-shadow: 0px 10px 10px rgb(73, 73, 73);
 }
 
 .headerborder1 {
@@ -16,7 +31,7 @@ body {
     width: 65%;
     max-width: 840px;
     min-width: 590px;
-    padding: 12px;
+    padding: 30px;
     box-shadow: 5px 10px 10px rgb(73, 73, 73);
     background-image: url(./media/greenMetal.png);
     border-radius: 3px;
@@ -35,8 +50,22 @@ body {
     color: white;
     background-color: rgb(22, 22, 22);
     overflow: hidden;
-    border: solid rgb(18, 18, 18);
+    border: solid rgb(18, 18, 18) 3px;
     border-radius: 2px;
+}
+
+.sublogo {
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+}
+
+.tilediv {
+    height: 150px;
+    width: 100%;
+    background-image: url(./media/tileG.png);
+    background-size: 50px;
+    border: solid rgb(78, 78, 78) 1px;
 }
 
 .panel {
@@ -66,13 +95,21 @@ body {
     margin-top: 0px;
     margin-bottom: 10px;
     margin-left: 8px;
-    font-size: 40px;
+    font-size: 44px;
 }
 
 .paneltext {
     margin-top: 0px;
     margin-left: 8px;
     margin-right: 10px;
+    font-size: 18px;
+}
+
+.panelsmalltext {
+    margin-top: 0px;
+    margin-left: 6px;
+    margin-right: 10px;
+    font-size: 12px;
 }
 
 .panelsublogo {
@@ -124,7 +161,6 @@ body {
 }
 
 .footersublogo {
-    right: 0px;
     width: 40px;
     height: 40px;
 }
