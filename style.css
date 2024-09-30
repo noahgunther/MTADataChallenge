@@ -8,6 +8,37 @@ body {
     margin: 0px;
 }
 
+.headerborder1 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    width: 65%;
+    max-width: 840px;
+    min-width: 590px;
+    padding: 12px;
+    box-shadow: 5px 10px 10px rgb(73, 73, 73);
+    background-image: url(./media/greenMetal.png);
+    border-radius: 3px;
+}
+
+.headerborder0 {
+    padding: 10px;
+    background-image: url(./media/greenMetal.png);
+    border-radius: 3px;
+    border: solid rgb(75, 75, 75) 1px;
+}
+
+.titlepanel {
+    padding: 0px;
+    padding-bottom: 10px;
+    color: white;
+    background-color: rgb(22, 22, 22);
+    overflow: hidden;
+    border: solid rgb(18, 18, 18);
+    border-radius: 2px;
+}
+
 .panel {
     margin-left: auto;
     margin-right: auto;
@@ -41,6 +72,7 @@ body {
 .paneltext {
     margin-top: 0px;
     margin-left: 8px;
+    margin-right: 10px;
 }
 
 .panelsublogo {

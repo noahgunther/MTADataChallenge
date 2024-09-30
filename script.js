@@ -1,12 +1,12 @@
 // Todo:
 // - Get the rest of the data needed from MTA datasets.
 // - Add data for most popular stops in each borough?
+// - Add some graphs for activity by borough or that kind of thing
 // - Figure out what live data is possible to access and include.
-// - Add commas to big numbers
 // - Create CSS for tile divs (use color of popular subway line)
 // - Create CSS for live data (old style LCD cells)
 // - Add drop downs for more info / sources (e.g. number of individual riders estimated at two trips per rider. source: mta.whatever)
-// - Create graphics for: Page top(?), Page header (subway green metal / lamp), MTA/NG logo, subway header, bus header, subway cars, buses, motor cars, parking spots, subway line logos, bus line logos, general MTA seasoning
+// - Create graphics for: Page top (yellow hazard edge), MTA/NG logo for header, subway header, bus header, subway cars, buses, motor cars, parking spots, subway line logos, bus line logos, general MTA seasoning
 // - Write script for subway cars / buses / cars / parking spots layout and scroll or animation
 // - Create JS for "back to top"
 // - Other stuff: have a roosevelt island tram go by (include stats?), include map graphics or google maps link for station highlighting
@@ -52,8 +52,14 @@ function init() {
                 if (element == 'subway') totalRidership += parseInt(response[i].subways_total_estimated_ridership);
                 else if (element == 'bus') totalRidership += parseInt(response[i].buses_total_estimated_ridersip);
             }
-            if (element == 'subway') document.getElementById(element).innerHTML = totalRidership;
-            else if (element == 'bus') document.getElementById(element).innerHTML = totalRidership;
+            if (element == 'subway') {
+                document.getElementById('subwayweeklyridership').innerHTML = totalRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                document.getElementById('subwayweeklyfaretotal').innerHTML = (totalRidership * 2.9).toFixed(3).slice(0, -1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            else if (element == 'bus') {
+                document.getElementById('busweeklyridership').innerHTML = totalRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                document.getElementById('busweeklyfaretotal').innerHTML = (totalRidership * 2.9).toFixed(3).slice(0, -1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
         }
         //xhttp.open("GET", "http://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$where=" + dateString);
         xhttp.open("GET", "http://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$limit=7&$order=date+DESC");
