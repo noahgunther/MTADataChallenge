@@ -6,7 +6,7 @@
 // - Create CSS for tile divs (use color of popular subway line)
 // - Create CSS for live data (old style LCD cells)
 // - Add drop downs for more info / sources (e.g. number of individual riders estimated at two trips per rider. source: mta.whatever)
-// - Create graphics for: MTA/NG logo, subway header, bus header, subway cars, buses, motor cars, parking spots, subway line logos, bus line logos, general MTA seasoning
+// - Create graphics for: Page top(?), Page header (subway green metal / lamp), MTA/NG logo, subway header, bus header, subway cars, buses, motor cars, parking spots, subway line logos, bus line logos, general MTA seasoning
 // - Write script for subway cars / buses / cars / parking spots layout and scroll or animation
 // - Create JS for "back to top"
 // - Other stuff: have a roosevelt island tram go by (include stats?), include map graphics or google maps link for station highlighting

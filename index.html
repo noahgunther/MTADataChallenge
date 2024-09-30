@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <script type="module" src="./script.js"></script>
         <title>Lately on the MTA</title>
     </head>
+
     <body>
+
+        <!--Title-->
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">Lately on the MTA</p>
@@ -13,30 +17,56 @@
             <div class="panelline"></div>
             <p class="paneltitle">Today</p>
             <p class="paneltext">So far today, people have entered the New York City subway XXXXXXX times.</p>
+            <p class="paneltext">People have boarded a bus in New York City XXXXXXX times today.</p>
         </div>
+
+        <!--Subway-->
         <div class="panel">
             <div class="panelline"></div>
-            <p class="paneltitle">This Week</p>
+            <p class="paneltitle">The Past Week on the Subway</p>
             <p class="paneltext">This past week, people rode the NYC Subway a total of <text id="subway"></text> times, collectively paying $XXXXXXX at $2.90 a fare.</p>
+            <p class="paneltext">The most popular day of the week was XXXday, the XXth. XXXXXXX people rode the subway that day.</p>
+            <p class="paneltext">There were XXX subway cars in service this past week. All those cars would look something like this:</p>
+            <p class="paneltext">The most popular line was the X, with a ridership of XXXXXX, and the most popular stop was XXXXXX in XXX(borough) where XXXXXX people boarded the train.</p>
+            <p class="paneltext">In the Bronx, the busiest stop was XXXXXX</p>
+            <p class="paneltext">In Brooklyn, the busiest stop was XXXXXX</p>
+            <p class="paneltext">In Manhattan, the busiest stop was XXXXXX</p>
+            <p class="paneltext">In Queens, the busiest stop was XXXXXX</p>
+            <p class="paneltext">On Staten Island, the busiest stop was XXXXXX</p>
         </div>
-        <div>The most popular day of the week was XXXday, the XXth. XXXXXXX people rode the subway that day.</div>
-        <div>There were XXX subway cars in service this past week. All those cars would look something like this:</div>
-        <div>The most popular line was the X, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people boarded the train.</div>
-        <div>The busiest borough for subway ridership was XXXXXX.</div>
 
-        <div>So far today, people have boarded a bus in New York City XXXXXXX times.</div>
-        <div>This past week, people rode the bus in NYC a total of <text id="bus"></text> times, collectively paying $XXXXXXX at $2.90 a fare.</div>
-        <div>There were XXX buses in service this past week. All those buses might look something like this:</div>
-        <div>The most popular bus route was the XXXXXX, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people boarded the bus.</div>
-        <div>The busiest borough for bus ridership was XXXXXX.</div>
+        <!--Bus-->
+        <div class="panel">
+            <div class="panelline"></div>
+            <p class="paneltitle">The Past Week on the Bus</p>
+            <p class="paneltext">This past week, people rode the bus in NYC a total of <text id="bus"></text> times, collectively paying $XXXXXXX at $2.90 a fare.</p>
+            <p class="paneltext">The most popular day of the week was XXXday, the XXth. XXXXXXX people rode the bus that day.</p>
+            <p class="paneltext">There were XXX buses in service this past week. All those buses might look something like this:</p>
+            <p class="paneltext">The most popular bus route was the XXXXXX, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people boarded the bus.</p>
+            <p class="paneltext">In the Bronx, the busiest stop was XXXXXX</p>
+            <p class="paneltext">In Brooklyn, the busiest stop was XXXXXX</p>
+            <p class="paneltext">In Manhattan, the busiest stop was XXXXXX</p>
+            <p class="paneltext">In Queens, the busiest stop was XXXXXX</p>
+            <p class="paneltext">On Staten Island, the busiest stop was XXXXXX</p>
+        </div>
 
-        <div>If all those people who rode the subway or the bus this past week had driven a car instead, it might look something like this:</div>
-        <div>And all the parking spaces they would need would look a little like this:</div>
-        <div>In total, there are XXXX parking spaces for personal vehicles in NYC, or about XX% the number of people taking public transit.</div>
+        <!--Cars-->
+        <div class="panel">
+            <div class="panelline"></div>
+            <p class="paneltitle">Motor Vehicles</p>
+            <p class="paneltext">If all those people who rode the subway or the bus this past week had driven a car instead, it might look something like this:</p>
+            <p class="paneltext">And all the parking spaces they would need would look a little like this:</p>
+            <p class="paneltext">In total, there are XXXX parking spaces for personal vehicles in NYC, or about XX% the number of people taking public transit.</p>
+        </div>
 
-        <div>Over the past year, the most popular subway line has been the X, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people have boarded the train.</div>
-        <div>The most popular bus route in the past year was the XXXXXX, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people boarded the bus.</div>
-        <div>All together, people rode the NYC subway XXXXXXXXX times in the past year, and people rode the NYC bus XXXXXXXX times.</div>
+        <!--Year-->
+        <div class="panel">
+            <div class="panelline"></div>
+            <p class="paneltitle">The Past Year</p>
+            <p class="paneltext">Over the past year, the most popular subway line has been the X, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people have boarded the train.</p>
+            <p class="paneltext">The most popular bus route in the past year was the XXXXXX, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people boarded the bus.</p>
+            <p class="paneltext">All together, people rode the NYC subway XXXXXXXXX times in the past year, and people rode the NYC bus XXXXXXXX times.</p>
+        </div>
 
         <!--Footer-->
         <div class="panel">
