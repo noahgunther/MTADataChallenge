@@ -89,7 +89,6 @@ body {
 .tilediv {
     height: 150px;
     width: 100%;
-    background-image: url(./media/tileS.png);
     background-size: 50px;
     border: solid rgb(78, 78, 78) 1px;
 }
@@ -133,7 +132,7 @@ body {
 
 .panelsmalltext {
     margin-top: 0px;
-    margin-left: 6px;
+    margin-left: 8px;
     margin-right: 10px;
     font-size: 12px;
 }
