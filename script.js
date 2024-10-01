@@ -171,7 +171,8 @@ function init() {
 
     const tileColors = ['123', '456', '7', 'ACE', 'BDFM', 'G', 'JZ', 'L', 'NQRW', 'S'];
     const tileDivs = document.getElementsByClassName('tilediv');
+    const tileCol = tileColors[Math.floor(Math.random() * tileColors.length)];
     for (let i=0; i<tileDivs.length; i++) {
-        tileDivs[i].style = 'background-image: url(./media/tile' + tileColors[Math.floor(Math.random() * tileColors.length)] + '.png);'
+        tileDivs[i].style = 'background-image: url(./media/tile' + tileCol + '.png);'
     }
 }
