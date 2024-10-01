@@ -4,6 +4,7 @@
     <head>
         <script type="module" src="./script.js"></script>
         <title>Lately on the MTA</title>
+        <link rel="icon" type="image/x-icon" href="/media/favicon.ico">
     </head>
 
     <body>
@@ -13,6 +14,9 @@
         <div class="warningstrip"></div>
 
         <!--Title-->
+        <div class="lamps">
+            <img class="lamp" src="./media/lamp.png"></img>
+        </div>
         <div class="headerborder1">
             <div class="headerborder0">
                 <div class="titlepanel">
@@ -48,21 +52,35 @@
         </div>
 
         <!--Tile divider-->
+        <div class="tiledivborder"></div>
         <div class="tilediv"></div>
+        <div class="tiledivborder"></div>
+
+        <div class="panel">
+            <div class="panelline"></div>
+            <p class="paneltitle">ROOSEVELT ISLAND TRAM VISUALIZATION AND DATA HERE</p>
+        </div>
+
+        <!--Tile divider-->
+        <div class="tiledivborder"></div>
+        <div class="tilediv"></div>
+        <div class="tiledivborder"></div>
 
         <!--Subway-->
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">The Past Week on the Subway</p>
-            <p class="paneltext">This past week, people rode the NYC Subway a total of <text id="subwayweeklyridership"></text> times, collectively paying $<text id="subwayweeklyfaretotal"></text> in fares.</p>
-            <p class="paneltext">The most popular day of the week was XXXday, the XXth. XXXXXXX people rode the subway that day.</p>
-            <p class="paneltext">There were XXX subway cars in service this past week. All those cars would look something like this:</p>
-            <p class="paneltext">The most popular line was the X, with a ridership of XXXXXX, and the most popular stop was XXXXXX in XXX(borough) where XXXXXX people boarded the train.</p>
-            <p class="paneltext">In the Bronx, the busiest stop was XXXXXX</p>
-            <p class="paneltext">In Brooklyn, the busiest stop was XXXXXX</p>
-            <p class="paneltext">In Manhattan, the busiest stop was XXXXXX</p>
-            <p class="paneltext">In Queens, the busiest stop was XXXXXX</p>
-            <p class="paneltext">On Staten Island, the busiest stop was XXXXXX</p>
+            <p class="paneltext">This past week, people rode the NYC Subway a total of <text id="subwayweeklyridership"></text> times, collectively paying $XXXXXX<text id="subwayweeklyfaretotal"></text> in fares.</p>
+            <p class="paneltext">The most popular day this past week was <text id="subwaymaxdailydate0"></text>. People rode the subway <text id="subwaymaxdailyridership"></text> times that day.</p>
+            <p class="paneltext">All those riders on <text id="subwaymaxdailydate1"></text> would fit in about <text id="subwaymaxdailycars"></text> subway cars, at 200 riders per car. All those cars would look something like this:</p>
+            <p class="paneltitle">SUBWAY CARS VISUALIZATION HERE</p>
+            <p class="paneltext">The most popular station was XXXXXX in XXX(borough), serviced by the X, X, and X trains. XXXXXX people boarded the train at XXXXXX(station) over the past week.</p>
+            <p class="paneltext">In the Bronx, the busiest stop was XXXXXX, serviced by the X, X, and X trains, where XXXXXX people boarded during the past week.</p>
+            <p class="paneltext">In Brooklyn, the busiest stop was XXXXXX, serviced by the X, X, and X trains, where XXXXXX people boarded during the past week.</p>
+            <p class="paneltext">In Manhattan, the busiest stop was XXXXXX, serviced by the X, X, and X trains, where XXXXXX people boarded during the past week.</p>
+            <p class="paneltext">In Queens, the busiest stop was XXXXXX, serviced by the X, X, and X trains, where XXXXXX people boarded during the past week.</p>
+            <p class="paneltext">On Staten Island, the busiest stop was XXXXXX, serviced by the X, X, and X trains, where XXXXXX people boarded during the past week.</p>
+            <p class="paneltitle">STATIONS MAP HERE</p>
             <a class="panellink" href="https://data.ny.gov" target="_blank">
                 <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
                 <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">New York City Subway data</p>
@@ -70,21 +88,25 @@
         </div>
 
         <!--Tile divider-->
+        <div class="tiledivborder"></div>
         <div class="tilediv"></div>
+        <div class="tiledivborder"></div>
 
         <!--Bus-->
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">The Past Week on the Bus</p>
-            <p class="paneltext">This past week, people rode the bus in NYC a total of <text id="busweeklyridership"></text> times, collectively paying $<text id="busweeklyfaretotal"></text> in fares.</p>
-            <p class="paneltext">The most popular day of the week was XXXday, the XXth. XXXXXXX people rode the bus that day.</p>
-            <p class="paneltext">There were XXX buses in service this past week. All those buses might look something like this:</p>
-            <p class="paneltext">The most popular bus route was the XXXXXX, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people boarded the bus.</p>
+            <p class="paneltext">This past week, people rode the bus in NYC a total of <text id="busweeklyridership"></text> times, collectively paying $XXXXXX<text id="busweeklyfaretotal"></text> in fares.</p>
+            <p class="paneltext">The most popular day this past week was <text id="busmaxdailydate0"></text>. People rode the bus <text id="busmaxdailyridership"></text> times that day.</p>
+            <p class="paneltext">All those riders on <text id="busmaxdailydate1"></text> would fit in about <text id="busmaxdailybuses"></text> buses, at 120 riders per bus. All those buses would look something like this:</p>
+            <p class="paneltitle">BUSES VISUALIZATION HERE</p>
+            <p class="paneltext">The most popular stop was XXXXXX in XXX(borough), serviced by the X, X, and X routes. XXXXXX people boarded a bus at XXXXXX(stop) over the past week.</p>
             <p class="paneltext">In the Bronx, the busiest stop was XXXXXX</p>
             <p class="paneltext">In Brooklyn, the busiest stop was XXXXXX</p>
             <p class="paneltext">In Manhattan, the busiest stop was XXXXXX</p>
             <p class="paneltext">In Queens, the busiest stop was XXXXXX</p>
             <p class="paneltext">On Staten Island, the busiest stop was XXXXXX</p>
+            <p class="paneltitle">STATIONS MAP HERE</p>
             <a class="panellink" href="https://data.ny.gov" target="_blank">
                 <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
                 <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">New York City Bus data</p>
@@ -92,15 +114,19 @@
         </div>
 
         <!--Tile divider-->
+        <div class="tiledivborder"></div>
         <div class="tilediv"></div>
+        <div class="tiledivborder"></div>
 
         <!--Cars-->
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">Motor Vehicles</p>
-            <p class="paneltext">If all those people who rode the subway or the bus this past week had driven a car instead, it might look something like this:</p>
+            <p class="paneltext">If all those <text id="totalweeklytransitrides"></text> combined subway and bus rides this past week had been a drive in a car instead, it might look something like this:</p>
+            <p class="paneltitle">CARS VISUALIZATION HERE</p>
             <p class="paneltext">And all the parking spaces they would need would look a little like this:</p>
-            <p class="paneltext">In total, there are XXXX parking spaces for personal vehicles in NYC, or about XX% the number of people taking public transit.</p>
+            <p class="paneltitle">PARKING VISUALIZATION HERE</p>
+            <p class="paneltext">In total, there are XXXX parking spaces for personal vehicles in NYC, or about XX% the number of public transit trips.</p>
             <a class="panellink" href="https://data.ny.gov" target="_blank">
                 <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
                 <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">DMV Parking Data</p>
@@ -108,15 +134,22 @@
         </div>
 
         <!--Tile divider-->
+        <div class="tiledivborder"></div>
         <div class="tilediv"></div>
+        <div class="tiledivborder"></div>
 
         <!--Year-->
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">The Past Year</p>
-            <p class="paneltext">Over the past year, the most popular subway line has been the X, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people have boarded the train.</p>
-            <p class="paneltext">The most popular bus route in the past year was the XXXXXX, with a ridership of XXXXXX, and the most popular stop was XXXXXX, where XXXXXX people boarded the bus.</p>
-            <p class="paneltext">All together, people rode the NYC subway <text id="subwayyearlyridership"></text> times over the past year! People rode the NYC bus <text id="busyearlyridership"></text> times!</p>
+            <p class="paneltext">Over the past year, the most popular subway station was XXXXXX in XXX(borough), serviced by the X, X, and X trains. XXXXXX people boarded the train at XXXXXX(station) over the past year.</p>
+            <p class="paneltitle">STATION GRAPH HERE</p>
+            <p class="paneltext">The most popular bus stop in the past year was the XXXXXX in XXX(borough), serviced by the X, X, and X routes. XXXXXX people boarded a bus at XXXXXX(stop) in the past year.</p>
+            <p class="paneltitle">BUS STOPS GRAPH HERE</p>
+            <p class="paneltext">The most popular day of the week to ride the subway has been on <text id="subwaymaxannualday"></text>s, with an average ridership of <text id="subwaymaxannualdaymean"></text>, and the least popular day has been <text id="subwayminannualday"></text>, with an average ridership of <text id="subwayminannualdaymean"></text>.</p>
+            <p class="paneltext">The most popular day of the week to ride the bus has been on <text id="busmaxannualday"></text>s, with an average ridership of <text id="busmaxannualdaymean"></text>, and the least popular day has been <text id="busminannualday"></text>, with an average ridership of <text id="busminannualdaymean"></text>.</p>
+            <p class="paneltitle">WEEKDAY GRAPH HERE WITH BOTH BUS AND SUBWAY</p>
+            <p class="paneltext">All together, people rode the subway <text id="subwayyearlyridership"></text> times over the past year, and the bus <text id="busyearlyridership"></text> times!</p>
             <p class="paneltext">That's an average of <text id="subwaydailyridershipavg"></text> rides per day on the subway, and <text id="busdailyridershipavg"></text> per day on the bus.</p>
             <a class="panellink" href="https://data.ny.gov" target="_blank">
                 <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>

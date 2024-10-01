@@ -12,7 +12,7 @@ body {
     height: 150px;
     width: 100%;
     background-image: url(./media/warningStrip.png);
-    background-size: 235px;
+    background-size: 110px;
     border-bottom: solid rgb(182, 151, 28) 2px;
 }
 
@@ -23,11 +23,29 @@ body {
     box-shadow: 0px 10px 10px rgb(73, 73, 73);
 }
 
-.headerborder1 {
+.lamps {
     margin-left: auto;
     margin-right: auto;
     margin-top: 100px;
+    margin-bottom: 0px;
+    width: 65%;
+    height: 120px;
+    max-width: 840px;
+    min-width: 590px;
+    padding: 0px;
+}
+
+.lamp {
+    margin-bottom: 0px;
+    padding: 0px;
+    width: 120px;
+}
+
+.headerborder1 {
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 100px;
+    margin-top: 0px;
     width: 65%;
     max-width: 840px;
     min-width: 590px;
@@ -60,10 +78,18 @@ body {
     margin: 10px;
 }
 
+.tiledivborder {
+    height: 32px;
+    width: 100%;
+    background-image: url(./media/tileBorder.png);
+    background-size: 32px;
+    border: solid rgb(78, 78, 78) 1px;
+}
+
 .tilediv {
     height: 150px;
     width: 100%;
-    background-image: url(./media/tileG.png);
+    background-image: url(./media/tileS.png);
     background-size: 50px;
     border: solid rgb(78, 78, 78) 1px;
 }
@@ -129,7 +155,7 @@ body {
 }
 
 .footermiddle {
-    width: 38%;
+    width: 35%;
     background-color: rgb(235, 0, 8);
     top: 0px;
 }
@@ -167,7 +193,7 @@ body {
 
 .end {
     bottom: 0px;
-    height: 150px;
+    height: 200px;
     width: 100%;
     background-image: url(./media/wood.png);
 }
