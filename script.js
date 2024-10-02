@@ -1,8 +1,10 @@
 // Todo:
 // Data:
 // - Figure out what live data is possible to access and include (Today).
-// - Get most popular stations / stops 2023 from hourly dataset.
-// - Get Roosevelt island tram data 2023 from hourly dataset.
+// - Get most popular stations / stops from hourly dataset - if possible, set up for weekly popularity!
+// -- Example request: https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=160&$where=transit_timestamp+between+%272024-09-17T00:00:00%27+and+%272024-09-24T23:00:00%27&$order=transit_timestamp+DESC&$limit=5000
+// - Get Roosevelt island tram data from hourly dataset - if possible, set up for weekly popularity!
+// - If weekly data from hourly set is possible, modify dates to use most recent weekly - also remove 2023 and go back to the year being the final thing
 // - Get DMV data for parking spaces? UPDATE CARS PANEL WITH DMV INSTEAD OF MTA INFO
 // Data vis:
 // - Create dynamic graphs.
