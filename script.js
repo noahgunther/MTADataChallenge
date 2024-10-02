@@ -4,8 +4,7 @@
 // - Get most popular stations / stops from hourly dataset - if possible, set up for weekly popularity!
 // -- Example request: https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=160&$where=transit_timestamp+between+%272024-09-17T00:00:00%27+and+%272024-09-24T23:00:00%27&$order=transit_timestamp+DESC&$limit=5000
 // - Get Roosevelt island tram data from hourly dataset - if possible, set up for weekly popularity!
-// - If weekly data from hourly set is possible, modify dates to use most recent weekly - also remove 2023 and go back to the year being the final thing
-// - Get DMV data for parking spaces? UPDATE CARS PANEL WITH DMV INSTEAD OF MTA INFO
+// - If weekly data from hourly set is possible, modify dates to use most recent weekly
 // Data vis:
 // - Create dynamic graphs.
 // - Create JS for google map embedding for stations / stops.
@@ -30,28 +29,33 @@ window.addEventListener("load", init, false);
 
 function init() {
 
-    function dateDeconstructor(date) {
-        let year = date.substring(0, 4);
-        let month = date.substring(5, 7);
-        let day = date.substring (8, 10);
+    function dateDeconstructor(dateString) {
+        let year = dateString.substring(0, 4);
+        let month = dateString.substring(5, 7);
+        let day = dateString.substring (8, 10);
         const dateFromString = new Date(year, parseInt(month) - 1, day);
+        return dateFromString;
+    }
+
+    function longDateConstructor(date) {
         const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-        let nth = 'th'
-        const dayChar = day.slice(-1);
-        const tenToNineteen = day.substring(0, 1) == '1';
+        let nth = 'th';
+        const dayInt = date.getDate();
+        const dayString = dayInt.toString();
+        console.log(dayString);
+        const tenToNineteen = dayString.substring(0, 1) == '1' && dayInt > 9;
         if (!tenToNineteen) {
-            if (dayChar == '1') nth = 'st';
-            else if (dayChar == '2') nth = 'nd';
-            else if (dayChar == '3') nth = 'rd';
+            if (dayString.slice(-1) == '1') nth = 'st';
+            else if (dayString.slice(-1) == '2') nth = 'nd';
+            else if (dayString.slice(-1) == '3') nth = 'rd';
         }
-        let longDate = weekday[dateFromString.getDay()] + ", " + dateFromString.toLocaleString('default', { month: 'long' }) + " " + dateFromString.getDate() + nth;
+        let longDate = weekday[date.getDay()] + ", " + date.toLocaleString('default', { month: 'long' }) + " " + date.getDate() + nth;
         return longDate;
     }
 
-    let combinedWeeklyRidership = 0;
-    let dateYearStart = '';
-    let dateWeekStart = '';
-    let dateMostRecent = '';
+    let dateYearStart = new Date();
+    let dateWeekStart = new Date();
+    let dateMostRecent = new Date();
 
     function loadData(mode) {
 
@@ -59,9 +63,9 @@ function init() {
         const xhttpDaily = new XMLHttpRequest();
         xhttpDaily.onload = function() {
             const response = JSON.parse(this.responseText);
-            dateYearStart = dateDeconstructor(response[364].date);
-            dateWeekStart = dateDeconstructor(response[6].date);
-            dateMostRecent = dateDeconstructor(response[0].date);
+            //dateYearStart = dateDeconstructor(response[364].date);
+            //dateWeekStart = dateDeconstructor(response[6].date);
+            //dateMostRecent = dateDeconstructor(response[0].date);
             
             // Weekly
             let weeklyRidership = 0;
@@ -160,16 +164,28 @@ function init() {
             }
             
             document.getElementById('yeardaterange').innerHTML = dateYearStart + ' - ' + dateMostRecent;
-            combinedWeeklyRidership += weeklyRidership;
-            document.getElementById('totalweeklytransitrides').innerHTML = combinedWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
         xhttpDaily.open("GET", "http://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$limit=365&$order=date+DESC");
         xhttpDaily.send();
     }
 
-    loadData('subway');
-    loadData('bus');
+    // Get most recent available hourly set day
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+        const response = JSON.parse(this.responseText);
+        dateMostRecent = dateDeconstructor(response[0].transit_timestamp);
+        dateWeekStart.setTime(dateMostRecent.getTime() - 60 * 60 * 24 * 7 * 1000);
+        dateYearStart.setTime(dateMostRecent.getTime() - 60 * 60 * 24 * 365 * 1000);
+        console.log(dateMostRecent);
+        console.log(dateWeekStart);
+        console.log(dateYearStart);
+    }
+    xhttp.open("GET", "https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$order=transit_timestamp+DESC&$limit=1");
+    xhttp.send();
+
+    //loadData('subway');
+    //loadData('bus');
 
     const tileColors = ['123', '456', '7', 'ACE', 'BDFM', 'G', 'JZ', 'L', 'NQRW', 'S'];
     const tileDivs = document.getElementsByClassName('tilediv');
