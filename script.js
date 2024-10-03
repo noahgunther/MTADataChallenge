@@ -1,12 +1,14 @@
 // Todo:
 // Data:
+// - Use Pythonanywhere to host and daily update data cache
+// -- Example request: https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=160&$where=transit_timestamp+between+%272024-09-17T00:00:00%27+and+%272024-09-24T23:00:00%27&$order=transit_timestamp+DESC&$limit=5000
+// -- Add data from daily ridership to host page
 // - Figure out what live data is possible to access and include (Today).
 // - Get most popular stations / stops from hourly dataset - if possible, set up for weekly popularity!
-// -- Example request: https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=160&$where=transit_timestamp+between+%272024-09-17T00:00:00%27+and+%272024-09-24T23:00:00%27&$order=transit_timestamp+DESC&$limit=5000
 // - Get Roosevelt island tram data from hourly dataset - if possible, set up for weekly popularity!
 // - If weekly data from hourly set is possible, modify dates to use most recent weekly
 // Data vis:
-// - Create dynamic graphs.
+// - Create dynamic graphs / charts.
 // - Create JS for google map embedding for stations / stops.
 // CSS:
 // - Create CSS for live data (old style LCD cells)
@@ -29,7 +31,7 @@ window.addEventListener("load", init, false);
 
 function init() {
 
-    function dateDeconstructor(dateString) {
+    /*function dateDeconstructor(dateString) {
         let year = dateString.substring(0, 4);
         let month = dateString.substring(5, 7);
         let day = dateString.substring (8, 10);
@@ -42,7 +44,7 @@ function init() {
         let nth = 'th';
         const dayInt = date.getDate();
         const dayString = dayInt.toString();
-        console.log(dayString);
+
         const tenToNineteen = dayString.substring(0, 1) == '1' && dayInt > 9;
         if (!tenToNineteen) {
             if (dayString.slice(-1) == '1') nth = 'st';
@@ -63,9 +65,9 @@ function init() {
         const xhttpDaily = new XMLHttpRequest();
         xhttpDaily.onload = function() {
             const response = JSON.parse(this.responseText);
-            //dateYearStart = dateDeconstructor(response[364].date);
-            //dateWeekStart = dateDeconstructor(response[6].date);
-            //dateMostRecent = dateDeconstructor(response[0].date);
+            dateYearStart = longDateConstructor(dateDeconstructor(response[364].date));
+            dateWeekStart = longDateConstructor(dateDeconstructor(response[6].date));
+            dateMostRecent = longDateConstructor(dateDeconstructor(response[0].date));
             
             // Weekly
             let weeklyRidership = 0;
@@ -94,7 +96,7 @@ function init() {
                 
                 yearlyRidership += dailyRidership;
 
-                let day = dateDeconstructor(response[i].date).substring(0, 3);
+                let day = longDateConstructor(dateDeconstructor(response[i].date)).substring(0, 3);
                 if (day == 'Sun') { daysOfWeekTally[0]++; daysOfWeekRidership[0] += dailyRidership; }
                 else if (day == 'Mon') { daysOfWeekTally[1]++; daysOfWeekRidership[1] += dailyRidership; }
                 else if (day == 'Tue') { daysOfWeekTally[2]++; daysOfWeekRidership[2] += dailyRidership; }
@@ -183,9 +185,22 @@ function init() {
     }
     xhttp.open("GET", "https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$order=transit_timestamp+DESC&$limit=1");
     xhttp.send();
+    
+    loadData('subway');
+    loadData('bus');*/
 
-    //loadData('subway');
-    //loadData('bus');
+    // Get data from web app
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+        const response = JSON.parse(this.responseText);
+        const dateMostRecent = response.dateMostRecent;
+        const dateWeekStart = response.dateWeekStart;
+        const dateYearStart = response.dateYearStart;
+
+        document.getElementById('weekdaterangesubway').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+    }
+    xhttp.open("GET", "https://gunthern.pythonanywhere.com/");
+    xhttp.send();
 
     const tileColors = ['123', '456', '7', 'ACE', 'BDFM', 'G', 'JZ', 'L', 'NQRW', 'S'];
     const tileDivs = document.getElementsByClassName('tilediv');
