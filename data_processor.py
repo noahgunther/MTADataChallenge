@@ -160,12 +160,54 @@ busMaxAnnualDayMeanRidership = busMaxAnnualDayRidership / busMaxAnnualDayTally
 busMinAnnualDayMeanRidership = busMinAnnualDayRidership / busMinAnnualDayTally
 
 # Get latest week of data from hourly subway / tram set
+
+# Tram
 url = "https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&transit_mode=tram&$where=transit_timestamp+between%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=5000"
 data = requests.get(url).json()
 tramWeeklyRidership = 0
-for d in data:
-    tramWeeklyRidership += int(float(d['ridership']))
+tramDailyRidership = [0,0,0,0,0,0,0]
+tramMaxDailyRidershipWeekly = 0
+tramMaxDailyDateWeekly = ''
 
+for d in data:
+    tramRidership = int(float(d['ridership']))
+    tramWeeklyRidership += tramRidership
+    date = longDateConstructor(dateDeconstructor(d['transit_timestamp']))
+    if date[:3] == 'Mon':
+        tramDailyRidership[0] += tramRidership
+        if tramDailyRidership[0] > tramMaxDailyRidershipWeekly:
+            tramMaxDailyRidershipWeekly = tramDailyRidership[0]
+            tramMaxDailyDateWeekly = date
+    elif date[:3] == 'Tue':
+        tramDailyRidership[1] += tramRidership
+        if tramDailyRidership[1] > tramMaxDailyRidershipWeekly:
+            tramMaxDailyRidershipWeekly = tramDailyRidership[1]
+            tramMaxDailyDateWeekly = date
+    elif date[:3] == 'Wed':
+        tramDailyRidership[2] += tramRidership
+        if tramDailyRidership[2] > tramMaxDailyRidershipWeekly:
+            tramMaxDailyRidershipWeekly = tramDailyRidership[2]
+            tramMaxDailyDateWeekly = date
+    elif date[:3] == 'Thu':
+        tramDailyRidership[3] += tramRidership
+        if tramDailyRidership[3] > tramMaxDailyRidershipWeekly:
+            tramMaxDailyRidershipWeekly = tramDailyRidership[3]
+            tramMaxDailyDateWeekly = date
+    elif date[:3] == 'Fri':
+        tramDailyRidership[4] += tramRidership
+        if tramDailyRidership[4] > tramMaxDailyRidershipWeekly:
+            tramMaxDailyRidershipWeekly = tramDailyRidership[4]
+            tramMaxDailyDateWeekly = date
+    elif date[:3] == 'Sat':
+        tramDailyRidership[5] += tramRidership
+        if tramDailyRidership[5] > tramMaxDailyRidershipWeekly:
+            tramMaxDailyRidershipWeekly = tramDailyRidership[5]
+            tramMaxDailyDateWeekly = date
+    elif date[:3] == 'Sun':
+        tramDailyRidership[6] += tramRidership
+        if tramDailyRidership[6] > tramMaxDailyRidershipWeekly:
+            tramMaxDailyRidershipWeekly = tramDailyRidership[6]
+            tramMaxDailyDateWeekly = date
 
 # Write data to json
 data = {
@@ -189,7 +231,9 @@ data = {
     'busMaxAnnualDayMeanRidership': busMaxAnnualDayMeanRidership,
     'busMinAnnualDay': busMinAnnualDay,
     'busMinAnnualDayMeanRidership': busMinAnnualDayMeanRidership,
-    'tramWeeklyRidership': tramWeeklyRidership
+    'tramWeeklyRidership': tramWeeklyRidership,
+    'tramMaxDailyRidershipWeekly': tramMaxDailyRidershipWeekly,
+    'tramMaxDailyDateWeekly': tramMaxDailyDateWeekly
 }
 
 #print(data)

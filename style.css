@@ -89,7 +89,7 @@ body {
 .tilediv {
     height: 150px;
     width: 100%;
-    background-image: url(./media/tileL.png);
+    background-image: url(./media/tileGray.png);
     background-size: 50px;
     border: solid rgb(78, 78, 78) 1px;
 }

@@ -15,11 +15,11 @@
 // - Make text bigger generally when other stuff is done
 // JS functionality:
 // - Add dropdowns arrows for more info / individual sources to panels (e.g. number of individual riders estimated at two trips per rider. source: mta.whatever, links to view raw data)
-// - Write script for subway cars / buses layout and scroll or animation
+// - Write script for subway cars, buses, subway platform (from inside train) scroll or animation (like the tramway)
 // - Write autoscroll button functionality
 // - Create JS for "back to top" scroll animation
 // Graphics:
-// - Create graphics for: Subway header (subway logo), Bus header (bus logo), DMV logo (?), subway cars, buses, motor cars, parking spots, bus line logos
+// - Create graphics for: Subway header (subway icon), Bus header (bus icon), subway cars, buses, bus line logos(?)
 // - Place subway / bus graphics according to popular stations / stops etc
 // - Create custom google map style to look like MTA map?
 // $$$:
@@ -47,6 +47,8 @@ function init() {
         document.getElementById('yeardaterange').innerHTML = dateYearStart + ' - ' + dateMostRecent;
 
         document.getElementById('tramweeklyridership').innerHTML = response.tramWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('trammaxdailyridership').innerHTML = response.tramMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('trammaxdailydate').innerHTML = response.tramMaxDailyDateWeekly;
 
         document.getElementById('subwayweeklyridership').innerHTML = response.subwayWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaymaxdailyridership').innerHTML = response.subwayMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -77,13 +79,6 @@ function init() {
     xhttp.open("GET", "https://gunthern.pythonanywhere.com/");
     xhttp.send();
 
-    /*const tileColors = ['123', '456', '7', 'ACE', 'BDFM', 'G', 'JZ', 'L', 'NQRW', 'S'];
-    const tileDivs = document.getElementsByClassName('tilediv');
-    const tileCol = tileColors[Math.floor(Math.random() * tileColors.length)];
-    for (let i=0; i<tileDivs.length; i++) {
-        tileDivs[i].style = 'background-image: url(./media/tile' + tileCol + '.png);'
-    }*/
-
     let offset = window.scrollY;
 
     // Parallax scroll for clouds
@@ -111,8 +106,8 @@ function init() {
     const tramScrollXSpeed = 0.8;
     const tramScrollYSpeed = 0.8;
     function tramPositioner() {
-        const pos = -1200 + offset * tramScrollXSpeed;
-        tram.style.marginLeft = pos + 'px';
+        const pos = -1500 + offset * tramScrollXSpeed;
+        tram.style.marginLeft = (pos / 20) + '%';
         if (offset > tramScrollLock) {
             if (offset < tramScrollUnlock) {
                 tramRig.style.marginTop = (tramPosY + (offset - tramScrollLock) * tramScrollYSpeed) + 'px';
