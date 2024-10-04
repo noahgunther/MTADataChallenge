@@ -2,7 +2,6 @@
 // Data:
 // - Use Pythonanywhere to host and daily update data cache
 // -- Example request: https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=160&$where=transit_timestamp+between+%272024-09-17T00:00:00%27+and+%272024-09-24T23:00:00%27&$order=transit_timestamp+DESC&$limit=5000
-// -- Add data from daily ridership to host page
 // - Figure out what live data is possible to access and include (Today).
 // - Get most popular stations / stops from hourly dataset - if possible, set up for weekly popularity!
 // - Get Roosevelt island tram data from hourly dataset - if possible, set up for weekly popularity!
@@ -197,7 +196,38 @@ function init() {
         const dateWeekStart = response.dateWeekStart;
         const dateYearStart = response.dateYearStart;
 
+        document.getElementById('weekdaterangetram').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangesubway').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangebus').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('yeardaterange').innerHTML = dateYearStart + ' - ' + dateMostRecent;
+
+        document.getElementById('tramweeklyridership').innerHTML = response.tramWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        document.getElementById('subwayweeklyridership').innerHTML = response.subwayWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('subwaymaxdailyridership').innerHTML = response.subwayMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('subwaymaxdailycars').innerHTML = (response.subwayMaxDailyRidershipWeekly / 200).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('subwaymaxdailydate0').innerHTML = response.subwayMaxDailyDateWeekly;
+        document.getElementById('subwaymaxdailydate1').innerHTML = response.subwayMaxDailyDateWeekly;
+
+        document.getElementById('subwaymaxannualday').innerHTML = response.subwayMaxAnnualDay;
+        document.getElementById('subwaymaxannualdaymean').innerHTML = response.subwayMaxAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('subwayminannualday').innerHTML = response.subwayMinAnnualDay;
+        document.getElementById('subwayminannualdaymean').innerHTML = response.subwayMinAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('subwayyearlyridership').innerHTML = response.subwayYearlyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('subwaydailyridershipavg').innerHTML = (response.subwayYearlyRidership / 365.0).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+        document.getElementById('busweeklyridership').innerHTML = response.busWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busmaxdailyridership').innerHTML = response.busMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busmaxdailybuses').innerHTML = (response.busMaxDailyRidershipWeekly / 200).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busmaxdailydate0').innerHTML = response.busMaxDailyDateWeekly;
+        document.getElementById('busmaxdailydate1').innerHTML = response.busMaxDailyDateWeekly;
+        
+        document.getElementById('busmaxannualday').innerHTML = response.busMaxAnnualDay;
+        document.getElementById('busmaxannualdaymean').innerHTML = response.busMaxAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busminannualday').innerHTML = response.busMinAnnualDay;
+        document.getElementById('busminannualdaymean').innerHTML = response.busMinAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busyearlyridership').innerHTML = response.busYearlyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busdailyridershipavg').innerHTML = (response.busYearlyRidership / 365.0).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
     xhttp.open("GET", "https://gunthern.pythonanywhere.com/");
     xhttp.send();
