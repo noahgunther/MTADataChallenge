@@ -147,6 +147,13 @@ body {
     text-decoration: none;
 }
 
+.sky {
+    width: 100%;
+    padding-top: 200px;
+    padding-bottom: 200px;
+    background-image: url('./media/sky.png');
+}
+
 .footer {
     width: 100%;
     display: flex;
