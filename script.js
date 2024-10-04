@@ -18,7 +18,6 @@
 // - Write script for subway cars / buses layout and scroll or animation
 // - Write autoscroll button functionality
 // - Create JS for "back to top" scroll animation
-// - Roosevelt island tram animation script - tram moves horizontally, clouds scroll slowly, info panels scroll like normal
 // Graphics:
 // - Create graphics for: Subway header (subway logo), Bus header (bus logo), DMV logo (?), subway cars, buses, motor cars, parking spots, bus line logos
 // - Place subway / bus graphics according to popular stations / stops etc
@@ -84,4 +83,50 @@ function init() {
     for (let i=0; i<tileDivs.length; i++) {
         tileDivs[i].style = 'background-image: url(./media/tile' + tileCol + '.png);'
     }*/
+
+    let offset = window.scrollY;
+
+    // Parallax scroll for clouds
+    const clouds = document.getElementsByClassName('cloud');
+    let cloudPosY = [];
+    for (let i=0; i<clouds.length; i++) {
+        cloudPosY.push(parseFloat(clouds[i].style.marginTop.slice(0, -1)));
+    }
+    const cloudScrollYSpeed = 0.5;
+
+    function cloudPositioner() {
+        for (let i=0; i<clouds.length; i++) {
+            const pos = cloudPosY[i] - 500 + offset * cloudScrollYSpeed;
+            clouds[i].style.marginTop = pos + 'px';
+        }
+    }
+    cloudPositioner();
+
+    // Scroll animation for tram
+    const tram = document.getElementById('tram');
+    const tramRig = document.getElementById('tramrig');
+    const tramPosY = parseFloat(tramRig.style.marginTop.slice(0, -1));
+    const tramScrollLock = 1800;
+    const tramScrollUnlock = 4200;
+    const tramScrollXSpeed = 0.8;
+    const tramScrollYSpeed = 0.8;
+    function tramPositioner() {
+        const pos = -1200 + offset * tramScrollXSpeed;
+        tram.style.marginLeft = pos + 'px';
+        if (offset > tramScrollLock) {
+            if (offset < tramScrollUnlock) {
+                tramRig.style.marginTop = (tramPosY + (offset - tramScrollLock) * tramScrollYSpeed) + 'px';
+            }
+            else {
+                tramRig.style.marginTop = (tramPosY + (tramScrollUnlock - tramScrollLock) * tramScrollYSpeed) + 'px';
+            }
+        }
+    }
+    tramPositioner();
+
+    window.addEventListener("scroll", function() {
+        offset = window.scrollY;
+        cloudPositioner();
+        tramPositioner();
+    });
 }

@@ -150,15 +150,17 @@ body {
 
 .sky {
     width: 100%;
-    height: 1000px;
+    height: 3000px;
 }
 
 .skycontent {
     width: 100%;
-    height: 1000px;
+    height: 3000px;
     position: absolute;
     z-index: -1;
     background-color: rgb(87, 152, 216);
+    background: linear-gradient(180deg, rgb(164, 211, 255) 0%, rgb(71, 136, 200) 100%);
+    overflow: hidden;
 }
 
 .cloud {
@@ -171,7 +173,8 @@ body {
     margin-left: 0px;
     width: 100%;
     height: 4px;
-    background: linear-gradient(180deg, rgb(90, 90, 90) 0%, rgba(43,43,43,1) 50%, rgba(0,0,0,1) 100%);
+    background-color: rgb(46, 46, 46);
+    background: linear-gradient(180deg, rgb(90, 90, 90) 0%, rgba(0,0,0,1) 100%);
     z-index: 1;
 }
 
