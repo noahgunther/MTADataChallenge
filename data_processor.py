@@ -3,6 +3,7 @@
 import requests
 import json
 from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
 
 weekday = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
 
@@ -269,8 +270,24 @@ data = {
     'subwayStationMaxRidershipWeeklyCount': subwayStationMaxRidershipWeeklyCount
 }
 
+# Create graphs
+left = [1, 2, 3, 4, 5]
+height = subwayStationMaxRidershipWeeklyCount[:5]
+tick_label = subwayStationMaxRidershipWeeklyStation[:5]
+plt.bar(left, height, tick_label = tick_label,
+        width = 0.8, color = ['red', 'green'])
+# naming the x-axis
+plt.xlabel('Station Name / Service')
+# naming the y-axis
+plt.ylabel('Ridership')
+# plot title
+plt.title('Subway station ridership ' + dateWeekStartLong + " - " + dateMostRecentLong)
+
+# function to show the plot
+plt.show()
+
 #print(data)
 
 # Write json
-with open('./data/data.json', 'w') as f:
-    json.dump(data, f)
+#with open('./data/data.json', 'w') as f:
+#    json.dump(data, f)

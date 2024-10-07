@@ -139,21 +139,11 @@
             </a>
         </div>
 
-        <!--Tile divider-->
-        <div class="tiledivborder"></div>
-        <div class="tilediv"></div>
-        <div class="tiledivborder"></div>
-
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">SUBWAY CARS VISUALIZATION HERE</p>
 
         </div>
-
-        <!--Tile divider-->
-        <div class="tiledivborder"></div>
-        <div class="tilediv"></div>
-        <div class="tiledivborder"></div>
 
         <div class="panel">
             <div class="panelline"></div>
@@ -161,12 +151,14 @@
             <p class="panelsmalltext" style="margin-bottom: 30px;"><text id="weekdaterangesubway1"></text></p>
             <br/>
             <div class="panelline"></div>
+            <p class="paneltext" style="margin-bottom: 5px; margin-top: 10px;">#1 OVERALL:</p>
             <p class="panelsmalltitle"><text id="subwaystationweekmaxstation0"></text></p>
             <div id="subwaystationweekmaxstationserviceicons"></div>
             <p class="paneltext"><text id="subwaystationweekmaxstation1"></text>, located in <text id="subwaystationweekmaxborough"></text>, was the #1 most popular station this week, where <text id="subwaystationweekmaxcount"></text> people boarded the train.</p>
             <div id="subwayweeklybronx">
                 <br/>
                 <div class="panelline"></div>
+                <p class="paneltext" style="margin-bottom: 5px; margin-top: 10px;">#1 IN THE BRONX:</p>
                 <p class="panelsmalltitle"><text id="subwaybronxweekmaxstation0"></text></p>
                 <div id="subwayweeklybronxicons"></div>
                 <p class="paneltext"><text id="subwaybronxweekmaxstation1"></text> was the busiest station in the Bronx this week, where <text id="subwaybronxweekmaxcount"></text> people boarded the train.</p>
@@ -174,6 +166,7 @@
             <div id="subwayweeklybrooklyn">
                 <br/>
                 <div class="panelline"></div>
+                <p class="paneltext" style="margin-bottom: 5px; margin-top: 10px;">#1 IN BROOKLYN:</p>
                 <p class="panelsmalltitle"><text id="subwaybrooklynweekmaxstation0"></text></p>
                 <div id="subwayweeklybrooklynicons"></div>
                 <p class="paneltext"><text id="subwaybrooklynweekmaxstation1"></text> was the busiest station in Brooklyn this week, where <text id="subwaybrooklynweekmaxcount"></text> people boarded the train.</p>
@@ -181,6 +174,7 @@
             <div id="subwayweeklymanhattan">
                 <br/>
                 <div class="panelline"></div>
+                <p class="paneltext" style="margin-bottom: 5px; margin-top: 10px;">#1 IN MANHATTAN:</p>
                 <p class="panelsmalltitle"><text id="subwaymanhattanweekmaxstation0"></text></p>
                 <div id="subwayweeklymanhattanicons"></div>
                 <p class="paneltext"><text id="subwaymanhattanweekmaxstation1"></text> was the busiest station in Manhattan this week, where <text id="subwaymanhattanweekmaxcount"></text> people boarded the train.</p>
@@ -188,6 +182,7 @@
             <div id="subwayweeklyqueens">
                 <br/>
                 <div class="panelline"></div>
+                <p class="paneltext" style="margin-bottom: 5px; margin-top: 10px;">#1 IN QUEENS:</p>
                 <p class="panelsmalltitle"><text id="subwayqueensweekmaxstation0"></text></p>
                 <div id="subwayweeklyqueensicons"></div>
                 <p class="paneltext"><text id="subwayqueensweekmaxstation1"></text> was the busiest station in Queens this week, where <text id="subwayqueensweekmaxcount"></text> people boarded the train.</p>
@@ -195,6 +190,7 @@
             <div id="subwayweeklystaten">
                 <br/>
                 <div class="panelline"></div>
+                <p class="paneltext" style="margin-bottom: 5px; margin-top: 10px;">#1 ON STATEN ISLAND:</p>
                 <p class="panelsmalltitle"><text id="subwaystatenweekmaxstation0"></text></p>
                 <div id="subwayweeklystatenicons"></div>
                 <p class="paneltext"><text id="subwaystatenweekmaxstation1"></text> was the busiest station on the Staten Island Railway this week, where <text id="subwaystatenweekmaxcount"></text> people boarded the train.</p>
@@ -267,8 +263,14 @@
         <!--Year-->
         <div class="panel">
             <div class="panelline"></div>
-            <p class="paneltitle">A Year on the MTA</p>
-            <p class="panelsmalltext"><text id="yeardaterange"></text></p>
+            <p class="paneltitle" style="margin-bottom: 20px;">A Year on the MTA</p>
+            <p class="paneltext"><text id="yeardaterange0"></text></p>
+        </div>
+
+        <div class="panel">
+            <div class="panelline"></div>
+            <p class="panelsmalltitle">The Subway and the Bus</p>
+            <p class="panelsmalltext"><text id="yeardaterange1"></text></p>
             <p class="paneltext">Over the past year, the most popular day of the week to ride the subway has been on <text id="subwaymaxannualday"></text>s, with an average ridership of <text id="subwaymaxannualdaymean"></text>, and the least popular day has been <text id="subwayminannualday"></text>, with an average ridership of <text id="subwayminannualdaymean"></text>.</p>
             <p class="paneltext">The most popular day of the week to ride the bus has been on <text id="busmaxannualday"></text>s, with an average ridership of <text id="busmaxannualdaymean"></text>, and the least popular day has been <text id="busminannualday"></text>, with an average ridership of <text id="busminannualdaymean"></text>.</p>
             <p class="paneltitle">WEEKDAY RIDERSHIP GRAPH HERE WITH BOTH BUS AND SUBWAY</p>

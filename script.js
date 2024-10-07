@@ -11,9 +11,8 @@
 // - Create dynamic graphs / charts.
 // CSS:
 // - Create CSS for live data (old style LCD cells)
-// - Make text bigger generally when other stuff is done
+// - Do a pass for various screen widths, general functionality
 // JS functionality:
-// - Fix issue with tram animation where scroll position calculation messes up tram position
 // - Write script for subway cars, buses, subway platform (from inside train) scroll or animation (like the tramway)
 // - Test on mobile
 // Graphics:
@@ -42,7 +41,8 @@ function init() {
         document.getElementById('weekdaterangesubway1').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangesubway2').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangebus').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
-        document.getElementById('yeardaterange').innerHTML = dateYearStart + ' - ' + dateMostRecent;
+        document.getElementById('yeardaterange0').innerHTML = dateYearStart + ' - ' + dateMostRecent;
+        document.getElementById('yeardaterange1').innerHTML = dateYearStart + ' - ' + dateMostRecent;
 
         document.getElementById('tramweeklyridership').innerHTML = response.tramWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('trammaxdailyridership').innerHTML = response.tramMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
