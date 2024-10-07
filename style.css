@@ -164,12 +164,28 @@ body {
 
 .panelsublogo {
     width: 40px;
-    height: 40px;
 }
 
 .panellink {
     color: white;
     text-decoration: none;
+}
+
+.paneltable {
+    width: 98%;
+    margin-left: 1%;
+    font-size: 16px;
+}
+
+.paneltable th {
+    border: 1px solid white;
+}
+
+.paneltable img {
+    width: 20px;
+    margin: 3px;
+    margin-left: 1px;
+    margin-right: 1px;
 }
 
 .sky {

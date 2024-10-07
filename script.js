@@ -1,8 +1,6 @@
 // Todo:
 // Data:
-// - FIX ISSUE WHERE FULL STATION NAME IS NOT PRINTED FOR SUBWAY (EXTRACT LINE IDS BUT GET FULL NAME INCLUDING "/")!!!!!!!!!!
 // - Figure out what live data is possible to access and include (Today)
-// - Get most popular subway stations for the week from hourly dataset (most pop station, most pop in each borough, whole list)
 // - Get hourly popularity of week for subway
 // - Get most popular bus stops for the week from hourly dataset (most pop station, most pop in each borough, whole list)
 // - Get hourly popularity of week for bus
@@ -11,18 +9,15 @@
 // -- Add data disclaimers (estimated from ...) and info on updating (most recent data from mta sets fetch daily at https://gunthern.pythonanywhere.com/, most recent update xxxxxx)
 // Data vis:
 // - Create dynamic graphs / charts.
-// - Create JS for google map embedding for stations / stops.
 // CSS:
 // - Create CSS for live data (old style LCD cells)
-// - Create CSS for map borders
 // - Make text bigger generally when other stuff is done
 // JS functionality:
+// - Fix issue with tram animation where scroll position calculation messes up tram position
 // - Write script for subway cars, buses, subway platform (from inside train) scroll or animation (like the tramway)
-// - Write autoscroll button functionality
+// - Test on mobile
 // Graphics:
 // - Create graphics for: Subway header (subway icon), Bus header (bus icon), subway cars, buses, bus line logos(?)
-// - Place subway / bus graphics according to popular stations / stops etc
-// - Create custom google map style to look like MTA map?
 // $$$:
 // - Look into new hosting for full noahgunther.com site, including this subsite (hostgator?)
 // - Pay for pythonanywhere plan to handle more traffic?
@@ -150,6 +145,19 @@ function init() {
             document.getElementById('subwaystatenweekmaxstation1').innerHTML = nameIds[1];
             document.getElementById('subwaystatenweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[statenMaxStationIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
+        let subwayWeeklyTableHtmlString = "<tr><th><text>Rank</text></th><th><text>Subway Station / Service</text></th><th><text>Borough</text></th><th><text>Ridership (week)</text></th></tr>";
+        for (let i=0; i<response.subwayStationMaxRidershipWeeklyStation.length; i++) {
+            const nameIds = idsNameSplit(response.subwayStationMaxRidershipWeeklyStation[i].toString());
+            let idsImgString = '<br/>';
+            for (let j=0; j<nameIds[0].length; j++) {
+                idsImgString += '<img src="./media/subway' + nameIds[0][j] + '.png"></img>';
+            }
+            let tableString = "<tr><th><text>" + (i+1) + "</text></th><th><text>" + nameIds[1] + "</text>" + idsImgString + "</th>";
+            tableString += "<th><text>" + response.subwayStationMaxRidershipWeeklyBorough[i] + "</text></th>";
+            tableString += "<th><text>" + response.subwayStationMaxRidershipWeeklyCount[i].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</text></th></tr>";
+            subwayWeeklyTableHtmlString += tableString;
+        }
+        document.getElementById('subwayweeklytable').innerHTML = subwayWeeklyTableHtmlString;
 
         document.getElementById('subwaymaxannualday').innerHTML = response.subwayMaxAnnualDay;
         document.getElementById('subwaymaxannualdaymean').innerHTML = response.subwayMaxAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -170,6 +178,8 @@ function init() {
         document.getElementById('busminannualdaymean').innerHTML = response.busMinAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busyearlyridership').innerHTML = response.busYearlyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busdailyridershipavg').innerHTML = (response.busYearlyRidership / 365.0).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+        updateScrollValues();
     }
     xhttp.open("GET", "https://gunthern.pythonanywhere.com/");
     xhttp.send();
@@ -214,10 +224,45 @@ function init() {
         document.getElementById(element).innerHTML = htmlString;
     }
 
-    idsNameSplit("Cathedral Pkwy (110 St) (1) (A,C,E)")
+    // Dropdown behavior
+
+    // Subway table
+    const subwayStationTableToggle0 = document.getElementById('togglesubwaystationtabledropdown0');
+    const subwayStationTableToggle0Text = document.getElementById('subwaystationtabledropdowntext');
+    const subwayStationTableToggle0Arrow = document.getElementById('subwaystationtabledropdownarrow');
+    const subwayStationTableToggle1 = document.getElementById('togglesubwaystationtabledropdown1');
+    const subwayStationTable = document.getElementById('subwaystationtabledropdown');
+    subwayStationTableToggle0.addEventListener('click', function() {
+        toggleSubwayStationTable(false);
+    });
+    subwayStationTableToggle1.addEventListener('click', function() { 
+        toggleSubwayStationTable(true);
+    });
+    function toggleSubwayStationTable(scrollIntoView) {
+        if (subwayStationTable.hidden) {
+            subwayStationTable.hidden = false;
+            subwayStationTableToggle0Text.innerHTML = "Hide all stations by ridership: ";
+            subwayStationTableToggle0Arrow.style.transform = "rotate(0deg)";
+        }
+        else {
+            subwayStationTable.hidden = true;
+            subwayStationTableToggle0Text.innerHTML = "View all stations by ridership: ";
+            subwayStationTableToggle0Arrow.style.transform = "rotate(180deg)";
+            if (scrollIntoView) subwayStationTableToggle0.scrollIntoView();
+        }
+        updateScrollValues();
+    }
 
     // Scrolling effects
-    let offset = window.scrollY;
+    let offset;
+    let tramStart;
+    let docEnd;
+    function updateScrollValues() {
+        offset = window.scrollY;
+        tramStart = document.getElementById('tramanimstart').getBoundingClientRect().bottom + window.scrollY;
+        docEnd = document.getElementById('end').getBoundingClientRect().bottom + window.scrollY;
+    }
+    updateScrollValues();
 
     // Parallax scroll for clouds
     const clouds = document.getElementsByClassName('cloud');
@@ -229,7 +274,7 @@ function init() {
 
     function cloudPositioner() {
         for (let i=0; i<clouds.length; i++) {
-            const pos = cloudPosY[i] - 500 + offset * cloudScrollYSpeed;
+            const pos = cloudPosY[i] - tramStart + 4500 + offset * cloudScrollYSpeed;
             clouds[i].style.marginTop = pos + 'px';
         }
     }
@@ -239,13 +284,14 @@ function init() {
     const tram = document.getElementById('tram');
     const tramRig = document.getElementById('tramrig');
     const tramPosY = parseFloat(tramRig.style.marginTop.slice(0, -1));
-    const tramScrollLock = 2200;
-    const tramScrollUnlock = 4400;
-    const tramScrollXSpeed = 0.7;
+    const tramScrollLock = tramStart - 3100;
+    const tramScrollUnlock = tramScrollLock + 2200;
+    const tramScrollXSpeed = 0.66;
     const tramScrollYSpeed = 0.9;
     function tramPositioner() {
         const pos = offset * tramScrollXSpeed;
-        tram.style.marginLeft = (pos/20 - 60) + '%';
+        const offsetX = tramStart / 100;
+        tram.style.marginLeft = (pos/20 - offsetX) + '%';
         if (offset > tramScrollLock) {
             if (offset < tramScrollUnlock) {
                 tramRig.style.marginTop = (tramPosY + (offset - tramScrollLock) * tramScrollYSpeed) + 'px';
@@ -283,4 +329,6 @@ function init() {
     const footerleft = document.getElementById('footerleft');
     footermiddle.addEventListener('click', function() { scrollTo(document.getElementById('top'), 1000); });
     footerleft.addEventListener('click', function() { scrollTo(document.getElementById('top'), 1000); });
+
+    updateScrollValues();
 }
