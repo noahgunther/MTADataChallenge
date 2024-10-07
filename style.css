@@ -27,18 +27,32 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 100px;
-    margin-bottom: 0px;
+    margin-bottom: -32px;
     width: 65%;
-    height: 120px;
+    height: 220px;
     max-width: 840px;
     min-width: 590px;
     padding: 0px;
 }
 
 .lamp {
-    margin-bottom: 0px;
-    padding: 0px;
-    width: 120px;
+    margin-left: -64px;
+    width: 220px;
+}
+
+.headerspikerow{
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+    max-width: 840px;
+    min-width: 590px;
+    height: 32px;
+    position: relative;
+}
+
+.headerspike {
+    width: 32px;
+    position: absolute;
 }
 
 .headerborder1 {
@@ -76,6 +90,8 @@ body {
     width: 40px;
     height: 40px;
     margin: 10px;
+    margin-left: 5px;
+    margin-right: 0px;
 }
 
 .tiledivborder {
@@ -119,23 +135,31 @@ body {
 
 .paneltitle {
     margin-top: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     margin-left: 8px;
-    font-size: 44px;
+    font-size: 52px;
+}
+
+.panelsmalltitle {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 8px;
+    font-size: 48px;
 }
 
 .paneltext {
     margin-top: 0px;
     margin-left: 8px;
     margin-right: 10px;
-    font-size: 18px;
+    font-size: 22px;
 }
 
 .panelsmalltext {
     margin-top: 0px;
     margin-left: 8px;
     margin-right: 10px;
-    font-size: 12px;
+    margin-bottom: 40px;
+    font-size: 16px;
 }
 
 .panelsublogo {
@@ -184,17 +208,26 @@ body {
     flex-wrap: nowrap;
 }
 
+.footerleft {
+    left: 0%;
+    width: auto;
+    top: 0px;
+    cursor: pointer;
+}
+
 .footermiddle {
-    width: 35%;
+    width: 30%;
+    min-width: 180px;
     background-color: rgb(235, 0, 8);
     top: 0px;
+    cursor: pointer;
 }
 
 .footerright {
-    left: 50%;
-    width: 50%;
-    height: 100%;
+    left: 55%;
+    width: 55%;
     top: 0px;
+    padding-bottom: 10px;
 }
 
 .footerexit {
@@ -214,11 +247,6 @@ body {
 
 .footerlogos {
     margin: 10px;
-}
-
-.footersublogo {
-    width: 40px;
-    height: 40px;
 }
 
 .end {

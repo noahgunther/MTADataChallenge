@@ -10,12 +10,25 @@
     <body>
 
         <!--Start-->
-        <div class="start"></div>
+        <div class="start" id="top"></div>
         <div class="warningstrip"></div>
 
         <!--Title-->
         <div class="lamps">
             <img class="lamp" src="./media/lamp.png"></img>
+        </div>
+        <div class="headerspikerow">
+            <img class="headerspike" src="./media/spike.png" style="margin-left: 0%;"></img>
+            <img class="headerspike" src="./media/spike.png" style="margin-left: 10%; transform: translate(-10%);"></img>
+            <img class="headerspike" src="./media/spike.png" style="margin-left: 20%; transform: translate(-20%);"></img>
+            <img class="headerspike" src="./media/spike.png" style="margin-left: 30%; transform: translate(-30%);"></img>
+            <img class="headerspike" src="./media/spike.png" style="margin-left: 40%; transform: translate(-40%);"></img>
+            <img class="headerspike" src="./media/spike.png" style="margin-left: 50%; transform: translate(-50%);"></img>
+            <img class="headerspike" src="./media/spike.png" style="margin-left: 60%; transform: translate(-60%);"></img>
+            <img class="headerspike" src="./media/spike.png" style="margin-left: 70%; transform: translate(-70%);"></img>
+            <img class="headerspike" src="./media/spike.png" style="margin-left: 80%; transform: translate(-80%);"></img>
+            <img class="headerspike" src="./media/spike.png" style="margin-left: 90%; transform: translate(-90%);"></img>
+            <img class="headerspike" src="./media/spike.png" style="margin-left: 100%; transform: translate(-100%);"></img>
         </div>
         <div class="headerborder1">
             <div class="headerborder0">
@@ -28,12 +41,12 @@
                     
                     <a class="panellink" href="https://data.ny.gov" target="_blank">
                         <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
-                        <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">Data from data.ny.gov</p>
+                        <p class="panelsmalltext" style="float: left; margin-top: 22px; margin-bottom: 20px; text-decoration: underline;">Data from data.ny.gov</p>
                     </a>
                     <a class="panellink" href="https://noahgunther.com" target="_blank">
-                        <img class="sublogo" src="./media/subwayG.png" alt="Subway G line logo" style="float: right; margin-left: 0px;"></img>
-                        <img class="sublogo" src="./media/subwayN.png" alt="Subway N line logo" style="float: right; margin-right: 5px;"></img>
-                        <p class="panelsmalltext" style="float: right; margin-top: 22px; text-decoration: underline;">Created by Noah Gunther, 2024</p>
+                        <img class="sublogo" src="./media/subwayG.png" alt="Subway G line logo" style="float: right; margin: 10px; margin-left: 0px; margin-bottom: 0px;"></img>
+                        <img class="sublogo" src="./media/subwayN.png" alt="Subway N line logo" style="float: right; margin: 10px; margin-right: 5px; margin-bottom: 0px;"></img>
+                        <p class="panelsmalltext" style="float: right; margin-top: 22px; margin-bottom: 20px; text-decoration: underline;">Created by Noah Gunther, 2024</p>
                     </a>
                 </div>
             </div>
@@ -43,7 +56,7 @@
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">Today</p>
-            <p class="paneltitle">DATE GOES HERE</p>
+            <p class="panelsmalltext">DATE GOES HERE</p>
             <p class="paneltext">So far today, people have entered the New York City subway XXXXXXX times.</p>
             <p class="paneltext">People have boarded a bus in New York City XXXXXXX times today.</p>
             <a class="panellink" href="https://api.mta.info/#/" target="_blank">
@@ -60,8 +73,8 @@
         <!--Week-->
         <div class="panel">
             <div class="panelline"></div>
-            <p class="paneltitle">A Week on the MTA</p>
-            <p class="paneltext">Week of <text id="weekdaterange"></text></p>
+            <p class="paneltitle" style="margin-bottom: 20px;">A Week on the MTA</p>
+            <p class="paneltext"><text id="weekdaterange"></text></p>
         </div>
 
         <!--Tile divider-->
@@ -81,7 +94,7 @@
                 <img class="cloud" style="margin-top: 950px; margin-left: 66%; width: 15%; min-width: 150px; max-width: 450px;" src="./media/cloud1.png"></img>
 
                 <div id="tramrig" style="position: absolute; margin-top: 455px; width: 100%;">
-                    <img id="tram" style="position: absolute; width: 400px; z-index: 0;" src="./media/tram.png"></img>
+                    <img id="tram" style="position: absolute; width: 400px; z-index: 0; transform: translate(-50%);" src="./media/tram.png"></img>
                     <div class="tramcable" style="position: absolute; margin-top: 45px; z-index: 1;"></div>
                     <div class="tramcable" style="margin-top: 80px; z-index: -1;"></div>
                 </div>
@@ -91,7 +104,7 @@
             <div class="panel" style="margin-top: 0;">
                 <div class="panelline"></div>
                 <p class="paneltitle">A Week on the Roosevelt Island Tramway</p>
-                <p class="panelsmalltext">Week of <text id="weekdaterangetram"></text></p>
+                <p class="panelsmalltext"><text id="weekdaterangetram"></text></p>
                 <p class="paneltext">People rode the Roosevelt Island Tramway <text id="tramweeklyridership"></text> times during this week! The most popular day was <text id="trammaxdailydate"></text>, with a ridership of <text id="trammaxdailyridership"></text>.</p>
             </div>
 
@@ -111,20 +124,90 @@
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">A Week on the Subway</p>
-            <p class="panelsmalltext">Week of <text id="weekdaterangesubway"></text></p>
+            <p class="panelsmalltext">Week of <text id="weekdaterangesubway0"></text></p>
             <p class="paneltext">During this week, people rode the NYC Subway a total of <text id="subwayweeklyridership"></text> times.</p>
-            <p class="paneltext">The most popular during this week was <text id="subwaymaxdailydate0"></text>, when people rode the subway <text id="subwaymaxdailyridership"></text> times.</p>
+            <p class="paneltext">The most popular day during this week was <text id="subwaymaxdailydate0"></text>, when people rode the subway <text id="subwaymaxdailyridership0"></text> times.</p>
             <p class="paneltitle">SUBWAY RIDERSHIP / WEEK CHART HERE - WAVE INDICATING BOTH TIME OF DAY AND DAY POPULARITY FOR THE WEEK</p>
-            <p class="paneltext">All those riders on <text id="subwaymaxdailydate1"></text> would fit in about <text id="subwaymaxdailycars"></text> subway cars, at 200 riders per car. All those cars would look something like this:</p>
+            <p class="paneltext">Those <text id="subwaymaxdailyridership1"></text> riders on <text id="subwaymaxdailydate1"></text> would fit in about <text id="subwaymaxdailycars"></text> subway cars, at 200 riders per car.</p>
+            <a class="panellink" href="https://data.ny.gov" target="_blank">
+                <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
+                <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">New York City Subway data</p>
+            </a>
+        </div>
+
+        <!--Tile divider-->
+        <div class="tiledivborder"></div>
+        <div class="tilediv"></div>
+        <div class="tiledivborder"></div>
+
+        <div class="panel">
+            <div class="panelline"></div>
             <p class="paneltitle">SUBWAY CARS VISUALIZATION HERE</p>
-            <p class="paneltext">The most popular station was XXXXXX in XXX(borough), serviced by the X, X, and X trains. XXXXXX people boarded the train at XXXXXX(station) during the week.</p>
-            <p class="paneltitle">SUBWAY STATION GRAPH HERE</p>
-            <p class="paneltext">In the Bronx, the busiest stop was XXXXXX, serviced by the X, X, and X trains, where XXXXXX people boarded during the week.</p>
-            <p class="paneltext">In Brooklyn, the busiest stop was XXXXXX, serviced by the X, X, and X trains, where XXXXXX people boarded during the week.</p>
-            <p class="paneltext">In Manhattan, the busiest stop was XXXXXX, serviced by the X, X, and X trains, where XXXXXX people boarded during the week.</p>
-            <p class="paneltext">In Queens, the busiest stop was XXXXXX, serviced by the X, X, and X trains, where XXXXXX people boarded during the week.</p>
-            <p class="paneltext">On the Staten Island Railway, the busiest stop was XXXXXX, serviced by the X, X, and X trains, where XXXXXX people boarded during the week.</p>
-            <p class="paneltitle">STATIONS MAP HERE</p>
+
+        </div>
+
+        <!--Tile divider-->
+        <div class="tiledivborder"></div>
+        <div class="tilediv"></div>
+        <div class="tiledivborder"></div>
+
+        <div class="panel">
+            <div class="panelline"></div>
+            <p class="paneltitle">Subway Stations of the Week</p>
+            <p class="panelsmalltext" style="margin-bottom: 30px;"><text id="weekdaterangesubway1"></text></p>
+            <br/>
+            <div class="panelline"></div>
+            <p class="panelsmalltitle"><text id="subwaystationweekmaxstation0"></text></p>
+            <div id="subwaystationweekmaxstationserviceicons"></div>
+            <p class="paneltext"><text id="subwaystationweekmaxstation1"></text>, located in <text id="subwaystationweekmaxborough"></text>, was the #1 most popular station this week, where <text id="subwaystationweekmaxcount"></text> people boarded the train.</p>
+            <div id="subwayweeklybronx">
+                <br/>
+                <div class="panelline"></div>
+                <p class="panelsmalltitle"><text id="subwaybronxweekmaxstation0"></text></p>
+                <div id="subwayweeklybronxicons"></div>
+                <p class="paneltext"><text id="subwaybronxweekmaxstation1"></text> was the busiest station in the Bronx this week, where <text id="subwaybronxweekmaxcount"></text> people boarded the train.</p>
+            </div>
+            <div id="subwayweeklybrooklyn">
+                <br/>
+                <div class="panelline"></div>
+                <p class="panelsmalltitle"><text id="subwaybrooklynweekmaxstation0"></text></p>
+                <div id="subwayweeklybrooklynicons"></div>
+                <p class="paneltext"><text id="subwaybrooklynweekmaxstation1"></text> was the busiest station in Brooklyn this week, where <text id="subwaybrooklynweekmaxcount"></text> people boarded the train.</p>
+            </div>
+            <div id="subwayweeklymanhattan">
+                <br/>
+                <div class="panelline"></div>
+                <p class="panelsmalltitle"><text id="subwaymanhattanweekmaxstation0"></text></p>
+                <div id="subwayweeklymanhattanicons"></div>
+                <p class="paneltext"><text id="subwaymanhattanweekmaxstation1"></text> was the busiest station in Manhattan this week, where <text id="subwaymanhattanweekmaxcount"></text> people boarded the train.</p>
+            </div>
+            <div id="subwayweeklyqueens">
+                <br/>
+                <div class="panelline"></div>
+                <p class="panelsmalltitle"><text id="subwayqueensweekmaxstation0"></text></p>
+                <div id="subwayweeklyqueensicons"></div>
+                <p class="paneltext"><text id="subwayqueensweekmaxstation1"></text> was the busiest station in Queens this week, where <text id="subwayqueensweekmaxcount"></text> people boarded the train.</p>
+            </div>
+            <div id="subwayweeklystaten">
+                <br/>
+                <div class="panelline"></div>
+                <p class="panelsmalltitle"><text id="subwaystatenweekmaxstation0"></text></p>
+                <div id="subwayweeklystatenicons"></div>
+                <p class="paneltext"><text id="subwaystatenweekmaxstation1"></text> was the busiest station on the Staten Island Railway this week, where <text id="subwaystatenweekmaxcount"></text> people boarded the train.</p>
+            </div>
+            <p class="paneltext">STATIONS MAP HERE</p>
+            <p class="paneltext">DROPDOWN WITH ALL STATIONS, BOROUGH, RIDERSHIP, ICONS HERE</p>
+            <a class="panellink" href="https://data.ny.gov" target="_blank">
+                <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
+                <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">New York City Subway data</p>
+            </a>
+        </div>
+
+        <div class="panel">
+            <div class="panelline"></div>
+            <p class="paneltitle">Subway Ridership by Hour</p>
+            <p class="panelsmalltext"><text id="weekdaterangesubway2"></text></p>
+            <p class="paneltext">SUBWAY HOURLY RIDERSHIP CHART HERE</p>
             <a class="panellink" href="https://data.ny.gov" target="_blank">
                 <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
                 <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">New York City Subway data</p>
@@ -140,7 +223,7 @@
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">A Week on the Bus</p>
-            <p class="panelsmalltext">Week of <text id="weekdaterangebus"></text></p>
+            <p class="panelsmalltext"><text id="weekdaterangebus"></text></p>
             <p class="paneltext">During this week, people rode the bus in NYC a total of <text id="busweeklyridership"></text> times.</p>
             <p class="paneltext">The most popular day during this week was <text id="busmaxdailydate0"></text>, when people rode the bus <text id="busmaxdailyridership"></text> times.</p>
             <p class="paneltitle">BUS RIDERSHIP / WEEK CHART HERE - WAVE INDICATING BOTH TIME OF DAY AND DAY POPULARITY FOR THE WEEK</p>
@@ -169,7 +252,7 @@
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">A Year on the MTA</p>
-            <p class="paneltext">Year of <text id="yeardaterange"></text></p>
+            <p class="panelsmalltext"><text id="yeardaterange"></text></p>
             <p class="paneltext">Over the past year, the most popular day of the week to ride the subway has been on <text id="subwaymaxannualday"></text>s, with an average ridership of <text id="subwaymaxannualdaymean"></text>, and the least popular day has been <text id="subwayminannualday"></text>, with an average ridership of <text id="subwayminannualdaymean"></text>.</p>
             <p class="paneltext">The most popular day of the week to ride the bus has been on <text id="busmaxannualday"></text>s, with an average ridership of <text id="busmaxannualdaymean"></text>, and the least popular day has been <text id="busminannualday"></text>, with an average ridership of <text id="busminannualdaymean"></text>.</p>
             <p class="paneltitle">WEEKDAY RIDERSHIP GRAPH HERE WITH BOTH BUS AND SUBWAY</p>
@@ -191,20 +274,20 @@
         <div class="panel">
             <div class="panelline"></div>
             <div class="footer">
-                <div class="footerleft">
+                <div class="footerleft" id="footerleft">
                     <img class="footerarrow" src="./media/arrowUp.png" alt="Up arrow"></img>
                 </div>
-                <div class="footermiddle">
+                <div class="footermiddle" id="footermiddle">
                     <div class="footerexit">Top</div>
                 </div>
                 <div class="footerright">
-                    <p class="paneltitle">Lately on the MTA</p>
+                    <p class="paneltitle" style="font-size: 50px;">Lately on the MTA</p>
                     <a class="panellink" href="https://noahgunther.com" target="_blank">
-                        <p class="paneltext" style="text-decoration: underline;">Created by Noah Gunther, 2024</p>
-                        <div class="footerlogos">
-                            <img class="footersublogo" src="./media/subwayN.png" alt="Subway N line logo"></img>
-                            <img class="footersublogo" src="./media/subwayG.png" alt="Subway G line logo"></img>
-                        </div>
+                        <a class="panellink" href="https://noahgunther.com" target="_blank">
+                            <img class="sublogo" src="./media/subwayG.png" alt="Subway G line logo" style="float: right; margin-bottom: 0px; margin-left: 0px; margin-right: 10px;"></img>
+                            <img class="sublogo" src="./media/subwayN.png" alt="Subway N line logo" style="float: right; margin-bottom: 0px; margin-right: 5px;"></img>
+                            <p class="panelsmalltext" style="float: right; margin-top: 22px; margin-bottom: 20px; text-decoration: underline;">Created by Noah Gunther, 2024</p>
+                        </a>
                     </a>
                 </div>
             </div>

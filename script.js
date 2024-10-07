@@ -1,11 +1,14 @@
 // Todo:
 // Data:
-// - Use Pythonanywhere to host and daily update data cache
-// -- Example request: https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=160&$where=transit_timestamp+between+%272024-09-17T00:00:00%27+and+%272024-09-24T23:00:00%27&$order=transit_timestamp+DESC&$limit=5000
-// - Figure out what live data is possible to access and include (Today).
-// - Get most popular stations / stops from hourly dataset - if possible, set up for weekly popularity!
-// - Get Roosevelt island tram data from hourly dataset - if possible, set up for weekly popularity!
-// - If weekly data from hourly set is possible, modify dates to use most recent weekly
+// - FIX ISSUE WHERE FULL STATION NAME IS NOT PRINTED FOR SUBWAY (EXTRACT LINE IDS BUT GET FULL NAME INCLUDING "/")!!!!!!!!!!
+// - Figure out what live data is possible to access and include (Today)
+// - Get most popular subway stations for the week from hourly dataset (most pop station, most pop in each borough, whole list)
+// - Get hourly popularity of week for subway
+// - Get most popular bus stops for the week from hourly dataset (most pop station, most pop in each borough, whole list)
+// - Get hourly popularity of week for bus
+// - Review all code / math
+// - Add dropdowns arrows for more info / individual sources to panels (e.g. source: mta.whatever, links to view raw data)
+// -- Add data disclaimers (estimated from ...) and info on updating (most recent data from mta sets fetch daily at https://gunthern.pythonanywhere.com/, most recent update xxxxxx)
 // Data vis:
 // - Create dynamic graphs / charts.
 // - Create JS for google map embedding for stations / stops.
@@ -14,10 +17,8 @@
 // - Create CSS for map borders
 // - Make text bigger generally when other stuff is done
 // JS functionality:
-// - Add dropdowns arrows for more info / individual sources to panels (e.g. number of individual riders estimated at two trips per rider. source: mta.whatever, links to view raw data)
 // - Write script for subway cars, buses, subway platform (from inside train) scroll or animation (like the tramway)
 // - Write autoscroll button functionality
-// - Create JS for "back to top" scroll animation
 // Graphics:
 // - Create graphics for: Subway header (subway icon), Bus header (bus icon), subway cars, buses, bus line logos(?)
 // - Place subway / bus graphics according to popular stations / stops etc
@@ -42,7 +43,9 @@ function init() {
 
         document.getElementById('weekdaterange').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangetram').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
-        document.getElementById('weekdaterangesubway').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangesubway0').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangesubway1').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangesubway2').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangebus').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('yeardaterange').innerHTML = dateYearStart + ' - ' + dateMostRecent;
 
@@ -51,10 +54,102 @@ function init() {
         document.getElementById('trammaxdailydate').innerHTML = response.tramMaxDailyDateWeekly;
 
         document.getElementById('subwayweeklyridership').innerHTML = response.subwayWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('subwaymaxdailyridership').innerHTML = response.subwayMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('subwaymaxdailyridership0').innerHTML = response.subwayMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('subwaymaxdailyridership1').innerHTML = response.subwayMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaymaxdailycars').innerHTML = (response.subwayMaxDailyRidershipWeekly / 200).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaymaxdailydate0').innerHTML = response.subwayMaxDailyDateWeekly;
         document.getElementById('subwaymaxdailydate1').innerHTML = response.subwayMaxDailyDateWeekly;
+
+        let maxBoroughId = 'subwayweekly';
+        let maxBorough = response.subwayStationMaxRidershipWeeklyBorough[0];
+        if (maxBorough == 'Bronx') {
+            maxBoroughId += 'bronx';
+            maxBorough = 'The Bronx';
+        }
+        else if (maxBorough == 'Brooklyn') maxBoroughId += 'brooklyn';
+        else if (maxBorough == 'Manhattan') maxBoroughId += 'manhattan';
+        else if (maxBorough == 'Queens') maxBoroughId += 'queens';
+        else if (maxBorough == 'Staten Island') maxBoroughId += 'staten';
+        document.getElementById(maxBoroughId).hidden = true;
+        document.getElementById(maxBoroughId + 'icons').hidden = true;
+
+        let nameIds = idsNameSplit(response.subwayStationMaxRidershipWeeklyStation[0].toString());
+        lineIconsFromIds(nameIds[0], 'subwaystationweekmaxstationserviceicons', 0);
+        document.getElementById('subwaystationweekmaxstation0').innerHTML = nameIds[1];
+        document.getElementById('subwaystationweekmaxstation1').innerHTML = nameIds[1];
+        document.getElementById('subwaystationweekmaxborough').innerHTML = maxBorough;
+        document.getElementById('subwaystationweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        if (maxBorough != 'The Bronx') {
+            let bronxMaxStationIndex;
+            for (let i=0; i<response.subwayStationMaxRidershipWeeklyBorough.length; i++) {
+                if (response.subwayStationMaxRidershipWeeklyBorough[i] == 'Bronx') {
+                    bronxMaxStationIndex = i;
+                    break;
+                }
+            }
+            nameIds = idsNameSplit(response.subwayStationMaxRidershipWeeklyStation[bronxMaxStationIndex].toString());
+            lineIconsFromIds(nameIds[0], 'subwayweeklybronxicons', 0);
+            document.getElementById('subwaybronxweekmaxstation0').innerHTML = nameIds[1];
+            document.getElementById('subwaybronxweekmaxstation1').innerHTML = nameIds[1];
+            document.getElementById('subwaybronxweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[bronxMaxStationIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        if (maxBorough != 'Brooklyn') {
+            let brooklynMaxStationIndex;
+            for (let i=0; i<response.subwayStationMaxRidershipWeeklyBorough.length; i++) {
+                if (response.subwayStationMaxRidershipWeeklyBorough[i] == 'Brooklyn') {
+                    brooklynMaxStationIndex = i;
+                    break;
+                }
+            }
+            nameIds = idsNameSplit(response.subwayStationMaxRidershipWeeklyStation[brooklynMaxStationIndex].toString());
+            lineIconsFromIds(nameIds[0], 'subwayweeklybrooklynicons', 0);
+            document.getElementById('subwaybrooklynweekmaxstation0').innerHTML = nameIds[1];
+            document.getElementById('subwaybrooklynweekmaxstation1').innerHTML = nameIds[1];
+            document.getElementById('subwaybrooklynweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[brooklynMaxStationIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        if (maxBorough != 'Manhattan') {
+            let manhattanMaxStationIndex;
+            for (let i=0; i<response.subwayStationMaxRidershipWeeklyBorough.length; i++) {
+                if (response.subwayStationMaxRidershipWeeklyBorough[i] == 'Manhattan') {
+                    manhattanMaxStationIndex = i;
+                    break;
+                }
+            }
+            nameIds = idsNameSplit(response.subwayStationMaxRidershipWeeklyStation[manhattanMaxStationIndex].toString());
+            lineIconsFromIds(nameIds[0], 'subwayweeklymanhattanicons', 0);
+            document.getElementById('subwaymanhattanweekmaxstation0').innerHTML = nameIds[1];
+            document.getElementById('subwaymanhattanweekmaxstation1').innerHTML = nameIds[1];
+            document.getElementById('subwaymanhattanweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[manhattanMaxStationIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        if (maxBorough != 'Queens') {
+            let queensMaxStationIndex;
+            for (let i=0; i<response.subwayStationMaxRidershipWeeklyBorough.length; i++) {
+                if (response.subwayStationMaxRidershipWeeklyBorough[i] == 'Queens') {
+                    queensMaxStationIndex = i;
+                    break;
+                }
+            }
+            nameIds = idsNameSplit(response.subwayStationMaxRidershipWeeklyStation[queensMaxStationIndex].toString());
+            lineIconsFromIds(nameIds[0], 'subwayweeklyqueensicons', 0);
+            document.getElementById('subwayqueensweekmaxstation0').innerHTML = nameIds[1];
+            document.getElementById('subwayqueensweekmaxstation1').innerHTML = nameIds[1];
+            document.getElementById('subwayqueensweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[queensMaxStationIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        if (maxBorough != 'Staten Island') {
+            let statenMaxStationIndex;
+            for (let i=0; i<response.subwayStationMaxRidershipWeeklyBorough.length; i++) {
+                if (response.subwayStationMaxRidershipWeeklyBorough[i] == 'Staten Island') {
+                    statenMaxStationIndex = i;
+                    break;
+                }
+            }
+            nameIds = idsNameSplit(response.subwayStationMaxRidershipWeeklyStation[statenMaxStationIndex].toString());
+            lineIconsFromIds(nameIds[0], 'subwayweeklystatenicons', 0);
+            document.getElementById('subwaystatenweekmaxstation0').innerHTML = nameIds[1];
+            document.getElementById('subwaystatenweekmaxstation1').innerHTML = nameIds[1];
+            document.getElementById('subwaystatenweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[statenMaxStationIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
 
         document.getElementById('subwaymaxannualday').innerHTML = response.subwayMaxAnnualDay;
         document.getElementById('subwaymaxannualdaymean').innerHTML = response.subwayMaxAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -79,6 +174,49 @@ function init() {
     xhttp.open("GET", "https://gunthern.pythonanywhere.com/");
     xhttp.send();
 
+    // Extract subway line identifiers from station name
+    function idsNameSplit(nameIds) {
+
+        const regex = /\(([^)]+)\)/g;
+        let match;
+        const result = [];
+        let name = nameIds;
+        while ((match = regex.exec(nameIds)) !== null) {
+            const r = match[1].split(',');
+            let matchFound = false;
+            for (let i=0; i<r.length; i++) {
+                if (r[i].length == 1 || r[i] == 'SIR') {
+                    result.push(r[i]);
+                    matchFound = true;
+                }
+            }
+            if (matchFound) {
+                name = name.replace(match.toString().match(/\([^)]*\)/g), '').trim();
+            }
+        }
+        return [result, name]
+
+    }
+
+    // Create HTML for subway line icons from line ids
+    function lineIconsFromIds(id, element, scale) {
+
+        // Create html string
+        let htmlString = '';
+        let logoScale = ['sublogo'];
+        for (let i=0; i<id.length; i++) {
+            htmlString += '<img class="' + logoScale[scale] + '" ';
+            if (i==0) htmlString += 'style="margin-left: 10px;" ';
+            htmlString += 'src = "./media/subway' + id[i].toString() + '.png"></img>';
+        }
+        
+        // Update html
+        document.getElementById(element).innerHTML = htmlString;
+    }
+
+    idsNameSplit("Cathedral Pkwy (110 St) (1) (A,C,E)")
+
+    // Scrolling effects
     let offset = window.scrollY;
 
     // Parallax scroll for clouds
@@ -101,13 +239,13 @@ function init() {
     const tram = document.getElementById('tram');
     const tramRig = document.getElementById('tramrig');
     const tramPosY = parseFloat(tramRig.style.marginTop.slice(0, -1));
-    const tramScrollLock = 1800;
-    const tramScrollUnlock = 4200;
-    const tramScrollXSpeed = 0.8;
-    const tramScrollYSpeed = 0.8;
+    const tramScrollLock = 2200;
+    const tramScrollUnlock = 4400;
+    const tramScrollXSpeed = 0.7;
+    const tramScrollYSpeed = 0.9;
     function tramPositioner() {
-        const pos = -1500 + offset * tramScrollXSpeed;
-        tram.style.marginLeft = (pos / 20) + '%';
+        const pos = offset * tramScrollXSpeed;
+        tram.style.marginLeft = (pos/20 - 60) + '%';
         if (offset > tramScrollLock) {
             if (offset < tramScrollUnlock) {
                 tramRig.style.marginTop = (tramPosY + (offset - tramScrollLock) * tramScrollYSpeed) + 'px';
@@ -124,4 +262,25 @@ function init() {
         cloudPositioner();
         tramPositioner();
     });
+
+    // Autoscroll
+    function scrollTo(destination, duration) {
+        if (duration <= 0) {
+            return;
+        }
+        const difference = destination.scrollTop - window.scrollY;
+        const perTick = (difference / duration) * 10;
+    
+        setTimeout(() => {
+            window.scrollTo(0, window.scrollY + perTick);
+            if (window.scrollY === destination.scrollTop) {
+                return;
+            }
+            scrollTo(destination, duration - 10);
+        }, 10);
+    }
+    const footermiddle = document.getElementById('footermiddle');
+    const footerleft = document.getElementById('footerleft');
+    footermiddle.addEventListener('click', function() { scrollTo(document.getElementById('top'), 1000); });
+    footerleft.addEventListener('click', function() { scrollTo(document.getElementById('top'), 1000); });
 }

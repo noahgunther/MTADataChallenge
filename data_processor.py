@@ -162,7 +162,7 @@ busMinAnnualDayMeanRidership = busMinAnnualDayRidership / busMinAnnualDayTally
 # Get latest week of data from hourly subway / tram set
 
 # Tram
-url = "https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&transit_mode=tram&$where=transit_timestamp+between%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=5000"
+url = "https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&transit_mode=tram&$where=transit_timestamp+between%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=10000"
 data = requests.get(url).json()
 tramWeeklyRidership = 0
 tramDailyRidership = [0,0,0,0,0,0,0]
@@ -209,6 +209,36 @@ for d in data:
             tramMaxDailyRidershipWeekly = tramDailyRidership[6]
             tramMaxDailyDateWeekly = date
 
+# Subway
+subwayStationMaxRidershipWeeklyCount = []
+subwayStationMaxRidershipWeeklyStation = []
+subwayStationMaxRidershipWeeklyBorough = []
+for i in range(1000):
+    stationComplexId = str(i+1)
+    url = "https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=" + stationComplexId + "&$where=transit_timestamp+between+%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=10000"
+    data = requests.get(url).json()
+    if (data != []):
+        stationWeeklyRidership = 0
+        for d in data:
+            ridership = int(float(d['ridership']))
+            stationWeeklyRidership += ridership
+        if i == 0:
+            subwayStationMaxRidershipWeeklyCount.insert(0, stationWeeklyRidership)
+            subwayStationMaxRidershipWeeklyStation.insert(0, data[0]['station_complex'])
+            subwayStationMaxRidershipWeeklyBorough.insert(0, data[0]['borough'])
+        inserted = False
+        for j in range(len(subwayStationMaxRidershipWeeklyCount)):
+            if stationWeeklyRidership > subwayStationMaxRidershipWeeklyCount[j]:
+                subwayStationMaxRidershipWeeklyCount.insert(j, stationWeeklyRidership)
+                subwayStationMaxRidershipWeeklyStation.insert(j, data[0]['station_complex'])
+                subwayStationMaxRidershipWeeklyBorough.insert(j, data[0]['borough'])
+                inserted = True
+                break
+        if not inserted:
+            subwayStationMaxRidershipWeeklyCount.append(stationWeeklyRidership)
+            subwayStationMaxRidershipWeeklyStation.append(data[0]['station_complex'])
+            subwayStationMaxRidershipWeeklyBorough.append(data[0]['borough'])
+
 # Write data to json
 data = {
     'last_cached': str(datetime.now()),
@@ -233,7 +263,10 @@ data = {
     'busMinAnnualDayMeanRidership': busMinAnnualDayMeanRidership,
     'tramWeeklyRidership': tramWeeklyRidership,
     'tramMaxDailyRidershipWeekly': tramMaxDailyRidershipWeekly,
-    'tramMaxDailyDateWeekly': tramMaxDailyDateWeekly
+    'tramMaxDailyDateWeekly': tramMaxDailyDateWeekly,
+    'subwayStationMaxRidershipWeeklyStation': subwayStationMaxRidershipWeeklyStation,
+    'subwayStationMaxRidershipWeeklyBorough': subwayStationMaxRidershipWeeklyBorough,
+    'subwayStationMaxRidershipWeeklyCount': subwayStationMaxRidershipWeeklyCount
 }
 
 #print(data)
