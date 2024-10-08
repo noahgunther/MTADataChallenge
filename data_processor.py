@@ -291,8 +291,14 @@ plt.rcParams['axes.spines.top'] = False
 # Top station weekly ridership comparison
 left = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 height = subwayStationMaxRidershipWeeklyCount[:15]
-tick_label = subwayStationMaxRidershipWeeklyStation[:15]
-plt.xticks(rotation=45, ha='right', font=fpathreg, fontsize=16)
+tick_label = []
+for i in range(15):
+    if len(subwayStationMaxRidershipWeeklyStation[i]) > 27:
+        tick_label.append(subwayStationMaxRidershipWeeklyStation[i][:27] + '...')
+    else:
+        tick_label.append(subwayStationMaxRidershipWeeklyStation[i])
+
+plt.xticks(rotation=35, ha='right', font=fpathreg, fontsize=16)
 plt.yticks(font=fpathreg, fontsize=18)
 
 # Colors and format
@@ -302,7 +308,7 @@ for c in subwayStationMaxRidershipWeeklyCount[:15]:
 plt.bar(left, height, tick_label = tick_label, width = 0.95, color = mpl.colors.hsv_to_rgb(HSVcolor))
 
 # Labels
-plt.xlabel('Station Name / Service', font=fpathbold, fontsize=26)
+plt.xlabel('Station Name', font=fpathbold, fontsize=26)
 plt.ylabel('Ridership', font=fpathbold, fontsize=26)
 
 # Output
