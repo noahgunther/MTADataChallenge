@@ -2,8 +2,10 @@
 
 import requests
 import json
+from pathlib import Path
 from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 
 weekday = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
 
@@ -44,7 +46,7 @@ dateMostRecentLong = longDateConstructor(dateMostRecent)
 dateWeekStartLong = longDateConstructor(dateWeekStart)
 dateYearStartLong = longDateConstructor(dateYearStart)
 
-# Get latest year of data from daily ridership set 
+# Get latest year of data from daily ridership set
 url = "http://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$limit=365&$order=date+DESC&$where=date+between+%27" + queryDateConstructor(dateYearStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27"
 data = requests.get(url).json()
 
@@ -79,45 +81,45 @@ busDaysOfWeekRidership = [0,0,0,0,0,0,0]
 for d in data:
     subwayDailyRidership = int(d['subways_total_estimated_ridership'])
     busDailyRidership = int(d['buses_total_estimated_ridersip'])
-                
+
     subwayYearlyRidership += subwayDailyRidership
     busYearlyRidership += busDailyRidership
 
     day = longDateConstructor(dateDeconstructor(d['date']))[:3]
     if day == 'Mon':
-        subwayDaysOfWeekTally[0] += 1; 
+        subwayDaysOfWeekTally[0] += 1;
         subwayDaysOfWeekRidership[0] += subwayDailyRidership
-        busDaysOfWeekTally[0] += 1; 
+        busDaysOfWeekTally[0] += 1;
         busDaysOfWeekRidership[0] += busDailyRidership
     elif day == 'Tue':
-        subwayDaysOfWeekTally[1] += 1; 
+        subwayDaysOfWeekTally[1] += 1;
         subwayDaysOfWeekRidership[1] += subwayDailyRidership
-        busDaysOfWeekTally[1] += 1; 
+        busDaysOfWeekTally[1] += 1;
         busDaysOfWeekRidership[1] += busDailyRidership
     elif day == 'Wed':
-        subwayDaysOfWeekTally[2] += 1; 
+        subwayDaysOfWeekTally[2] += 1;
         subwayDaysOfWeekRidership[2] += subwayDailyRidership
-        busDaysOfWeekTally[2] += 1; 
+        busDaysOfWeekTally[2] += 1;
         busDaysOfWeekRidership[2] += busDailyRidership
     elif day == 'Thu':
-        subwayDaysOfWeekTally[3] += 1; 
+        subwayDaysOfWeekTally[3] += 1;
         subwayDaysOfWeekRidership[3] += subwayDailyRidership
-        busDaysOfWeekTally[3] += 1; 
+        busDaysOfWeekTally[3] += 1;
         busDaysOfWeekRidership[3] += busDailyRidership
     elif day == 'Fri':
-        subwayDaysOfWeekTally[4] += 1; 
+        subwayDaysOfWeekTally[4] += 1;
         subwayDaysOfWeekRidership[4] += subwayDailyRidership
-        busDaysOfWeekTally[4] += 1; 
+        busDaysOfWeekTally[4] += 1;
         busDaysOfWeekRidership[4] += busDailyRidership
     elif day == 'Sat':
-        subwayDaysOfWeekTally[5] += 1; 
+        subwayDaysOfWeekTally[5] += 1;
         subwayDaysOfWeekRidership[5] += subwayDailyRidership
-        busDaysOfWeekTally[5] += 1; 
+        busDaysOfWeekTally[5] += 1;
         busDaysOfWeekRidership[5] += busDailyRidership
     elif day == 'Sun':
-        subwayDaysOfWeekTally[6] += 1; 
+        subwayDaysOfWeekTally[6] += 1;
         subwayDaysOfWeekRidership[6] += subwayDailyRidership
-        busDaysOfWeekTally[6] += 1; 
+        busDaysOfWeekTally[6] += 1;
         busDaysOfWeekRidership[6] += busDailyRidership
 
 subwayMaxAnnualDay = ''
@@ -136,7 +138,7 @@ for i in range(7):
     if subwayMinAnnualDayRidership == 0 or subwayDaysOfWeekRidership[i] < subwayMinAnnualDayRidership:
         subwayMinAnnualDayRidership = subwayDaysOfWeekRidership[i]
         subwayMinAnnualDayTally = subwayDaysOfWeekTally[i]
-        subwayMinAnnualDay = weekday[i]        
+        subwayMinAnnualDay = weekday[i]
 subwayMaxAnnualDayMeanRidership = subwayMaxAnnualDayRidership / subwayMaxAnnualDayTally
 subwayMinAnnualDayMeanRidership = subwayMinAnnualDayRidership / subwayMinAnnualDayTally
 
@@ -156,7 +158,7 @@ for i in range(7):
     if busMinAnnualDayRidership == 0 or busDaysOfWeekRidership[i] < busMinAnnualDayRidership:
         busMinAnnualDayRidership = busDaysOfWeekRidership[i]
         busMinAnnualDayTally = busDaysOfWeekTally[i]
-        busMinAnnualDay = weekday[i]   
+        busMinAnnualDay = weekday[i]
 busMaxAnnualDayMeanRidership = busMaxAnnualDayRidership / busMaxAnnualDayTally
 busMinAnnualDayMeanRidership = busMinAnnualDayRidership / busMinAnnualDayTally
 
@@ -270,24 +272,39 @@ data = {
     'subwayStationMaxRidershipWeeklyCount': subwayStationMaxRidershipWeeklyCount
 }
 
-# Create graphs
-left = [1, 2, 3, 4, 5]
-height = subwayStationMaxRidershipWeeklyCount[:5]
-tick_label = subwayStationMaxRidershipWeeklyStation[:5]
-plt.bar(left, height, tick_label = tick_label,
-        width = 0.8, color = ['red', 'green'])
-# naming the x-axis
-plt.xlabel('Station Name / Service')
-# naming the y-axis
-plt.ylabel('Ridership')
-# plot title
-plt.title('Subway station ridership ' + dateWeekStartLong + " - " + dateMostRecentLong)
-
-# function to show the plot
-plt.show()
-
 #print(data)
 
 # Write json
-#with open('./data/data.json', 'w') as f:
-#    json.dump(data, f)
+with open('./data/data.json', 'w') as f:
+    json.dump(data, f)
+
+# Create graphs
+plt.style.use(['dark_background'])
+plt.hsv()
+fpathreg = Path("./fonts/Helvetica.ttf")
+fpathbold = Path("./fonts/Helvetica-Bold.ttf")
+fig, ax = plt.subplots()
+plt.figure(figsize=(14.23,14.23))
+plt.rcParams['axes.spines.right'] = False
+plt.rcParams['axes.spines.top'] = False
+
+# Top station weekly ridership comparison
+left = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+height = subwayStationMaxRidershipWeeklyCount[:15]
+tick_label = subwayStationMaxRidershipWeeklyStation[:15]
+plt.xticks(rotation=45, ha='right', font=fpathreg, fontsize=16)
+plt.yticks(font=fpathreg, fontsize=18)
+
+# Colors and format
+HSVcolor = []
+for c in subwayStationMaxRidershipWeeklyCount[:15]:
+    HSVcolor.append([abs((c - subwayStationMaxRidershipWeeklyCount[15])/(subwayStationMaxRidershipWeeklyCount[0] - subwayStationMaxRidershipWeeklyCount[15])-1.0) * 0.75, 1.0, 1.0])
+plt.bar(left, height, tick_label = tick_label, width = 0.95, color = mpl.colors.hsv_to_rgb(HSVcolor))
+
+# Labels
+plt.xlabel('Station Name / Service', font=fpathbold, fontsize=26)
+plt.ylabel('Ridership', font=fpathbold, fontsize=26)
+
+# Output
+plt.tight_layout()
+plt.savefig('./mysite/media/weeklystationcomparison.png', transparent=True, dpi=144.0)

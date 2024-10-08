@@ -178,7 +178,10 @@ function init() {
         document.getElementById('busminannualdaymean').innerHTML = response.busMinAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busyearlyridership').innerHTML = response.busYearlyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busdailyridershipavg').innerHTML = (response.busYearlyRidership / 365.0).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    
+        
+        document.getElementById('subwayweeklystationcomparison').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklystationcomparison?dummy' + Date.now())
+        console.log('https://gunthern.pythonanywhere.com/weeklystationcomparison?dummy' + Date.now());
+
         updateScrollValues();
     }
     xhttp.open("GET", "https://gunthern.pythonanywhere.com/");
