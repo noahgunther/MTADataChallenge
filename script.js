@@ -1,7 +1,4 @@
 // Todo:
-// Misc:
-// - FIX ISSUE WITH TRAM / CLOUDS BEING AT WRONG HEIGHT WHEN PAGE EXTENDED
-// - ALLOW TRAM TO GET SMALL WITH PAGE WIDTH SHRINK
 // Data:
 // - Figure out what live data is possible to access and include (Today)
 // - Get hourly popularity of week for subway
@@ -14,10 +11,10 @@
 // - Create dynamic graphs / charts.
 // CSS:
 // - Create CSS for live data (old style LCD cells)
-// - Do a pass for various screen widths, general functionality
 // JS functionality:
 // - Write script for subway cars, buses, subway platform (from inside train) scroll or animation (like the tramway)
 // - Test on mobile
+// - Do a pass for various screen widths, general functionality
 // Graphics:
 // - Bus line logos(?)
 // $$$:
@@ -262,11 +259,9 @@ function init() {
     // Scrolling effects
     let offset;
     let tramStart;
-    let docEnd;
     function updateScrollValues() {
         offset = window.scrollY;
-        tramStart = document.getElementById('tramanimstart').getBoundingClientRect().bottom + window.scrollY;
-        docEnd = document.getElementById('end').getBoundingClientRect().bottom + window.scrollY;
+        tramStart = document.getElementById('tramanimstart').getBoundingClientRect().top + window.scrollY;
     }
     updateScrollValues();
 
@@ -280,7 +275,7 @@ function init() {
 
     function cloudPositioner() {
         for (let i=0; i<clouds.length; i++) {
-            const pos = cloudPosY[i] - tramStart + 4500 + offset * cloudScrollYSpeed;
+            const pos = cloudPosY[i] - tramStart + 1500 + offset * cloudScrollYSpeed;
             clouds[i].style.marginTop = pos + 'px';
         }
     }
@@ -289,14 +284,14 @@ function init() {
     // Scroll animation for tram
     const tram = document.getElementById('tram');
     const tramRig = document.getElementById('tramrig');
-    const tramPosY = parseFloat(tramRig.style.marginTop.slice(0, -1));
-    const tramScrollLock = tramStart - 3100;
-    const tramScrollUnlock = tramScrollLock + 2200;
-    const tramScrollXSpeed = 0.66;
+    const tramPosY = 600;
+    const tramScrollLock = tramStart;
+    const tramScrollUnlock = tramScrollLock + 2000;
+    const tramScrollXSpeed = 0.7;
     const tramScrollYSpeed = 0.9;
     function tramPositioner() {
         const pos = offset * tramScrollXSpeed;
-        const offsetX = tramStart / 100;
+        const offsetX = (tramStart / 100) * 2.75;
         tram.style.marginLeft = (pos/20 - offsetX) + '%';
         if (offset > tramScrollLock) {
             if (offset < tramScrollUnlock) {
@@ -305,6 +300,9 @@ function init() {
             else {
                 tramRig.style.marginTop = (tramPosY + (tramScrollUnlock - tramScrollLock) * tramScrollYSpeed) + 'px';
             }
+        }
+        else {
+            tramRig.style.marginTop = tramPosY + 'px';
         }
     }
     tramPositioner();

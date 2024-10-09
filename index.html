@@ -85,20 +85,21 @@
         <!--Roosevelt island tram-->
         <div class="sky" id="tramanimstart">
             <div class="skycontent">
-                <img class="cloud" style="margin-top: -300px; margin-left: 40%; width: 12%; min-width: 120px; max-width: 360px;" src="./media/cloud0.png"></img>
-                <img class="cloud" style="margin-top: 50px; margin-left: 10%; width: 10%; min-width: 100px; max-width: 300px;" src="./media/cloud0.png"></img>
-                <img class="cloud" style="margin-top: 100px; margin-left: 20%; width: 20%; min-width: 200px; max-width: 600px;" src="./media/cloud1.png"></img>
-                <img class="cloud" style="margin-top: 50px; margin-left: 70%; width: 15%; min-width: 150px; max-width: 450px;" src="./media/cloud2.png"></img>
-                <img class="cloud" style="margin-top: 400px; margin-left: 5%; width: 15%; min-width: 150px; max-width: 450px;" src="./media/cloud2.png"></img>
-                <img class="cloud" style="margin-top: 700px; margin-left: 50%; width: 17%; min-width: 170px; max-width: 510px;" src="./media/cloud0.png"></img>
-                <img class="cloud" style="margin-top: 950px; margin-left: 66%; width: 15%; min-width: 150px; max-width: 450px;" src="./media/cloud1.png"></img>
-                <img class="cloud" style="margin-top: 1200px; margin-left: 12%; width: 10%; min-width: 100px; max-width: 300px;" src="./media/cloud2.png"></img>
-                <img class="cloud" style="margin-top: 1400px; margin-left: 16%; width: 15%; min-width: 150px; max-width: 450px;" src="./media/cloud1.png"></img>
+                <img class="cloud" style="margin-top: -300px; margin-left: 50%; width: 12%; min-width: 240px; max-width: 360px;" src="./media/cloud0.png"></img>
+                <img class="cloud" style="margin-top: 50px; margin-left: 15%; width: 10%; min-width: 200px; max-width: 300px;" src="./media/cloud0.png"></img>
+                <img class="cloud" style="margin-top: 100px; margin-left: 30%; width: 20%; min-width: 400px; max-width: 600px;" src="./media/cloud1.png"></img>
+                <img class="cloud" style="margin-top: 50px; margin-left: 87%; width: 15%; min-width: 300px; max-width: 450px;" src="./media/cloud2.png"></img>
+                <img class="cloud" style="margin-top: 400px; margin-left: 12%; width: 15%; min-width: 300px; max-width: 450px;" src="./media/cloud2.png"></img>
+                <img class="cloud" style="margin-top: 700px; margin-left: 63%; width: 17%; min-width: 340px; max-width: 510px;" src="./media/cloud0.png"></img>
+                <img class="cloud" style="margin-top: 950px; margin-left: 76%; width: 15%; min-width: 300px; max-width: 450px;" src="./media/cloud1.png"></img>
+                <img class="cloud" style="margin-top: 1200px; margin-left: 17%; width: 10%; min-width: 200px; max-width: 300px;" src="./media/cloud2.png"></img>
+                <img class="cloud" style="margin-top: 1400px; margin-left: 12%; width: 15%; min-width: 300px; max-width: 450px;" src="./media/cloud1.png"></img>
+                <img class="cloud" style="margin-top: 1570px; margin-left: 86%; width: 16%; min-width: 320px; max-width: 480px;" src="./media/cloud2.png"></img>
 
-                <div id="tramrig" style="position: absolute; margin-top: 455px; width: 100%;">
-                    <img id="tram" style="position: absolute; width: 400px; z-index: 0; transform: translate(-50%);" src="./media/tram.png"></img>
-                    <div class="tramcable" style="position: absolute; margin-top: 45px; z-index: 1;"></div>
-                    <div class="tramcable" style="margin-top: 80px; z-index: -1;"></div>
+                <div id="tramrig">
+                    <img id="tram" src="./media/tram.png"></img>
+                    <div class="tramcable" style="margin-top: min(max(1.75%, 35px), 45px); z-index: 1;"></div>
+                    <div class="tramcable" style="margin-top: min(max(3.5%, 70px), 90px); z-index: -1;"></div>
                 </div>
             </div>
 
@@ -134,7 +135,7 @@
             <p class="paneltitle">A Week on the Subway</p>
             <p class="panelsmalltext">Week of <text id="weekdaterangesubway0"></text></p>
             <p class="paneltext">During this week, people rode the NYC Subway a total of <text id="subwayweeklyridership"></text> times.</p>
-            <p class="paneltext">The most popular day during this week was <text id="subwaymaxdailydate0"></text>, when people rode the subway <text id="subwaymaxdailyridership0"></text> times.</p>
+            <p class="paneltext">The most popular day during this week was <text id="subwaymaxdailydate0"></text>, when subway ridership was <text id="subwaymaxdailyridership0"></text>.</p>
             <p class="paneltitle">SUBWAY RIDERSHIP / WEEK CHART HERE - WAVE INDICATING BOTH TIME OF DAY AND DAY POPULARITY FOR THE WEEK</p>
             <p class="paneltext">Those <text id="subwaymaxdailyridership1"></text> riders on <text id="subwaymaxdailydate1"></text> would fit in about <text id="subwaymaxdailycars"></text> subway cars (at 200 riders per car).</p>
             <a class="panellink" href="https://data.ny.gov" target="_blank">

@@ -211,6 +211,21 @@ body {
 .cloud {
     position: absolute;
     z-index: -2;
+    transform: translate(-50%);
+}
+
+#tramrig {
+    position: absolute;
+    width: 100%;
+}
+
+#tram {
+    position: absolute;
+    width: 15%;
+    min-width: 300px;
+    max-width: 400px;
+    z-index: 0;
+    transform: translate(-50%);
 }
 
 .tramcable {
