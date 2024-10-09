@@ -1,4 +1,7 @@
 // Todo:
+// Misc:
+// - FIX ISSUE WITH TRAM / CLOUDS BEING AT WRONG HEIGHT WHEN PAGE EXTENDED
+// - ALLOW TRAM TO GET SMALL WITH PAGE WIDTH SHRINK
 // Data:
 // - Figure out what live data is possible to access and include (Today)
 // - Get hourly popularity of week for subway
@@ -16,10 +19,9 @@
 // - Write script for subway cars, buses, subway platform (from inside train) scroll or animation (like the tramway)
 // - Test on mobile
 // Graphics:
-// - Create graphics for: Subway header (subway icon), Bus header (bus icon), subway cars, buses, bus line logos(?)
+// - Bus line logos(?)
 // $$$:
 // - Look into new hosting for full noahgunther.com site, including this subsite (hostgator?)
-// - Pay for pythonanywhere plan to handle more traffic?
 
 import './style.css'
 
@@ -36,7 +38,8 @@ function init() {
         const dateYearStart = response.dateYearStart;
 
         document.getElementById('weekdaterange').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
-        document.getElementById('weekdaterangetram').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangetram0').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangetram1').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangesubway0').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangesubway1').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangesubway2').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
@@ -179,8 +182,8 @@ function init() {
         document.getElementById('busyearlyridership').innerHTML = response.busYearlyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busdailyridershipavg').innerHTML = (response.busYearlyRidership / 365.0).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         
+        document.getElementById('tramweeklyridershiphourly').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklytramridership?dummy' + Date.now())
         document.getElementById('subwayweeklystationcomparison').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklystationcomparison?dummy' + Date.now())
-        console.log('https://gunthern.pythonanywhere.com/weeklystationcomparison?dummy' + Date.now());
 
         updateScrollValues();
     }
