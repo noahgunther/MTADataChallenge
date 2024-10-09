@@ -47,6 +47,7 @@ dateYearStart = dateMostRecent - timedelta(days=364, hours=23)
 dateMostRecentLong = longDateConstructor(dateMostRecent)
 dateWeekStartLong = longDateConstructor(dateWeekStart)
 dateYearStartLong = longDateConstructor(dateYearStart)
+
 # Create array of hours in week 
 hoursInWeek = []
 h = 0
@@ -76,8 +77,6 @@ for i in range(len(hoursInWeek)):
         hoursInWeekLabels.append(d[:3] + ', ' + ds[:3] + '. ' + ds.split(' ', 2)[1] + ', 00:00')
     else:
         hoursInWeekLabels.append('')
-
-print(hoursInWeekLabels)
     
 # Get latest year of data from daily ridership set
 url = "http://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$limit=365&$order=date+DESC&$where=date+between+%27" + queryDateConstructor(dateYearStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27"
@@ -263,7 +262,11 @@ for d in data:
 subwayStationMaxRidershipWeeklyCount = []
 subwayStationMaxRidershipWeeklyStation = []
 subwayStationMaxRidershipWeeklyBorough = []
-for i in range(1000):
+subwayHourlyRidership = []
+for h in range(len(hoursInWeek)):
+    subwayHourlyRidership.append(0)
+
+for i in range(100):
     stationComplexId = str(i+1)
     url = "https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=" + stationComplexId + "&$where=transit_timestamp+between+%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=10000"
     data = requests.get(url).json()
@@ -272,10 +275,17 @@ for i in range(1000):
         for d in data:
             ridership = int(float(d['ridership']))
             stationWeeklyRidership += ridership
+            ridershipHour = d['transit_timestamp'][:13]
+
+            for h in range(len(hoursInWeek)):
+                if ridershipHour == hoursInWeek[h]:
+                    subwayHourlyRidership[h] += ridership
+
         if i == 0:
             subwayStationMaxRidershipWeeklyCount.insert(0, stationWeeklyRidership)
             subwayStationMaxRidershipWeeklyStation.insert(0, data[0]['station_complex'])
             subwayStationMaxRidershipWeeklyBorough.insert(0, data[0]['borough'])
+
         inserted = False
         for j in range(len(subwayStationMaxRidershipWeeklyCount)):
             if stationWeeklyRidership > subwayStationMaxRidershipWeeklyCount[j]:
@@ -284,6 +294,7 @@ for i in range(1000):
                 subwayStationMaxRidershipWeeklyBorough.insert(j, data[0]['borough'])
                 inserted = True
                 break
+
         if not inserted:
             subwayStationMaxRidershipWeeklyCount.append(stationWeeklyRidership)
             subwayStationMaxRidershipWeeklyStation.append(data[0]['station_complex'])
@@ -382,6 +393,56 @@ plt.tight_layout()
 plt.savefig('./mysite/media/weeklytramridership.png', transparent=True, dpi=144.0)
 
 plt.clf()
+fig, ax = plt.subplots()
+
+# Hourly subway ridership for the week
+plt.xlabel('Time', fontsize=26, font=fpathreg)
+plt.ylabel('Ridership', fontsize=26, font=fpathreg)
+
+# Ticks and labels
+x = []
+for i in range(168):
+    x.append(i)
+plt.xticks(rotation=35, ticks=x, labels=hoursInWeekLabels, ha='right', font=fpathreg, fontsize=16)
+plt.yticks(font=fpathreg, fontsize=18)
+plt.plot(hoursInWeek, subwayHourlyRidership, color=[1,1,1,1], linewidth=0.05)
+ax.set_ylim(ymin=0)
+for n, label in enumerate(ax.xaxis.get_ticklabels()):
+    if n % 24 != 0:
+        label.set_fontsize(11)
+for n, tick in enumerate(ax.xaxis.get_ticklines()):
+    if n % 12 != 0:
+        tick.set_visible(False)
+
+# Colors and fill
+subwayMaxWeeklyHour = 0
+for h in subwayHourlyRidership:
+    if h > subwayMaxWeeklyHour:
+        subwayMaxWeeklyHour = h
+subwayHourlyRidershipSubstep = 10
+for i in range(168):
+    if i > 0:
+        stepXStart = x[i-1]
+        stepXEnd = x[i]
+        stepYStart = subwayHourlyRidership[i-1]
+        stepYEnd = subwayHourlyRidership[i]
+        substepLength = 1 / subwayHourlyRidershipSubstep
+        for j in range(subwayHourlyRidershipSubstep):
+            lerp = stepYStart + (stepYEnd - stepYStart) * (substepLength * j)
+            HSVcolor = [abs(1.0-(lerp / subwayMaxWeeklyHour)) * 0.75, 1.0, 1.0]
+            plt.fill_between(
+                [stepXStart + substepLength * (j+1), stepXEnd - substepLength * (subwayHourlyRidershipSubstep - (j+1) + 1)],
+                [stepYStart + (stepYEnd - stepYStart) * (substepLength * (j+1)), lerp],
+                color=mpl.colors.hsv_to_rgb(HSVcolor),
+                linewidth=1
+            )
+
+# Output
+plt.tight_layout()
+plt.savefig('./mysite/media/weeklysubwayridership.png', transparent=True, dpi=144.0)
+
+plt.clf()
+fig, ax = plt.subplots()
 
 # Top subway station weekly ridership comparison
 left = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
