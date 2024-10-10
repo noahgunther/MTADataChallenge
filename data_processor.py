@@ -266,7 +266,7 @@ subwayHourlyRidership = []
 for h in range(len(hoursInWeek)):
     subwayHourlyRidership.append(0)
 
-for i in range(100):
+for i in range(1000):
     stationComplexId = str(i+1)
     url = "https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=" + stationComplexId + "&$where=transit_timestamp+between+%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=10000"
     data = requests.get(url).json()

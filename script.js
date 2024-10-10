@@ -1,20 +1,20 @@
 // Todo:
 // Data:
 // - Figure out what live data is possible to access and include (Today)
-// - Get hourly popularity of week for subway
 // - Get most popular bus stops for the week from hourly dataset (most pop station, most pop in each borough, whole list)
 // - Get hourly popularity of week for bus
 // - Review all code / math
-// - Add dropdowns arrows for more info / individual sources to panels (e.g. source: mta.whatever, links to view raw data)
-// -- Add data disclaimers (estimated from ...) and info on updating (most recent data from mta sets fetch daily at https://gunthern.pythonanywhere.com/, most recent update xxxxxx)
+// - Add source links to each panel with dataset
+// - Add data disclaimer (estimated from ...) and info on updating (most recent data from mta sets fetch daily at https://gunthern.pythonanywhere.com/, most recent update xxxxxx)
 // Data vis:
 // - Create dynamic graphs / charts.
 // CSS:
 // - Create CSS for live data (old style LCD cells)
 // JS functionality:
+// - Write functionality for search for subway station list (type text, highlight matching, jump to next / previous, clear search)
 // - Write script for subway cars, buses, subway platform (from inside train) scroll or animation (like the tramway)
 // - Test on mobile
-// - Do a pass for various screen widths, general functionality
+// - Do a pass for various screen widths, browsers, general functionality
 // Graphics:
 // - Bus line logos(?)
 // $$$:
@@ -40,6 +40,7 @@ function init() {
         document.getElementById('weekdaterangesubway0').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangesubway1').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangesubway2').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangesubway2').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangebus').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('yeardaterange0').innerHTML = dateYearStart + ' - ' + dateMostRecent;
         document.getElementById('yeardaterange1').innerHTML = dateYearStart + ' - ' + dateMostRecent;
@@ -52,8 +53,7 @@ function init() {
         document.getElementById('subwaymaxdailyridership0').innerHTML = response.subwayMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaymaxdailyridership1').innerHTML = response.subwayMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaymaxdailycars').innerHTML = (response.subwayMaxDailyRidershipWeekly / 200).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('subwaymaxdailydate0').innerHTML = response.subwayMaxDailyDateWeekly;
-        document.getElementById('subwaymaxdailydate1').innerHTML = response.subwayMaxDailyDateWeekly;
+        document.getElementById('subwaymaxdailydate').innerHTML = response.subwayMaxDailyDateWeekly;
 
         let maxBoroughId = 'subwayweekly';
         let maxBorough = response.subwayStationMaxRidershipWeeklyBorough[0];
@@ -145,7 +145,7 @@ function init() {
             document.getElementById('subwaystatenweekmaxstation1').innerHTML = nameIds[1];
             document.getElementById('subwaystatenweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[statenMaxStationIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        let subwayWeeklyTableHtmlString = "<tr><th><text>Rank</text></th><th><text>Subway Station / Service</text></th><th><text>Borough</text></th><th><text>Ridership (week)</text></th></tr>";
+        let subwayWeeklyTableHtmlString = "<thead class='paneltablehead'><tr><th><text>Rank</text></th><th><text>Subway Station / Service</text></th><th><text>Borough</text></th><th><text>Ridership (week)</text></th></tr></thead><tbody class='paneltablebody'>";
         for (let i=0; i<response.subwayStationMaxRidershipWeeklyStation.length; i++) {
             const nameIds = idsNameSplit(response.subwayStationMaxRidershipWeeklyStation[i].toString());
             let idsImgString = '<br/>';
@@ -157,7 +157,7 @@ function init() {
             tableString += "<th><text>" + response.subwayStationMaxRidershipWeeklyCount[i].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</text></th></tr>";
             subwayWeeklyTableHtmlString += tableString;
         }
-        document.getElementById('subwayweeklytable').innerHTML = subwayWeeklyTableHtmlString;
+        document.getElementById('subwayweeklytable').innerHTML = subwayWeeklyTableHtmlString + '</tbody>';
 
         document.getElementById('subwaymaxannualday').innerHTML = response.subwayMaxAnnualDay;
         document.getElementById('subwaymaxannualdaymean').innerHTML = response.subwayMaxAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -180,6 +180,7 @@ function init() {
         document.getElementById('busdailyridershipavg').innerHTML = (response.busYearlyRidership / 365.0).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         
         document.getElementById('tramweeklyridershiphourly').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklytramridership?dummy' + Date.now())
+        document.getElementById('subwayweeklyridershiphourly').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklysubwayridership?dummy' + Date.now())
         document.getElementById('subwayweeklystationcomparison').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklystationcomparison?dummy' + Date.now())
 
         updateScrollValues();
@@ -225,35 +226,6 @@ function init() {
         
         // Update html
         document.getElementById(element).innerHTML = htmlString;
-    }
-
-    // Dropdown behavior
-
-    // Subway table
-    const subwayStationTableToggle0 = document.getElementById('togglesubwaystationtabledropdown0');
-    const subwayStationTableToggle0Text = document.getElementById('subwaystationtabledropdowntext');
-    const subwayStationTableToggle0Arrow = document.getElementById('subwaystationtabledropdownarrow');
-    const subwayStationTableToggle1 = document.getElementById('togglesubwaystationtabledropdown1');
-    const subwayStationTable = document.getElementById('subwaystationtabledropdown');
-    subwayStationTableToggle0.addEventListener('click', function() {
-        toggleSubwayStationTable(false);
-    });
-    subwayStationTableToggle1.addEventListener('click', function() { 
-        toggleSubwayStationTable(true);
-    });
-    function toggleSubwayStationTable(scrollIntoView) {
-        if (subwayStationTable.hidden) {
-            subwayStationTable.hidden = false;
-            subwayStationTableToggle0Text.innerHTML = "Hide all stations by ridership: ";
-            subwayStationTableToggle0Arrow.style.transform = "rotate(0deg)";
-        }
-        else {
-            subwayStationTable.hidden = true;
-            subwayStationTableToggle0Text.innerHTML = "View all stations by ridership: ";
-            subwayStationTableToggle0Arrow.style.transform = "rotate(180deg)";
-            if (scrollIntoView) subwayStationTableToggle0.scrollIntoView();
-        }
-        updateScrollValues();
     }
 
     // Scrolling effects
