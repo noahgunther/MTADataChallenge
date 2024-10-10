@@ -41,7 +41,10 @@ function init() {
         document.getElementById('weekdaterangesubway1').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangesubway2').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangesubway2').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
-        document.getElementById('weekdaterangebus').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangebus0').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangebus1').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangebus2').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangebus3').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('yeardaterange0').innerHTML = dateYearStart + ' - ' + dateMostRecent;
         document.getElementById('yeardaterange1').innerHTML = dateYearStart + ' - ' + dateMostRecent;
 
@@ -159,18 +162,26 @@ function init() {
         }
         document.getElementById('subwayweeklytable').innerHTML = subwayWeeklyTableHtmlString + '</tbody>';
 
+        document.getElementById('subwaymaxannualdate').innerHTML = response.subwayMaxAnnualDate;
+        document.getElementById('subwaymaxannualdateridership').innerHTML = response.subwayMaxAnnualDateRidership;
+        document.getElementById('subwayminannualdate').innerHTML = response.subwayMinAnnualDate;
+        document.getElementById('subwayminannualdateridership').innerHTML = response.subwayMinAnnualDateRidership;
         document.getElementById('subwaymaxannualday').innerHTML = response.subwayMaxAnnualDay;
         document.getElementById('subwaymaxannualdaymean').innerHTML = response.subwayMaxAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwayminannualday').innerHTML = response.subwayMinAnnualDay;
         document.getElementById('subwayminannualdaymean').innerHTML = response.subwayMinAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwayyearlyridership').innerHTML = response.subwayYearlyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaydailyridershipavg').innerHTML = (response.subwayYearlyRidership / 365.0).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    
+        
+        document.getElementById('busmaxannualdate').innerHTML = response.busMaxAnnualDate;
+        document.getElementById('busmaxannualdateridership').innerHTML = response.busMaxAnnualDateRidership;
+        document.getElementById('busminannualdate').innerHTML = response.busMinAnnualDate;
+        document.getElementById('busminannualdateridership').innerHTML = response.busMinAnnualDateRidership;
         document.getElementById('busweeklyridership').innerHTML = response.busWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('busmaxdailyridership').innerHTML = response.busMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busmaxdailyridership0').innerHTML = response.busMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busmaxdailyridership1').innerHTML = response.busMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busmaxdailybuses').innerHTML = (response.busMaxDailyRidershipWeekly / 200).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('busmaxdailydate0').innerHTML = response.busMaxDailyDateWeekly;
-        document.getElementById('busmaxdailydate1').innerHTML = response.busMaxDailyDateWeekly;
+        document.getElementById('busmaxdailydate').innerHTML = response.busMaxDailyDateWeekly;
         
         document.getElementById('busmaxannualday').innerHTML = response.busMaxAnnualDay;
         document.getElementById('busmaxannualdaymean').innerHTML = response.busMaxAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

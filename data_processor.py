@@ -8,16 +8,16 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 
 weekday = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 
 def dateDeconstructor(dateString):
     year = int(dateString[:4])
-    month = int(dateString[5:7])
+    mo = int(dateString[5:7])
     day = int(dateString[8:10])
     hour = int(dateString[11:13])
-    return datetime(year, month, day, hour, 0, 0, 0)
+    return datetime(year, mo, day, hour, 0, 0, 0)
 
 def longDateConstructor(date):
-    month = ["January","February","March","April","May","June","July","August","September","October","November","December"]
     nth = 'th'
     dayInt = date.day
     dayString = str(dayInt)
@@ -47,6 +47,23 @@ dateYearStart = dateMostRecent - timedelta(days=364, hours=23)
 dateMostRecentLong = longDateConstructor(dateMostRecent)
 dateWeekStartLong = longDateConstructor(dateWeekStart)
 dateYearStartLong = longDateConstructor(dateYearStart)
+
+# Create array of days in year 
+daysInYear = []
+d = 364
+for i in range(365):
+    daysInYear.append(str(dateMostRecent - timedelta(days=d))[:10])
+    d -= 1
+
+# Create labels for hours in week
+daysInYearLabels = []
+for i in range(len(daysInYear)):
+    if i == 0 or i == len(daysInYear)-1:
+        daysInYearLabels.append(month[int(daysInYear[i][5:7])-1] + " " + daysInYear[i][8:11] + ", " + daysInYear[i][:4])
+    elif daysInYear[i][8:11] == '01':
+        daysInYearLabels.append(month[int(daysInYear[i][5:7])-1] + " 01, " + daysInYear[i][:4])
+    else:
+        daysInYearLabels.append('')
 
 # Create array of hours in week 
 hoursInWeek = []
@@ -90,90 +107,122 @@ busWeeklyRidership = 0
 busMaxDailyRidershipWeekly = 0
 busMaxDailyDateWeekly = ''
 for i in range(7):
-    subwayDailyRidership = int(data[i]['subways_total_estimated_ridership'])
-    busDailyRidership = int(data[i]['buses_total_estimated_ridersip'])
+    subwayRidership = int(data[i]['subways_total_estimated_ridership'])
+    busRidership = int(data[i]['buses_total_estimated_ridersip'])
 
-    subwayWeeklyRidership += subwayDailyRidership
-    if (subwayDailyRidership > subwayMaxDailyRidershipWeekly):
-        subwayMaxDailyRidershipWeekly = subwayDailyRidership
+    subwayWeeklyRidership += subwayRidership
+    if (subwayRidership > subwayMaxDailyRidershipWeekly):
+        subwayMaxDailyRidershipWeekly = subwayRidership
         subwayMaxDailyDateWeekly = longDateConstructor(dateDeconstructor(data[i]['date']))
 
-    busWeeklyRidership += busDailyRidership
-    if (busDailyRidership > busMaxDailyRidershipWeekly):
-        busMaxDailyRidershipWeekly = busDailyRidership
+    busWeeklyRidership += busRidership
+    if (busRidership > busMaxDailyRidershipWeekly):
+        busMaxDailyRidershipWeekly = busRidership
         busMaxDailyDateWeekly = longDateConstructor(dateDeconstructor(data[i]['date']))
 
 # Latest year of ridership from daily data
 subwayYearlyRidership = 0
+subwayDailyRidership = []
+for i in range(365):
+    subwayDailyRidership.append(0)
 subwayDaysOfWeekTally = [0,0,0,0,0,0,0]
 subwayDaysOfWeekRidership = [0,0,0,0,0,0,0]
+subwayMaxAnnualDateRidership = 0
+subwayMaxAnnualDate = ''
+subwayMinAnnualDateRidership = 0
+subwayMinAnnualDate = ''
 busYearlyRidership = 0
+busDailyRidership = []
+for i in range(365):
+    busDailyRidership.append(0)
 busDaysOfWeekTally = [0,0,0,0,0,0,0]
 busDaysOfWeekRidership = [0,0,0,0,0,0,0]
+busMaxAnnualDateRidership = 0
+busMaxAnnualDate = ''
+busMinAnnualDateRidership = 0
+busMinAnnualDate = ''
 for d in data:
-    subwayDailyRidership = int(d['subways_total_estimated_ridership'])
-    busDailyRidership = int(d['buses_total_estimated_ridersip'])
+    day = longDateConstructor(dateDeconstructor(d['date']))
 
-    subwayYearlyRidership += subwayDailyRidership
-    busYearlyRidership += busDailyRidership
+    subwayRidership = int(d['subways_total_estimated_ridership'])
+    busRidership = int(d['buses_total_estimated_ridersip'])
 
-    day = longDateConstructor(dateDeconstructor(d['date']))[:3]
-    if day == 'Mon':
+    # Daily ridership for subway / bus
+    for t in range(len(daysInYear)):
+           if d['date'][:10] == daysInYear[t]:
+            subwayDailyRidership[t] += subwayRidership
+            busDailyRidership[t] += busRidership
+
+    if subwayRidership > subwayMaxAnnualDateRidership:
+        subwayMaxAnnualDateRidership = subwayRidership
+        subwayMaxAnnualDate = day
+    if subwayRidership < subwayMinAnnualDateRidership or subwayMinAnnualDateRidership == 0:
+        subwayMinAnnualDateRidership = subwayRidership
+        subwayMinAnnualDate = day
+
+    if busRidership > busMaxAnnualDateRidership:
+        busMaxAnnualDateRidership = busRidership
+        busMaxAnnualDate = day
+    if busRidership < busMinAnnualDateRidership or busMinAnnualDateRidership == 0:
+        busMinAnnualDateRidership = busRidership
+        busMinAnnualDate = day
+
+    subwayYearlyRidership += subwayRidership
+    busYearlyRidership += busRidership
+
+    if day[:3] == 'Mon':
         subwayDaysOfWeekTally[0] += 1
-        subwayDaysOfWeekRidership[0] += subwayDailyRidership
+        subwayDaysOfWeekRidership[0] += subwayRidership
         busDaysOfWeekTally[0] += 1
-        busDaysOfWeekRidership[0] += busDailyRidership
-    elif day == 'Tue':
+        busDaysOfWeekRidership[0] += busRidership
+    elif day[:3] == 'Tue':
         subwayDaysOfWeekTally[1] += 1
-        subwayDaysOfWeekRidership[1] += subwayDailyRidership
+        subwayDaysOfWeekRidership[1] += subwayRidership
         busDaysOfWeekTally[1] += 1
-        busDaysOfWeekRidership[1] += busDailyRidership
-    elif day == 'Wed':
+        busDaysOfWeekRidership[1] += busRidership
+    elif day[:3] == 'Wed':
         subwayDaysOfWeekTally[2] += 1
-        subwayDaysOfWeekRidership[2] += subwayDailyRidership
+        subwayDaysOfWeekRidership[2] += subwayRidership
         busDaysOfWeekTally[2] += 1
-        busDaysOfWeekRidership[2] += busDailyRidership
-    elif day == 'Thu':
+        busDaysOfWeekRidership[2] += busRidership
+    elif day[:3] == 'Thu':
         subwayDaysOfWeekTally[3] += 1
-        subwayDaysOfWeekRidership[3] += subwayDailyRidership
+        subwayDaysOfWeekRidership[3] += subwayRidership
         busDaysOfWeekTally[3] += 1
-        busDaysOfWeekRidership[3] += busDailyRidership
-    elif day == 'Fri':
+        busDaysOfWeekRidership[3] += busRidership
+    elif day[:3] == 'Fri':
         subwayDaysOfWeekTally[4] += 1
-        subwayDaysOfWeekRidership[4] += subwayDailyRidership
+        subwayDaysOfWeekRidership[4] += subwayRidership
         busDaysOfWeekTally[4] += 1
-        busDaysOfWeekRidership[4] += busDailyRidership
-    elif day == 'Sat':
+        busDaysOfWeekRidership[4] += busRidership
+    elif day[:3] == 'Sat':
         subwayDaysOfWeekTally[5] += 1
-        subwayDaysOfWeekRidership[5] += subwayDailyRidership
+        subwayDaysOfWeekRidership[5] += subwayRidership
         busDaysOfWeekTally[5] += 1
-        busDaysOfWeekRidership[5] += busDailyRidership
-    elif day == 'Sun':
+        busDaysOfWeekRidership[5] += busRidership
+    elif day[:3] == 'Sun':
         subwayDaysOfWeekTally[6] += 1
-        subwayDaysOfWeekRidership[6] += subwayDailyRidership
+        subwayDaysOfWeekRidership[6] += subwayRidership
         busDaysOfWeekTally[6] += 1
-        busDaysOfWeekRidership[6] += busDailyRidership
+        busDaysOfWeekRidership[6] += busRidership
 
 # Calculate subway yearly data
+subwayMeanDayRidership = [0,0,0,0,0,0,0]
 subwayMaxAnnualDay = ''
-subwayMaxAnnualDayRidership = 0
-subwayMaxAnnualDayTally = 0
-subwayMaxAnnualDayMeanRidership = 0
+subwayMaxMeanDayRidership = 0
 subwayMinAnnualDay = ''
-subwayMinAnnualDayRidership = 0
-subwayMinAnnualDayTally = 0
-subwayMinAnnualDayMeanRidership = 0
+subwayMinMeanDayRidership = 0
+
 for i in range(7):
-    if subwayDaysOfWeekRidership[i] > subwayMaxAnnualDayRidership:
-        subwayMaxAnnualDayRidership = subwayDaysOfWeekRidership[i]
-        subwayMaxAnnualDayTally = subwayDaysOfWeekTally[i]
+    subwayMeanDayRidership[i] = subwayDaysOfWeekRidership[i] / subwayDaysOfWeekTally[i]
+
+    if subwayMeanDayRidership[i] > subwayMaxMeanDayRidership:
+        subwayMaxMeanDayRidership = subwayMeanDayRidership[i]
         subwayMaxAnnualDay = weekday[i]
-    if subwayMinAnnualDayRidership == 0 or subwayDaysOfWeekRidership[i] < subwayMinAnnualDayRidership:
-        subwayMinAnnualDayRidership = subwayDaysOfWeekRidership[i]
-        subwayMinAnnualDayTally = subwayDaysOfWeekTally[i]
+
+    if i == 0 or subwayMeanDayRidership[i] < subwayMinMeanDayRidership:
+        subwayMinMeanDayRidership = subwayMeanDayRidership[i]
         subwayMinAnnualDay = weekday[i]
-subwayMaxAnnualDayMeanRidership = subwayMaxAnnualDayRidership / subwayMaxAnnualDayTally
-subwayMinAnnualDayMeanRidership = subwayMinAnnualDayRidership / subwayMinAnnualDayTally
 
 # Calculate bus yearly data
 busMaxAnnualDay = ''
@@ -308,16 +357,24 @@ data = {
     'dateYearStart': dateYearStartLong,
     'subwayWeeklyRidership': subwayWeeklyRidership,
     'subwayYearlyRidership': subwayYearlyRidership,
+    'subwayMaxAnnualDateRidership': subwayMaxAnnualDateRidership,
+    'subwayMaxAnnualDate': subwayMaxAnnualDate,
+    'subwayMinAnnualDateRidership': subwayMinAnnualDateRidership,
+    'subwayMinAnnualDate': subwayMinAnnualDate,
     'subwayMaxDailyRidershipWeekly': subwayMaxDailyRidershipWeekly,
     'subwayMaxDailyDateWeekly': subwayMaxDailyDateWeekly,
     'busWeeklyRidership': busWeeklyRidership,
     'busYearlyRidership': busYearlyRidership,
+    'busMaxAnnualDateRidership': busMaxAnnualDateRidership,
+    'busMaxAnnualDate': busMaxAnnualDate,
+    'busMinAnnualDateRidership': busMinAnnualDateRidership,
+    'busMinAnnualDate': busMinAnnualDate,
     'busMaxDailyRidershipWeekly': busMaxDailyRidershipWeekly,
     'busMaxDailyDateWeekly': busMaxDailyDateWeekly,
     'subwayMaxAnnualDay': subwayMaxAnnualDay,
-    'subwayMaxAnnualDayMeanRidership': subwayMaxAnnualDayMeanRidership,
+    'subwayMaxMeanDayRidership': subwayMaxMeanDayRidership,
     'subwayMinAnnualDay': subwayMinAnnualDay,
-    'subwayMinAnnualDayMeanRidership': subwayMinAnnualDayMeanRidership,
+    'subwayMinMeanDayRidership': subwayMinMeanDayRidership,
     'busMaxAnnualDay': busMaxAnnualDay,
     'busMaxAnnualDayMeanRidership': busMaxAnnualDayMeanRidership,
     'busMinAnnualDay': busMinAnnualDay,
@@ -358,6 +415,8 @@ plt.xticks(rotation=35, ticks=x, labels=hoursInWeekLabels, ha='right', font=fpat
 plt.yticks(font=fpathreg, fontsize=18)
 plt.plot(hoursInWeek, tramHourlyRidership, color=[1,1,1,1], linewidth=0.05)
 ax.set_ylim(ymin=0)
+ax.get_yaxis().set_major_formatter(
+    mpl.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 for n, label in enumerate(ax.xaxis.get_ticklabels()):
     if n % 24 != 0:
         label.set_fontsize(11)
@@ -407,6 +466,8 @@ plt.xticks(rotation=35, ticks=x, labels=hoursInWeekLabels, ha='right', font=fpat
 plt.yticks(font=fpathreg, fontsize=18)
 plt.plot(hoursInWeek, subwayHourlyRidership, color=[1,1,1,1], linewidth=0.05)
 ax.set_ylim(ymin=0)
+ax.get_yaxis().set_major_formatter(
+    mpl.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 for n, label in enumerate(ax.xaxis.get_ticklabels()):
     if n % 24 != 0:
         label.set_fontsize(11)
@@ -456,6 +517,8 @@ for i in range(15):
 
 plt.xticks(rotation=35, ha='right', font=fpathreg, fontsize=16)
 plt.yticks(font=fpathreg, fontsize=18)
+ax.get_yaxis().set_major_formatter(
+    mpl.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 
 # Colors and format
 HSVcolor = []
@@ -470,3 +533,50 @@ plt.ylabel('Ridership', font=fpathbold, fontsize=26)
 # Output
 plt.tight_layout()
 plt.savefig('./mysite/media/weeklystationcomparison.png', transparent=True, dpi=144.0)
+
+plt.clf()
+fig, ax = plt.subplots()
+
+# Daily subway ridership for the year
+plt.xlabel('Time', fontsize=26, font=fpathreg)
+plt.ylabel('Ridership', fontsize=26, font=fpathreg)
+
+# Ticks and labels
+x = []
+for i in range(365):
+    x.append(i)
+plt.xticks(rotation=35, ticks=x, labels=daysInYearLabels, ha='right', font=fpathreg, fontsize=16)
+plt.yticks(font=fpathreg, fontsize=18)
+plt.plot(daysInYear, subwayDailyRidership, color=[1,1,1,1], linewidth=0.05)
+ax.set_ylim(ymin=0)
+plt.ticklabel_format(axis='y', style='plain')
+ax.get_yaxis().set_major_formatter(
+    mpl.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
+for n, tick in enumerate(ax.xaxis.get_ticklines()):
+    if n % 2 != 0:
+        tick.set_visible(False)
+    elif daysInYearLabels[int(n / 2)] == '':
+        tick.set_visible(False)
+
+# Colors and fill
+subwayDailyRidershipSubstep = 10
+for i in range(365):
+    if i > 0:
+        stepXStart = x[i-1]
+        stepXEnd = x[i]
+        stepYStart = subwayDailyRidership[i-1]
+        stepYEnd = subwayDailyRidership[i]
+        substepLength = 1 / subwayDailyRidershipSubstep
+        for j in range(subwayDailyRidershipSubstep):
+            lerp = stepYStart + (stepYEnd - stepYStart) * (substepLength * j)
+            HSVcolor = [abs(1.0-(lerp / subwayMaxAnnualDateRidership)) * 0.75, 1.0, 1.0]
+            plt.fill_between(
+                [stepXStart + substepLength * (j+1), stepXEnd - substepLength * (subwayDailyRidershipSubstep - (j+1) + 1)],
+                [stepYStart + (stepYEnd - stepYStart) * (substepLength * (j+1)), lerp],
+                color=mpl.colors.hsv_to_rgb(HSVcolor),
+                linewidth=1
+            )
+
+# Output
+plt.tight_layout()
+plt.savefig('./mysite/media/yearlysubwayridership.png', transparent=True, dpi=144.0)

@@ -150,7 +150,7 @@
 
         <div class="panel">
             <div class="panelline"></div>
-            <p class="paneltitle">SUBWAY CARS VISUALIZATION HERE</p>
+            <p class="paneltitle">SUBWAY VISUALIZATION HERE</p>
 
         </div>
 
@@ -206,7 +206,7 @@
             </div>
             <div class="panelline"></div>
             <div style="margin-top: 20px; margin-left: 10px; height: 30px;">
-                <img src="./media/arrowUp.png" id="subwaystationtabledropdownarrow" style="width: 30px; float: left; transform: rotate(180deg);"></img>
+                <img src="./media/arrowUp.png" style="width: 30px; float: left; transform: rotate(180deg);"></img>
                 <p class="paneltext" style="float: left;">All stations by ridership (scroll or search):</p>
             </div>
             <div class="panelline"></div>
@@ -243,20 +243,61 @@
         <div class="panel">
             <div class="panelline"></div>
             <p class="paneltitle">A Week on the Bus</p>
-            <p class="panelsmalltext"><text id="weekdaterangebus"></text></p>
+            <p class="panelsmalltext">Week of <text id="weekdaterangebus0"></text></p>
             <p class="paneltext">During this week, people rode the bus in NYC a total of <text id="busweeklyridership"></text> times.</p>
-            <p class="paneltext">The most popular day during this week was <text id="busmaxdailydate0"></text>, when people rode the bus <text id="busmaxdailyridership"></text> times.</p>
-            <p class="paneltitle">BUS RIDERSHIP / WEEK CHART HERE - WAVE INDICATING BOTH TIME OF DAY AND DAY POPULARITY FOR THE WEEK</p>
-            <p class="paneltext">All those riders on <text id="busmaxdailydate1"></text> would fit in about <text id="busmaxdailybuses"></text> buses, at 120 riders per bus. All those buses would look something like this:</p>
-            <p class="paneltitle">BUSES VISUALIZATION HERE</p>
-            <p class="paneltext">The most popular stop was XXXXXX in XXX(borough), serviced by the X, X, and X routes. XXXXXX people boarded a bus at XXXXXX(stop) during the week.</p>
-            <p class="paneltitle">BUS STOPS GRAPH HERE</p>
-            <p class="paneltext">In the Bronx, the busiest stop was XXXXXX, serviced by the X, X, and X lines, where XXXXXX people boarded during the week.</p>
-            <p class="paneltext">In Brooklyn, the busiest stop was XXXXXX, serviced by the X, X, and X lines, where XXXXXX people boarded during the week.</p>
-            <p class="paneltext">In Manhattan, the busiest stop was XXXXXX, serviced by the X, X, and X lines, where XXXXXX people boarded during the week.</p>
-            <p class="paneltext">In Queens, the busiest stop was XXXXXX, serviced by the X, X, and X lines, where XXXXXX people boarded during the week.</p>
-            <p class="paneltext">On Staten Island, the busiest stop was XXXXXX, serviced by the X, X, and X lines, where XXXXXX people boarded during the week.</p>
-            <p class="paneltitle">STOPS MAP HERE</p>
+            <p class="paneltext">The most popular day during this week was <text id="busmaxdailydate"></text>, when bus ridership was <text id="busmaxdailyridership0"></text>.</p>
+            <p class="paneltext">Those <text id="busmaxdailyridership1"></text> riders would fit in about <text id="busmaxdailybuses"></text> buses (at 120 riders per bus).</p>
+            <br/>
+            <div class="panelline"></div>
+            <p class="panelsmalltitle">Bus Ridership by Hour</p>
+            <p class="panelsmalltext"><text id="weekdaterangebus1"></text></p>
+            <img class="chart" id="busweeklyridershiphourly"></img>
+            <a class="panellink" href="https://data.ny.gov" target="_blank">
+                <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
+                <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">MTA Ridership Data</p>
+            </a>
+        </div>
+
+        <div class="panel">
+            <div class="panelline"></div>
+            <p class="paneltitle">BUS VISUALIZATION HERE</p>
+
+        </div>
+
+        <div class="panel">
+            <div class="panelline"></div>
+            <p class="paneltitle">Bus Routes of the Week</p>
+            <p class="panelsmalltext" style="margin-bottom: 30px;"><text id="weekdaterangebus2"></text></p>
+            <br/>
+            <div class="panelline"></div>
+            <p class="paneltext" style="margin-bottom: 5px; margin-top: 10px;">#1 OVERALL:</p>
+            <p class="panelsmalltitle"><text id="busrouteweekmaxroute0"></text></p>
+            <div id="routeweekmaxrouteicons"></div>
+            <p class="paneltext">The <text id="busrouteweekmaxroute1"></text>, servicing XXXXXX, was the #1 most popular bus route this week, with a ridership of <text id="busrouteweekmaxcount"></text>.</p>
+            <div class="panelline"></div>
+            <div style="margin-top: 20px; margin-left: 10px; height: 30px;">
+                <img src="./media/arrowUp.png" style="width: 30px; float: left; transform: rotate(180deg);"></img>
+                <p class="paneltext" style="float: left;">All routes by ridership (scroll or search):</p>
+            </div>
+            <div class="panelline"></div>
+            <div class="paneltablewrapper">
+                <div id="busroutetable">
+                    <table class="paneltable" id="busweeklytable" cellspacing="0"></table>
+                </div>
+            </div>
+            <div class="panelline" style="margin-top: 0px;"></div>
+            <br/>
+            <a class="panellink" href="https://data.ny.gov" target="_blank">
+                <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
+                <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">MTA Ridership Data</p>
+            </a>
+        </div>
+
+        <div class="panel">
+            <div class="panelline"></div>
+            <p class="paneltitle">Top Routes By Ridership</p>
+            <p class="panelsmalltext" style="margin-bottom: 10px;"><text id="weekdaterangebus3"></text></p>
+            <img class="chart" id="subwayweeklystationcomparison"></img>
             <a class="panellink" href="https://data.ny.gov" target="_blank">
                 <img class="sublogo" src="./media/mtaLogo.png" alt="MTA logo" style="float: left"></img>
                 <p class="panelsmalltext" style="float: left; margin-top: 22px; text-decoration: underline;">MTA Ridership Data</p>
@@ -279,7 +320,9 @@
             <div class="panelline"></div>
             <p class="panelsmalltitle">The Subway and the Bus</p>
             <p class="panelsmalltext"><text id="yeardaterange1"></text></p>
-            <p class="paneltext">Over the past year, the most popular day of the week to ride the subway has been on <text id="subwaymaxannualday"></text>s, with an average ridership of <text id="subwaymaxannualdaymean"></text>, and the least popular day has been <text id="subwayminannualday"></text>, with an average ridership of <text id="subwayminannualdaymean"></text>.</p>
+            <p class="paneltext">Over the past year, the busiest day on the subway was <text id="subwaymaxannualdate"></text>, with a ridership of <text id="subwaymaxannualdateridership"></text>, and the busiest day on the bus was <text id="busmaxannualdate"></text>, with a ridership of <text id="busmaxannualdateridership"></text>.</p>
+            <p class="paneltext">The least busy day on the subway was <text id="subwayminannualdate"></text>, with a ridership of <text id="subwayminannualdateridership"></text>, and the least busy day on the bus was <text id="busminannualdate"></text>, with a ridership of <text id="busminannualdateridership"></text>.</p>
+            <p class="paneltext">The most popular day of the week to ride the subway has been on <text id="subwaymaxannualday"></text>s, with an average ridership of <text id="subwaymaxannualdaymean"></text>, and the least popular day has been <text id="subwayminannualday"></text>, with an average ridership of <text id="subwayminannualdaymean"></text>.</p>
             <p class="paneltext">The most popular day of the week to ride the bus has been on <text id="busmaxannualday"></text>s, with an average ridership of <text id="busmaxannualdaymean"></text>, and the least popular day has been <text id="busminannualday"></text>, with an average ridership of <text id="busminannualdaymean"></text>.</p>
             <p class="paneltitle">WEEKDAY RIDERSHIP GRAPH HERE WITH BOTH BUS AND SUBWAY</p>
             <p class="paneltext">All together, people rode the subway <text id="subwayyearlyridership"></text> times over the past year, and the bus <text id="busyearlyridership"></text> times!</p>
