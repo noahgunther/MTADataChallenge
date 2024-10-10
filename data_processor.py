@@ -225,25 +225,22 @@ for i in range(7):
         subwayMinAnnualDay = weekday[i]
 
 # Calculate bus yearly data
+busMeanDayRidership = [0,0,0,0,0,0,0]
 busMaxAnnualDay = ''
-busMaxAnnualDayRidership = 0
-busMaxAnnualDayTally = 0
-busMaxAnnualDayMeanRidership = 0
+busMaxMeanDayRidership = 0
 busMinAnnualDay = ''
-busMinAnnualDayRidership = 0
-busMinAnnualDayTally = 0
-busMinAnnualDayMeanRidership = 0
+busMinMeanDayRidership = 0
+
 for i in range(7):
-    if busDaysOfWeekRidership[i] > busMaxAnnualDayRidership:
-        busMaxAnnualDayRidership = busDaysOfWeekRidership[i]
-        busMaxAnnualDayTally = busDaysOfWeekTally[i]
+    busMeanDayRidership[i] = busDaysOfWeekRidership[i] / busDaysOfWeekTally[i]
+
+    if busMeanDayRidership[i] > busMaxMeanDayRidership:
+        busMaxMeanDayRidership = busMeanDayRidership[i]
         busMaxAnnualDay = weekday[i]
-    if busMinAnnualDayRidership == 0 or busDaysOfWeekRidership[i] < busMinAnnualDayRidership:
-        busMinAnnualDayRidership = busDaysOfWeekRidership[i]
-        busMinAnnualDayTally = busDaysOfWeekTally[i]
+
+    if i == 0 or busMeanDayRidership[i] < busMinMeanDayRidership:
+        busMinMeanDayRidership = busMeanDayRidership[i]
         busMinAnnualDay = weekday[i]
-busMaxAnnualDayMeanRidership = busMaxAnnualDayRidership / busMaxAnnualDayTally
-busMinAnnualDayMeanRidership = busMinAnnualDayRidership / busMinAnnualDayTally
 
 # Get latest week of data from hourly subway / tram set
 
@@ -376,9 +373,9 @@ data = {
     'subwayMinAnnualDay': subwayMinAnnualDay,
     'subwayMinMeanDayRidership': subwayMinMeanDayRidership,
     'busMaxAnnualDay': busMaxAnnualDay,
-    'busMaxAnnualDayMeanRidership': busMaxAnnualDayMeanRidership,
+    'busMaxMeanDayRidership': busMaxMeanDayRidership,
     'busMinAnnualDay': busMinAnnualDay,
-    'busMinAnnualDayMeanRidership': busMinAnnualDayMeanRidership,
+    'busMinMeanDayRidership': busMinMeanDayRidership,
     'tramWeeklyRidership': tramWeeklyRidership,
     'tramMaxDailyRidershipWeekly': tramMaxDailyRidershipWeekly,
     'tramMaxDailyDateWeekly': tramMaxDailyDateWeekly,

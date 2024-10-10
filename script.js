@@ -47,16 +47,17 @@ function init() {
         document.getElementById('weekdaterangebus3').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('yeardaterange0').innerHTML = dateYearStart + ' - ' + dateMostRecent;
         document.getElementById('yeardaterange1').innerHTML = dateYearStart + ' - ' + dateMostRecent;
+        document.getElementById('yeardaterange2').innerHTML = dateYearStart + ' - ' + dateMostRecent;
 
         document.getElementById('tramweeklyridership').innerHTML = response.tramWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('trammaxdailyridership').innerHTML = response.tramMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('trammaxdailydate').innerHTML = response.tramMaxDailyDateWeekly;
+        document.getElementById('trammaxdailydate').innerHTML = response.tramMaxDailyDateWeekly.slice(0, -6);;
 
         document.getElementById('subwayweeklyridership').innerHTML = response.subwayWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaymaxdailyridership0').innerHTML = response.subwayMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaymaxdailyridership1').innerHTML = response.subwayMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaymaxdailycars').innerHTML = (response.subwayMaxDailyRidershipWeekly / 200).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('subwaymaxdailydate').innerHTML = response.subwayMaxDailyDateWeekly;
+        document.getElementById('subwaymaxdailydate').innerHTML = response.subwayMaxDailyDateWeekly.slice(0, -6);
 
         let maxBoroughId = 'subwayweekly';
         let maxBorough = response.subwayStationMaxRidershipWeeklyBorough[0];
@@ -163,36 +164,37 @@ function init() {
         document.getElementById('subwayweeklytable').innerHTML = subwayWeeklyTableHtmlString + '</tbody>';
 
         document.getElementById('subwaymaxannualdate').innerHTML = response.subwayMaxAnnualDate;
-        document.getElementById('subwaymaxannualdateridership').innerHTML = response.subwayMaxAnnualDateRidership;
+        document.getElementById('subwaymaxannualdateridership').innerHTML = response.subwayMaxAnnualDateRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
         document.getElementById('subwayminannualdate').innerHTML = response.subwayMinAnnualDate;
-        document.getElementById('subwayminannualdateridership').innerHTML = response.subwayMinAnnualDateRidership;
+        document.getElementById('subwayminannualdateridership').innerHTML = response.subwayMinAnnualDateRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
         document.getElementById('subwaymaxannualday').innerHTML = response.subwayMaxAnnualDay;
-        document.getElementById('subwaymaxannualdaymean').innerHTML = response.subwayMaxAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('subwaymaxannualdaymean').innerHTML = response.subwayMaxMeanDayRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwayminannualday').innerHTML = response.subwayMinAnnualDay;
-        document.getElementById('subwayminannualdaymean').innerHTML = response.subwayMinAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('subwayminannualdaymean').innerHTML = response.subwayMinMeanDayRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwayyearlyridership').innerHTML = response.subwayYearlyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaydailyridershipavg').innerHTML = (response.subwayYearlyRidership / 365.0).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         
-        document.getElementById('busmaxannualdate').innerHTML = response.busMaxAnnualDate;
-        document.getElementById('busmaxannualdateridership').innerHTML = response.busMaxAnnualDateRidership;
-        document.getElementById('busminannualdate').innerHTML = response.busMinAnnualDate;
-        document.getElementById('busminannualdateridership').innerHTML = response.busMinAnnualDateRidership;
+        document.getElementById('busmaxannualdate').innerHTML = response.busMaxAnnualDate == response.subwayMaxAnnualDate ? 'also ' + response.busMaxAnnualDate : response.busMaxAnnualDate;
+        document.getElementById('busmaxannualdateridership').innerHTML = response.busMaxAnnualDateRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
+        document.getElementById('busminannualdate').innerHTML = response.busMinAnnualDate == response.subwayMinAnnualDate ? 'also ' + response.busMinAnnualDate : response.busMinAnnualDate;
+        document.getElementById('busminannualdateridership').innerHTML = response.busMinAnnualDateRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
         document.getElementById('busweeklyridership').innerHTML = response.busWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busmaxdailyridership0').innerHTML = response.busMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busmaxdailyridership1').innerHTML = response.busMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busmaxdailybuses').innerHTML = (response.busMaxDailyRidershipWeekly / 200).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('busmaxdailydate').innerHTML = response.busMaxDailyDateWeekly;
+        document.getElementById('busmaxdailydate').innerHTML = response.busMaxDailyDateWeekly.slice(0, -6);;
         
         document.getElementById('busmaxannualday').innerHTML = response.busMaxAnnualDay;
-        document.getElementById('busmaxannualdaymean').innerHTML = response.busMaxAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busmaxannualdaymean').innerHTML = response.busMaxMeanDayRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busminannualday').innerHTML = response.busMinAnnualDay;
-        document.getElementById('busminannualdaymean').innerHTML = response.busMinAnnualDayMeanRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busminannualdaymean').innerHTML = response.busMinMeanDayRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busyearlyridership').innerHTML = response.busYearlyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busdailyridershipavg').innerHTML = (response.busYearlyRidership / 365.0).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         
         document.getElementById('tramweeklyridershiphourly').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklytramridership?dummy' + Date.now())
         document.getElementById('subwayweeklyridershiphourly').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklysubwayridership?dummy' + Date.now())
         document.getElementById('subwayweeklystationcomparison').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklystationcomparison?dummy' + Date.now())
+        document.getElementById('subwayyearlyridershipdaily').setAttribute('src', 'https://gunthern.pythonanywhere.com/yearlysubwayridership?dummy' + Date.now())
 
         updateScrollValues();
     }
