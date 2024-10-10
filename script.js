@@ -1,17 +1,17 @@
 // Todo:
 // Data:
 // - Figure out what live data is possible to access and include (Today)
-// - Get most popular bus stops for the week from hourly dataset (most pop station, most pop in each borough, whole list)
+// - Get most popular bus routes for the week from hourly dataset (most pop routes, whole list)
 // - Get hourly popularity of week for bus
 // - Review all code / math
 // - Add source links to each panel with dataset
 // - Add data disclaimer (estimated from ...) and info on updating (most recent data from mta sets fetch daily at https://gunthern.pythonanywhere.com/, most recent update xxxxxx)
 // Data vis:
-// - Create dynamic graphs / charts.
+// - Create dynamic graphs / charts for bus, yearly day-of-week comparison
 // CSS:
 // - Create CSS for live data (old style LCD cells)
 // JS functionality:
-// - Write functionality for search for subway station list (type text, highlight matching, jump to next / previous, clear search)
+// - Write functionality for search for subway station / bus route lists (type text, highlight matching, jump to next / previous, clear search)
 // - Write script for subway cars, buses, subway platform (from inside train) scroll or animation (like the tramway)
 // - Test on mobile
 // - Do a pass for various screen widths, browsers, general functionality
@@ -19,6 +19,7 @@
 // - Bus line logos(?)
 // $$$:
 // - Look into new hosting for full noahgunther.com site, including this subsite (hostgator?)
+// - Alternatively, remove some of the big files from current site to make room
 
 import './style.css'
 
@@ -48,6 +49,7 @@ function init() {
         document.getElementById('yeardaterange0').innerHTML = dateYearStart + ' - ' + dateMostRecent;
         document.getElementById('yeardaterange1').innerHTML = dateYearStart + ' - ' + dateMostRecent;
         document.getElementById('yeardaterange2').innerHTML = dateYearStart + ' - ' + dateMostRecent;
+        document.getElementById('yeardaterange3').innerHTML = dateYearStart + ' - ' + dateMostRecent;
 
         document.getElementById('tramweeklyridership').innerHTML = response.tramWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('trammaxdailyridership').innerHTML = response.tramMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -174,9 +176,9 @@ function init() {
         document.getElementById('subwayyearlyridership').innerHTML = response.subwayYearlyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaydailyridershipavg').innerHTML = (response.subwayYearlyRidership / 365.0).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         
-        document.getElementById('busmaxannualdate').innerHTML = response.busMaxAnnualDate == response.subwayMaxAnnualDate ? 'also ' + response.busMaxAnnualDate : response.busMaxAnnualDate;
+        document.getElementById('busmaxannualdate').innerHTML = response.busMaxAnnualDate;
         document.getElementById('busmaxannualdateridership').innerHTML = response.busMaxAnnualDateRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
-        document.getElementById('busminannualdate').innerHTML = response.busMinAnnualDate == response.subwayMinAnnualDate ? 'also ' + response.busMinAnnualDate : response.busMinAnnualDate;
+        document.getElementById('busminannualdate').innerHTML = response.busMinAnnualDate;
         document.getElementById('busminannualdateridership').innerHTML = response.busMinAnnualDateRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
         document.getElementById('busweeklyridership').innerHTML = response.busWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busmaxdailyridership0').innerHTML = response.busMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -195,6 +197,7 @@ function init() {
         document.getElementById('subwayweeklyridershiphourly').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklysubwayridership?dummy' + Date.now())
         document.getElementById('subwayweeklystationcomparison').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklystationcomparison?dummy' + Date.now())
         document.getElementById('subwayyearlyridershipdaily').setAttribute('src', 'https://gunthern.pythonanywhere.com/yearlysubwayridership?dummy' + Date.now())
+        document.getElementById('busyearlyridershipdaily').setAttribute('src', 'https://gunthern.pythonanywhere.com/yearlybusridership?dummy' + Date.now())
 
         updateScrollValues();
     }

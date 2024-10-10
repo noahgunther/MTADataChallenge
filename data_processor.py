@@ -577,3 +577,50 @@ for i in range(365):
 # Output
 plt.tight_layout()
 plt.savefig('./mysite/media/yearlysubwayridership.png', transparent=True, dpi=144.0)
+
+plt.clf()
+fig, ax = plt.subplots()
+
+# Daily bus ridership for the year
+plt.xlabel('Time', fontsize=26, font=fpathreg)
+plt.ylabel('Ridership', fontsize=26, font=fpathreg)
+
+# Ticks and labels
+x = []
+for i in range(365):
+    x.append(i)
+plt.xticks(rotation=35, ticks=x, labels=daysInYearLabels, ha='right', font=fpathreg, fontsize=16)
+plt.yticks(font=fpathreg, fontsize=18)
+plt.plot(daysInYear, busDailyRidership, color=[1,1,1,1], linewidth=0.05)
+ax.set_ylim(ymin=0)
+plt.ticklabel_format(axis='y', style='plain')
+ax.get_yaxis().set_major_formatter(
+    mpl.ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
+for n, tick in enumerate(ax.xaxis.get_ticklines()):
+    if n % 2 != 0:
+        tick.set_visible(False)
+    elif daysInYearLabels[int(n / 2)] == '':
+        tick.set_visible(False)
+
+# Colors and fill
+busDailyRidershipSubstep = 10
+for i in range(365):
+    if i > 0:
+        stepXStart = x[i-1]
+        stepXEnd = x[i]
+        stepYStart = busDailyRidership[i-1]
+        stepYEnd = busDailyRidership[i]
+        substepLength = 1 / busDailyRidershipSubstep
+        for j in range(busDailyRidershipSubstep):
+            lerp = stepYStart + (stepYEnd - stepYStart) * (substepLength * j)
+            HSVcolor = [abs(1.0-(lerp / busMaxAnnualDateRidership)) * 0.75, 1.0, 1.0]
+            plt.fill_between(
+                [stepXStart + substepLength * (j+1), stepXEnd - substepLength * (busDailyRidershipSubstep - (j+1) + 1)],
+                [stepYStart + (stepYEnd - stepYStart) * (substepLength * (j+1)), lerp],
+                color=mpl.colors.hsv_to_rgb(HSVcolor),
+                linewidth=1
+            )
+
+# Output
+plt.tight_layout()
+plt.savefig('./mysite/media/yearlybusridership.png', transparent=True, dpi=144.0)
