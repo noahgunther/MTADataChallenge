@@ -1,22 +1,15 @@
 // Todo:
 // Data:
 // - Figure out what live data is possible to access and include (Today)
-// - Get most popular bus routes for the week from hourly dataset (most pop routes, whole list)
-// - Get hourly popularity of week for bus
 // - Review all code / math
-// - Add source links to each panel with dataset
 // - Add data disclaimer (estimated from ...) and info on updating (most recent data from mta sets fetch daily at https://gunthern.pythonanywhere.com/, most recent update xxxxxx)
-// Data vis:
-// - Create dynamic graphs / charts for bus, yearly day-of-week comparison
-// CSS:
+// CSS / HTML:
 // - Create CSS for live data (old style LCD cells)
 // JS functionality:
 // - Write functionality for search for subway station / bus route lists (type text, highlight matching, jump to next / previous, clear search)
-// - Write script for subway cars, buses, subway platform (from inside train) scroll or animation (like the tramway)
+// - Write script for subway cars, buses, combination scroll animation (like the tramway)
 // - Test on mobile
 // - Do a pass for various screen widths, browsers, general functionality
-// Graphics:
-// - Bus line logos(?)
 // $$$:
 // - Look into new hosting for full noahgunther.com site, including this subsite (hostgator?)
 // - Alternatively, remove some of the big files from current site to make room
@@ -41,7 +34,7 @@ function init() {
         document.getElementById('weekdaterangesubway0').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangesubway1').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangesubway2').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
-        document.getElementById('weekdaterangesubway2').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
+        document.getElementById('weekdaterangesubway3').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangebus0').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangebus1').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
         document.getElementById('weekdaterangebus2').innerHTML = dateWeekStart + ' - ' + dateMostRecent;
@@ -50,6 +43,7 @@ function init() {
         document.getElementById('yeardaterange1').innerHTML = dateYearStart + ' - ' + dateMostRecent;
         document.getElementById('yeardaterange2').innerHTML = dateYearStart + ' - ' + dateMostRecent;
         document.getElementById('yeardaterange3').innerHTML = dateYearStart + ' - ' + dateMostRecent;
+        document.getElementById('yeardaterange4').innerHTML = dateYearStart + ' - ' + dateMostRecent;
 
         document.getElementById('tramweeklyridership').innerHTML = response.tramWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('trammaxdailyridership').innerHTML = response.tramMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -61,27 +55,27 @@ function init() {
         document.getElementById('subwaymaxdailycars').innerHTML = (response.subwayMaxDailyRidershipWeekly / 200).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('subwaymaxdailydate').innerHTML = response.subwayMaxDailyDateWeekly.slice(0, -6);
 
-        let maxBoroughId = 'subwayweekly';
-        let maxBorough = response.subwayStationMaxRidershipWeeklyBorough[0];
-        if (maxBorough == 'Bronx') {
-            maxBoroughId += 'bronx';
-            maxBorough = 'The Bronx';
+        let subwayMaxBoroughId = 'subwayweekly';
+        let subwayMaxBorough = response.subwayStationMaxRidershipWeeklyBorough[0];
+        if (subwayMaxBorough == 'Bronx') {
+            subwayMaxBoroughId += 'bronx';
+            subwayMaxBorough = 'The Bronx';
         }
-        else if (maxBorough == 'Brooklyn') maxBoroughId += 'brooklyn';
-        else if (maxBorough == 'Manhattan') maxBoroughId += 'manhattan';
-        else if (maxBorough == 'Queens') maxBoroughId += 'queens';
-        else if (maxBorough == 'Staten Island') maxBoroughId += 'staten';
-        document.getElementById(maxBoroughId).hidden = true;
-        document.getElementById(maxBoroughId + 'icons').hidden = true;
+        else if (subwayMaxBorough == 'Brooklyn') subwayMaxBoroughId += 'brooklyn';
+        else if (subwayMaxBorough == 'Manhattan') subwayMaxBoroughId += 'manhattan';
+        else if (subwayMaxBorough == 'Queens') subwayMaxBoroughId += 'queens';
+        else if (subwayMaxBorough == 'Staten Island') subwayMaxBoroughId += 'staten';
+        document.getElementById(subwayMaxBoroughId).hidden = true;
+        document.getElementById(subwayMaxBoroughId + 'icons').hidden = true;
 
         let nameIds = idsNameSplit(response.subwayStationMaxRidershipWeeklyStation[0].toString());
         lineIconsFromIds(nameIds[0], 'subwaystationweekmaxstationserviceicons', 0);
         document.getElementById('subwaystationweekmaxstation0').innerHTML = nameIds[1];
         document.getElementById('subwaystationweekmaxstation1').innerHTML = nameIds[1];
-        document.getElementById('subwaystationweekmaxborough').innerHTML = maxBorough;
+        document.getElementById('subwaystationweekmaxborough').innerHTML = subwayMaxBorough;
         document.getElementById('subwaystationweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-        if (maxBorough != 'The Bronx') {
+        if (subwayMaxBorough != 'The Bronx') {
             let bronxMaxStationIndex;
             for (let i=0; i<response.subwayStationMaxRidershipWeeklyBorough.length; i++) {
                 if (response.subwayStationMaxRidershipWeeklyBorough[i] == 'Bronx') {
@@ -95,7 +89,7 @@ function init() {
             document.getElementById('subwaybronxweekmaxstation1').innerHTML = nameIds[1];
             document.getElementById('subwaybronxweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[bronxMaxStationIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        if (maxBorough != 'Brooklyn') {
+        if (subwayMaxBorough != 'Brooklyn') {
             let brooklynMaxStationIndex;
             for (let i=0; i<response.subwayStationMaxRidershipWeeklyBorough.length; i++) {
                 if (response.subwayStationMaxRidershipWeeklyBorough[i] == 'Brooklyn') {
@@ -109,7 +103,7 @@ function init() {
             document.getElementById('subwaybrooklynweekmaxstation1').innerHTML = nameIds[1];
             document.getElementById('subwaybrooklynweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[brooklynMaxStationIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        if (maxBorough != 'Manhattan') {
+        if (subwayMaxBorough != 'Manhattan') {
             let manhattanMaxStationIndex;
             for (let i=0; i<response.subwayStationMaxRidershipWeeklyBorough.length; i++) {
                 if (response.subwayStationMaxRidershipWeeklyBorough[i] == 'Manhattan') {
@@ -123,7 +117,7 @@ function init() {
             document.getElementById('subwaymanhattanweekmaxstation1').innerHTML = nameIds[1];
             document.getElementById('subwaymanhattanweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[manhattanMaxStationIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        if (maxBorough != 'Queens') {
+        if (subwayMaxBorough != 'Queens') {
             let queensMaxStationIndex;
             for (let i=0; i<response.subwayStationMaxRidershipWeeklyBorough.length; i++) {
                 if (response.subwayStationMaxRidershipWeeklyBorough[i] == 'Queens') {
@@ -137,7 +131,7 @@ function init() {
             document.getElementById('subwayqueensweekmaxstation1').innerHTML = nameIds[1];
             document.getElementById('subwayqueensweekmaxcount').innerHTML = response.subwayStationMaxRidershipWeeklyCount[queensMaxStationIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        if (maxBorough != 'Staten Island') {
+        if (subwayMaxBorough != 'Staten Island') {
             let statenMaxStationIndex;
             for (let i=0; i<response.subwayStationMaxRidershipWeeklyBorough.length; i++) {
                 if (response.subwayStationMaxRidershipWeeklyBorough[i] == 'Staten Island') {
@@ -156,7 +150,7 @@ function init() {
             const nameIds = idsNameSplit(response.subwayStationMaxRidershipWeeklyStation[i].toString());
             let idsImgString = '<br/>';
             for (let j=0; j<nameIds[0].length; j++) {
-                idsImgString += '<img src="./media/subway' + nameIds[0][j] + '.png"></img>';
+                idsImgString += '<img src="./media/subway' + nameIds[0][j] + '.png" alt="Subway ' + nameIds[0][j] + ' line logo"/>';
             }
             let tableString = "<tr><th><text>" + (i+1) + "</text></th><th><text>" + nameIds[1] + "</text>" + idsImgString + "</th>";
             tableString += "<th><text>" + response.subwayStationMaxRidershipWeeklyBorough[i] + "</text></th>";
@@ -164,6 +158,106 @@ function init() {
             subwayWeeklyTableHtmlString += tableString;
         }
         document.getElementById('subwayweeklytable').innerHTML = subwayWeeklyTableHtmlString + '</tbody>';
+
+        document.getElementById('busweeklyridership').innerHTML = response.busWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busmaxdailyridership0').innerHTML = response.busMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busmaxdailyridership1').innerHTML = response.busMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busmaxdailybuses').innerHTML = (response.busMaxDailyRidershipWeekly / 200).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        document.getElementById('busmaxdailydate').innerHTML = response.busMaxDailyDateWeekly.slice(0, -6);
+
+        let busMaxBoroughId = 'busweekly';
+        let busMaxBorough = response.busRouteMaxRidershipWeeklyBorough[0];
+        if (busMaxBorough == 'Bronx') {
+            busMaxBoroughId += 'bronx';
+            busMaxBorough = 'The Bronx';
+        }
+        else if (busMaxBorough == 'Brooklyn') busMaxBoroughId += 'brooklyn';
+        else if (busMaxBorough == 'Manhattan') busMaxBoroughId += 'manhattan';
+        else if (busMaxBorough == 'Queens') busMaxBoroughId += 'queens';
+        else if (busMaxBorough == 'Staten Island') busMaxBoroughId += 'staten';
+        document.getElementById(busMaxBoroughId).hidden = true;
+        document.getElementById('busrouteweekmaxroute0').innerHTML = response.busRouteMaxRidershipWeeklyRoute[0].toString();
+        document.getElementById('busrouteweekmaxroute1').innerHTML = response.busRouteMaxRidershipWeeklyRoute[0].toString();
+        document.getElementById('busrouteweekmaxservice').innerHTML = busMaxBorough;
+        document.getElementById('busrouteweekmaxcount').innerHTML = response.busRouteMaxRidershipWeeklyCount[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        if (busMaxBorough != 'The Bronx') {
+            let bronxMaxRouteIndex;
+            for (let i=0; i<response.busRouteMaxRidershipWeeklyBorough.length; i++) {
+                if (response.busRouteMaxRidershipWeeklyBorough[i] == 'Bronx' ||
+                    response.busRouteMaxRidershipWeeklyBorough[i] == 'Bronx - Manhattan Express'
+                ) {
+                    bronxMaxRouteIndex = i;
+                    break;
+                }
+            }
+            document.getElementById('busbronxweekmaxroute0').innerHTML = response.busRouteMaxRidershipWeeklyRoute[bronxMaxRouteIndex];
+            document.getElementById('busbronxweekmaxroute1').innerHTML = response.busRouteMaxRidershipWeeklyRoute[bronxMaxRouteIndex];
+            document.getElementById('busbronxweekmaxcount').innerHTML = response.busRouteMaxRidershipWeeklyCount[bronxMaxRouteIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        if (busMaxBorough != 'Brooklyn') {
+            let brooklynMaxRouteIndex;
+            for (let i=0; i<response.busRouteMaxRidershipWeeklyBorough.length; i++) {
+                if (response.busRouteMaxRidershipWeeklyBorough[i] == 'Brooklyn' ||
+                    response.busRouteMaxRidershipWeeklyBorough[i] == 'Brooklyn - Manhattan Express'
+                ) {
+                    brooklynMaxRouteIndex = i;
+                    break;
+                }
+            }
+            document.getElementById('busbrooklynweekmaxroute0').innerHTML = response.busRouteMaxRidershipWeeklyRoute[brooklynMaxRouteIndex];
+            document.getElementById('busbrooklynweekmaxroute1').innerHTML = response.busRouteMaxRidershipWeeklyRoute[brooklynMaxRouteIndex];
+            document.getElementById('busbrooklynweekmaxcount').innerHTML = response.busRouteMaxRidershipWeeklyCount[brooklynMaxRouteIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        if (busMaxBorough != 'Manhattan') {
+            let manhattanMaxRouteIndex;
+            for (let i=0; i<response.busRouteMaxRidershipWeeklyBorough.length; i++) {
+                if (response.busRouteMaxRidershipWeeklyBorough[i] == 'Manhattan') {
+                    manhattanMaxRouteIndex = i;
+                    break;
+                }
+            }
+            document.getElementById('busmanhattanweekmaxroute0').innerHTML = response.busRouteMaxRidershipWeeklyRoute[manhattanMaxRouteIndex];
+            document.getElementById('busmanhattanweekmaxroute1').innerHTML = response.busRouteMaxRidershipWeeklyRoute[manhattanMaxRouteIndex];
+            document.getElementById('busmanhattanweekmaxcount').innerHTML = response.busRouteMaxRidershipWeeklyCount[manhattanMaxRouteIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        if (busMaxBorough != 'Queens') {
+            let queensMaxRouteIndex;
+            for (let i=0; i<response.busRouteMaxRidershipWeeklyBorough.length; i++) {
+                if (response.busRouteMaxRidershipWeeklyBorough[i] == 'Queens' ||
+                    response.busRouteMaxRidershipWeeklyBorough[i] == 'Queens - Manhattan Express'
+                ) {
+                    queensMaxRouteIndex = i;
+                    break;
+                }
+            }
+            document.getElementById('busqueensweekmaxroute0').innerHTML = response.busRouteMaxRidershipWeeklyRoute[queensMaxRouteIndex];
+            document.getElementById('busqueensweekmaxroute1').innerHTML = response.busRouteMaxRidershipWeeklyRoute[queensMaxRouteIndex];
+            document.getElementById('busqueensweekmaxcount').innerHTML = response.busRouteMaxRidershipWeeklyCount[queensMaxRouteIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        if (busMaxBorough != 'Staten Island') {
+            let statenMaxRouteIndex;
+            for (let i=0; i<response.busRouteMaxRidershipWeeklyBorough.length; i++) {
+                if (response.busRouteMaxRidershipWeeklyBorough[i] == 'Staten Island' ||
+                    response.busRouteMaxRidershipWeeklyBorough[i] == 'Staten Island - Manhattan Express'
+                ) {
+                    statenMaxRouteIndex = i;
+                    break;
+                }
+            }
+            document.getElementById('busstatenweekmaxroute0').innerHTML = response.busRouteMaxRidershipWeeklyRoute[statenMaxRouteIndex];
+            document.getElementById('busstatenweekmaxroute1').innerHTML = response.busRouteMaxRidershipWeeklyRoute[statenMaxRouteIndex];
+            document.getElementById('busstatenweekmaxcount').innerHTML = response.busRouteMaxRidershipWeeklyCount[statenMaxRouteIndex].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        let busWeeklyTableHtmlString = "<thead class='paneltablehead'><tr><th><text>Rank</text></th><th><text>Bus Route</text></th><th><text>Service</text></th><th><text>Ridership (week)</text></th></tr></thead><tbody class='paneltablebody'>";
+        for (let i=0; i<response.busRouteMaxRidershipWeeklyRoute.length; i++) {
+            const nameIds = idsNameSplit(response.busRouteMaxRidershipWeeklyRoute[i].toString());
+            let tableString = "<tr><th><text>" + (i+1) + "</text></th><th><text>" + nameIds[1] + "</text></th>";
+            tableString += "<th><text>" + response.busRouteMaxRidershipWeeklyBorough[i] + "</text></th>";
+            tableString += "<th><text>" + response.busRouteMaxRidershipWeeklyCount[i].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "</text></th></tr>";
+            busWeeklyTableHtmlString += tableString;
+        }
+        document.getElementById('busweeklytable').innerHTML = busWeeklyTableHtmlString + '</tbody>';
 
         document.getElementById('subwaymaxannualdate').innerHTML = response.subwayMaxAnnualDate;
         document.getElementById('subwaymaxannualdateridership').innerHTML = response.subwayMaxAnnualDateRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
@@ -180,12 +274,6 @@ function init() {
         document.getElementById('busmaxannualdateridership').innerHTML = response.busMaxAnnualDateRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
         document.getElementById('busminannualdate').innerHTML = response.busMinAnnualDate;
         document.getElementById('busminannualdateridership').innerHTML = response.busMinAnnualDateRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");;
-        document.getElementById('busweeklyridership').innerHTML = response.busWeeklyRidership.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('busmaxdailyridership0').innerHTML = response.busMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('busmaxdailyridership1').innerHTML = response.busMaxDailyRidershipWeekly.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('busmaxdailybuses').innerHTML = (response.busMaxDailyRidershipWeekly / 200).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        document.getElementById('busmaxdailydate').innerHTML = response.busMaxDailyDateWeekly.slice(0, -6);;
-        
         document.getElementById('busmaxannualday').innerHTML = response.busMaxAnnualDay;
         document.getElementById('busmaxannualdaymean').innerHTML = response.busMaxMeanDayRidership.toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         document.getElementById('busminannualday').innerHTML = response.busMinAnnualDay;
@@ -196,6 +284,9 @@ function init() {
         document.getElementById('tramweeklyridershiphourly').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklytramridership?dummy' + Date.now())
         document.getElementById('subwayweeklyridershiphourly').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklysubwayridership?dummy' + Date.now())
         document.getElementById('subwayweeklystationcomparison').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklystationcomparison?dummy' + Date.now())
+        document.getElementById('busweeklyridershiphourly').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklybusridership?dummy' + Date.now())
+        document.getElementById('busweeklyroutecomparison').setAttribute('src', 'https://gunthern.pythonanywhere.com/weeklyroutecomparison?dummy' + Date.now())
+        document.getElementById('meandayofweekcomparison').setAttribute('src', 'https://gunthern.pythonanywhere.com/meandayofweekcomparison?dummy' + Date.now())
         document.getElementById('subwayyearlyridershipdaily').setAttribute('src', 'https://gunthern.pythonanywhere.com/yearlysubwayridership?dummy' + Date.now())
         document.getElementById('busyearlyridershipdaily').setAttribute('src', 'https://gunthern.pythonanywhere.com/yearlybusridership?dummy' + Date.now())
 
@@ -237,7 +328,7 @@ function init() {
         for (let i=0; i<id.length; i++) {
             htmlString += '<img class="' + logoScale[scale] + '" ';
             if (i==0) htmlString += 'style="margin-left: 10px;" ';
-            htmlString += 'src = "./media/subway' + id[i].toString() + '.png"></img>';
+            htmlString += 'src = "./media/subway' + id[i].toString() + '.png" alt="Subway ' + id[i].toString() + ' line logo"/>';
         }
         
         // Update html
