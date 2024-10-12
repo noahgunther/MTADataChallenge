@@ -1,0 +1,310 @@
+html {
+    height: 100%;
+    min-height: 100%
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-weight: bold;
+    background-image: url(./tile.png);
+    background-size: max(min(5%, 128px), 64px);
+    background-repeat: repeat;
+    overflow-x: hidden;
+    margin: 0px;
+}
+
+.start {
+    top: 0px;
+    height: max(min(10%, 128px), 64px);
+    width: 100%;
+    background-image: url(./warningStrip.png);
+    background-size: max(min(3.8%, 128px), 64px);
+    border-bottom: solid rgb(182, 151, 28) 2px;
+}
+
+.warningstrip {
+    top: 0px;
+    height: max(min(2.33%, 40px), 20px);
+    background-image: url(./warningStripEdge.png);
+    background-size: max(min(3.8%, 128px), 64px);
+    box-shadow: 0px 10px 10px rgb(73, 73, 73);
+}
+
+.lamps {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: max(15%, 150px);
+    width: max(min(42%, 840px), 250px);
+    position: relative;
+}
+
+.lamp {
+    margin-left: max(min(-8%, -30px), -80px);
+    width: max(min(26%, 300px), 90px);
+    bottom: 0;
+    position: absolute;
+}
+
+.headerspikerow {
+    margin-left: auto;
+    margin-right: auto;
+    width: max(min(42%, 840px), 270px);
+    height: 0%;
+    position: relative;
+}
+
+.headerspike {
+    width: max(min(5%, 32px), 16px);
+    position: absolute;
+    bottom: -1px;
+}
+
+.headerborder1 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: max(10%, 100px);
+    margin-top: 0px;
+    width: max(min(42%, 920px), 250px);
+    padding: max(min(3%, 36px), 16px);
+    box-shadow: 5px 10px 10px rgb(73, 73, 73);
+    background-image: url(./greenMetal.png);
+    border-radius: 3px;
+}
+
+.headerborder0 {
+    padding: max(min(1.5%, 16px), 4px);
+    background-image: url(./greenMetal.png);
+    border-radius: 3px;
+    border: solid rgb(75, 75, 75) 1px;
+}
+
+.titlepanel {
+    color: white;
+    background-color: rgb(22, 22, 22);
+    overflow: hidden;
+    border: solid rgb(18, 18, 18) 3px;
+    border-radius: 2px;
+}
+
+.sublogo {
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    margin-left: 5px;
+    margin-right: 0px;
+}
+
+.tiledivborder {
+    height: max(min(3%, 32px), 16px);
+    width: 100%;
+    background-image: url(./tileBorder.png);
+    background-size: max(min(3%, 32px), 16px);
+    border: solid rgb(78, 78, 78) 1px;
+}
+
+.tilediv {
+    height: max(min(15%, 150px), 15px);
+    width: 100%;
+    background-image: url(./tileGray.png);
+    background-size: max(min(5%, 50px), 30px);
+    border: solid rgb(78, 78, 78) 1px;
+}
+
+.panel {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding: 0px;
+    width: max(min(40%, 900px), 128px);
+    color: white;
+    background-color: rgb(22, 22, 22);
+    overflow: hidden;
+    box-shadow: 5px 10px 10px rgb(73, 73, 73);
+}
+
+.panelline {
+    margin-left: 0px;
+    margin-top: 20px;
+    width: 200%;
+    height: 3px;
+    background-color: white;
+}
+
+.paneltitle {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 8px;
+    font-size: 52px;
+}
+
+.panelsmalltitle {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 8px;
+    font-size: 48px;
+}
+
+.paneltext {
+    margin-top: 0px;
+    margin-left: 8px;
+    margin-right: 10px;
+    font-size: 22px;
+}
+
+.panelsmalltext {
+    margin-top: 0px;
+    margin-left: 8px;
+    margin-right: 10px;
+    margin-bottom: 40px;
+    font-size: 16px;
+}
+
+.panelsublogo {
+    width: 40px;
+}
+
+.panellink {
+    color: white;
+    text-decoration: none;
+}
+
+.paneltablewrapper {
+    width: 100%;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.paneltablewrapper thead th {
+    position: sticky;
+    top: 0px;
+    border: 1px solid white;
+    background-color: rgb(91, 91, 91);
+}
+
+.paneltable {
+    width: 100%;
+    font-size: 16px;
+}
+
+.paneltable th {
+    border: 1px solid white;
+}
+
+.paneltable img {
+    width: 20px;
+    margin: 3px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.chart {
+    margin-left: 1%;
+    width: 98%;
+}
+
+.sky {
+    width: 100%;
+    height: 3700px;
+}
+
+.skycontent {
+    width: 100%;
+    height: 3700px;
+    position: absolute;
+    z-index: -1;
+    background-color: rgb(87, 152, 216);
+    background: linear-gradient(180deg, rgb(164, 211, 255) 0%, rgb(71, 136, 200) 100%);
+    overflow: hidden;
+}
+
+.cloud {
+    position: absolute;
+    z-index: -2;
+    transform: translate(-50%);
+}
+
+#tramrig {
+    position: absolute;
+    width: 100%;
+}
+
+#tram {
+    position: absolute;
+    width: 15%;
+    min-width: 300px;
+    max-width: 400px;
+    z-index: 0;
+    transform: translate(-50%);
+}
+
+.tramcable {
+    position: absolute;
+    margin-left: 0px;
+    width: 100%;
+    height: 4px;
+    background-color: rgb(46, 46, 46);
+    background: linear-gradient(180deg, rgb(90, 90, 90) 0%, rgba(0,0,0,1) 100%);
+    z-index: 1;
+}
+
+.footer {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.footerleft {
+    width: auto;
+    top: 0px;
+    cursor: pointer;
+}
+
+.footermiddle {
+    width: 30%;
+    min-width: 180px;
+    background-color: rgb(235, 0, 8);
+    top: 0px;
+    cursor: pointer;
+}
+
+.footerright {
+    width: 60%;
+    top: 0px;
+    padding-bottom: 10px;
+}
+
+.footerexit {
+    width: 100%;
+    height: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 35px;
+    font-size: 100px;
+    line-height: 80px;
+}
+
+.footerarrow {
+    padding: 5px;
+    height: 95px;
+}
+
+.footerlogos {
+    margin: 10px;
+}
+
+.end {
+    bottom: 0px;
+    height: 200px;
+    width: 100%;
+    background-image: url(./wood.png);
+}
+
+.caution {
+    top: 0px;
+    height: 15%;
+    background: repeating-linear-gradient(45deg, #ffd900, #ffd900 20px, #000000 20px, #000000 40px);
+}
