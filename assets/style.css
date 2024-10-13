@@ -36,14 +36,14 @@ body {
 .lamps {
     margin-left: auto;
     margin-right: auto;
-    margin-top: max(15%, 150px);
-    width: max(min(42%, 840px), 470px);
+    margin-top: max(16%, 200px);
+    width: max(min(40%, 840px), 560px);
     position: relative;
 }
 
 .lamp {
     margin-left: max(min(-8%, -30px), -80px);
-    width: max(min(26%, 300px), 90px);
+    width: max(min(28%, 300px), 110px);
     bottom: 0;
     position: absolute;
 }
@@ -51,7 +51,7 @@ body {
 .headerspikerow {
     margin-left: auto;
     margin-right: auto;
-    width: max(min(42%, 840px), 480px);
+    width: max(min(40%, 840px), 560px);
     height: 0%;
     position: relative;
 }
@@ -67,7 +67,7 @@ body {
     margin-right: auto;
     margin-bottom: max(10%, 100px);
     margin-top: 0px;
-    width: max(min(42%, 920px), 500px);
+    width: max(min(42%, 920px), 600px);
     padding: max(min(2%, 36px), 22px);
     box-shadow: 5px 10px 10px rgb(73, 73, 73);
     background-image: url(./greenMetal.png);
