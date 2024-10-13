@@ -344,7 +344,7 @@ for i in range(636):
                 if ridershipHour == hoursInWeek[h]:
                     subwayHourlyRidership[h] += ridership
 
-        if len(subwayStationMaxRidershipWeeklyCount) != 0:
+        if len(subwayStationMaxRidershipWeeklyCount) == 0:
             subwayStationMaxRidershipWeeklyCount.append(int(stationWeeklyRidership))
             subwayStationMaxRidershipWeeklyStation.append(data[0]['station_complex'])
             subwayStationMaxRidershipWeeklyBorough.append(data[0]['borough'])
@@ -421,7 +421,7 @@ for i in range(len(busRoute)):
                 if ridershipHour == hoursInWeek[h]:
                     busHourlyRidership[h] += ridership
 
-        if len(busRouteMaxRidershipWeeklyCount) != 0:
+        if len(busRouteMaxRidershipWeeklyCount) == 0:
             busRouteMaxRidershipWeeklyCount.append(int(routeWeeklyRidership))
             busRouteMaxRidershipWeeklyRoute.append(busRoute[i])
             busRouteMaxRidershipWeeklyBorough.append(borough)
