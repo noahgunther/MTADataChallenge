@@ -329,7 +329,7 @@ subwayHourlyRidership = []
 for h in range(len(hoursInWeek)):
     subwayHourlyRidership.append(0.0)
 
-for i in range(1000):
+for i in range(636):
     stationComplexId = str(i+1)
     url = "https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=" + stationComplexId + "&$where=transit_timestamp+between+%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=10000"
     data = requests.get(url).json()
@@ -345,23 +345,27 @@ for i in range(1000):
                     subwayHourlyRidership[h] += ridership
 
         if i == 0:
-            subwayStationMaxRidershipWeeklyCount.insert(0, int(stationWeeklyRidership))
-            subwayStationMaxRidershipWeeklyStation.insert(0, data[0]['station_complex'])
-            subwayStationMaxRidershipWeeklyBorough.insert(0, data[0]['borough'])
-
-        inserted = False
-        for j in range(len(subwayStationMaxRidershipWeeklyCount)):
-            if stationWeeklyRidership > subwayStationMaxRidershipWeeklyCount[j]:
-                subwayStationMaxRidershipWeeklyCount.insert(j, int(stationWeeklyRidership))
-                subwayStationMaxRidershipWeeklyStation.insert(j, data[0]['station_complex'])
-                subwayStationMaxRidershipWeeklyBorough.insert(j, data[0]['borough'])
-                inserted = True
-                break
-
-        if not inserted:
             subwayStationMaxRidershipWeeklyCount.append(int(stationWeeklyRidership))
             subwayStationMaxRidershipWeeklyStation.append(data[0]['station_complex'])
             subwayStationMaxRidershipWeeklyBorough.append(data[0]['borough'])
+
+        else:
+            inserted = False
+            for j in range(len(subwayStationMaxRidershipWeeklyCount)):
+                if stationWeeklyRidership > subwayStationMaxRidershipWeeklyCount[j]:
+                    subwayStationMaxRidershipWeeklyCount.insert(j, int(stationWeeklyRidership))
+                    subwayStationMaxRidershipWeeklyStation.insert(j, data[0]['station_complex'])
+                    subwayStationMaxRidershipWeeklyBorough.insert(j, data[0]['borough'])
+                    inserted = True
+                    break
+
+            if not inserted:
+                subwayStationMaxRidershipWeeklyCount.append(int(stationWeeklyRidership))
+                subwayStationMaxRidershipWeeklyStation.append(data[0]['station_complex'])
+                subwayStationMaxRidershipWeeklyBorough.append(data[0]['borough'])
+
+    else:
+        print("No data for station with id: " + str(i+1))
 
 for h in subwayHourlyRidership:
     h = int(h)
@@ -421,23 +425,24 @@ for i in range(len(busRoute)):
                     busHourlyRidership[h] += ridership
 
         if i == 0:
-            busRouteMaxRidershipWeeklyCount.insert(0, int(routeWeeklyRidership))
-            busRouteMaxRidershipWeeklyRoute.insert(0, busRoute[i])
-            busRouteMaxRidershipWeeklyBorough.insert(0, borough)
-
-        inserted = False
-        for j in range(len(busRouteMaxRidershipWeeklyCount)):
-            if routeWeeklyRidership > busRouteMaxRidershipWeeklyCount[j]:
-                busRouteMaxRidershipWeeklyCount.insert(j, int(routeWeeklyRidership))
-                busRouteMaxRidershipWeeklyRoute.insert(j, busRoute[i])
-                busRouteMaxRidershipWeeklyBorough.insert(j, borough)
-                inserted = True
-                break
-
-        if not inserted:
             busRouteMaxRidershipWeeklyCount.append(int(routeWeeklyRidership))
             busRouteMaxRidershipWeeklyRoute.append(busRoute[i])
             busRouteMaxRidershipWeeklyBorough.append(borough)
+
+        else:
+            inserted = False
+            for j in range(len(busRouteMaxRidershipWeeklyCount)):
+                if routeWeeklyRidership > busRouteMaxRidershipWeeklyCount[j]:
+                    busRouteMaxRidershipWeeklyCount.insert(j, int(routeWeeklyRidership))
+                    busRouteMaxRidershipWeeklyRoute.insert(j, busRoute[i])
+                    busRouteMaxRidershipWeeklyBorough.insert(j, borough)
+                    inserted = True
+                    break
+
+            if not inserted:
+                busRouteMaxRidershipWeeklyCount.append(int(routeWeeklyRidership))
+                busRouteMaxRidershipWeeklyRoute.append(busRoute[i])
+                busRouteMaxRidershipWeeklyBorough.append(borough)
 
 for h in busHourlyRidership:
     h = int(h)
