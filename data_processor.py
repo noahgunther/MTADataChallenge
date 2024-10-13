@@ -364,9 +364,6 @@ for i in range(636):
                 subwayStationMaxRidershipWeeklyStation.append(data[0]['station_complex'])
                 subwayStationMaxRidershipWeeklyBorough.append(data[0]['borough'])
 
-    else:
-        print("No data for station with id: " + str(i+1))
-
 for h in subwayHourlyRidership:
     h = int(h)
 
