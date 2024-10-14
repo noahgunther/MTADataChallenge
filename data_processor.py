@@ -502,8 +502,8 @@ plt.rcParams["figure.figsize"] = [14.228, 9.49]
 fig, ax = plt.subplots()
 
 # Hourly tram ridership for the week
-plt.xlabel('Time', fontsize=26, font=fpathreg)
-plt.ylabel('Ridership', fontsize=26, font=fpathreg)
+plt.xlabel('Time (week)', fontsize=26, font=fpathreg)
+plt.ylabel('Ridership (hourly)', fontsize=26, font=fpathreg)
 
 # Ticks and labels
 x = []
@@ -553,8 +553,8 @@ plt.clf()
 fig, ax = plt.subplots()
 
 # Hourly subway ridership for the week
-plt.xlabel('Time', fontsize=26, font=fpathreg)
-plt.ylabel('Ridership', fontsize=26, font=fpathreg)
+plt.xlabel('Time (week)', fontsize=26, font=fpathreg)
+plt.ylabel('Ridership (hourly)', fontsize=26, font=fpathreg)
 
 # Ticks and labels
 x = []
@@ -626,7 +626,7 @@ plt.bar(left, height, tick_label = tick_label, width = 0.95, color = mpl.colors.
 
 # Labels
 plt.xlabel('Station Name', font=fpathbold, fontsize=26)
-plt.ylabel('Ridership', font=fpathbold, fontsize=26)
+plt.ylabel('Ridership (week)', font=fpathbold, fontsize=26)
 
 # Output
 plt.tight_layout()
@@ -636,8 +636,8 @@ plt.clf()
 fig, ax = plt.subplots()
 
 # Hourly bus ridership for the week
-plt.xlabel('Time', fontsize=26, font=fpathreg)
-plt.ylabel('Ridership', fontsize=26, font=fpathreg)
+plt.xlabel('Time (week)', fontsize=26, font=fpathreg)
+plt.ylabel('Ridership (hourly)', fontsize=26, font=fpathreg)
 
 # Ticks and labels
 x = []
@@ -706,7 +706,7 @@ plt.bar(left, height, tick_label = tick_label, width = 0.95, color = mpl.colors.
 
 # Labels
 plt.xlabel('Bus Route', font=fpathbold, fontsize=26)
-plt.ylabel('Ridership', font=fpathbold, fontsize=26)
+plt.ylabel('Ridership (week)', font=fpathbold, fontsize=26)
 
 # Output
 plt.tight_layout()
@@ -716,8 +716,8 @@ plt.clf()
 fig, ax = plt.subplots()
 
 # Daily subway ridership for the year
-plt.xlabel('Time', fontsize=26, font=fpathreg)
-plt.ylabel('Ridership', fontsize=26, font=fpathreg)
+plt.xlabel('Time (year)', fontsize=26, font=fpathreg)
+plt.ylabel('Ridership (daily)', fontsize=26, font=fpathreg)
 
 # Ticks and labels
 x = []
@@ -763,8 +763,8 @@ plt.clf()
 fig, ax = plt.subplots()
 
 # Daily bus ridership for the year
-plt.xlabel('Time', fontsize=26, font=fpathreg)
-plt.ylabel('Ridership', fontsize=26, font=fpathreg)
+plt.xlabel('Time (year)', fontsize=26, font=fpathreg)
+plt.ylabel('Ridership (daily)', fontsize=26, font=fpathreg)
 
 # Ticks and labels
 x = []
@@ -820,7 +820,7 @@ plt.bar(weekday, subwayMeanDayRidership, width=-0.4, align='edge', color=[0, 0.2
 plt.bar(weekday, busMeanDayRidership, width=0.4, align='edge', color=[0.5, 0.5, 0.52, 1])
 
 # Labels
-plt.ylabel('Mean ridership', font=fpathbold, fontsize=26)
+plt.ylabel('Mean ridership (year)', font=fpathbold, fontsize=26)
 
 # Legend
 subway_patch = mpl.patches.Patch(color=[0, 0.223, 0.651, 1], label='Subway (left)')
