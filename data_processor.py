@@ -498,7 +498,7 @@ fpathreg = Path("./fonts/Helvetica.ttf")
 fpathbold = Path("./fonts/Helvetica-Bold.ttf")
 plt.rcParams['axes.spines.right'] = False
 plt.rcParams['axes.spines.top'] = False
-plt.rcParams["figure.figsize"] = [14.228,14.228]
+plt.rcParams["figure.figsize"] = [14.228, 9.49]
 fig, ax = plt.subplots()
 
 # Hourly tram ridership for the week
