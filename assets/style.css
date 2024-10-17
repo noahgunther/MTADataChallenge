@@ -33,7 +33,7 @@ a {
     top: 0px;
     height: 30px;
     background-image: url(./warningStripEdge.png);
-    box-shadow: 0px 10px 10px rgb(73, 73, 73);
+    box-shadow: 0px 10px 10px rgb(35, 35, 35);
 }
 
 .lamps {
@@ -72,7 +72,7 @@ a {
     margin-top: 0px;
     width: max(min(62%, 920px), 285px);
     padding: max(min(2%, 36px), 14px);
-    box-shadow: 5px 10px 10px rgb(73, 73, 73);
+    box-shadow: 5px 10px 10px rgb(35, 35, 35);
     background-image: url(./greenMetal.png);
     border-radius: 3px;
 }
@@ -133,7 +133,7 @@ a {
     color: white;
     background-color: rgb(22, 22, 22);
     overflow: hidden;
-    box-shadow: 5px 10px 10px rgb(73, 73, 73);
+    box-shadow: 5px 10px 10px rgb(35, 35, 35);
 }
 
 .panelline {
@@ -326,6 +326,65 @@ a {
     0% { left: max(min(150%, calc(100% + 400px)), calc(100% + 200px)); }
     50% { left: min(max(-50%, -400px), 200px); }
     100% { left: max(min(150%, calc(100% + 400px)), calc(100% + 200px)); }
+}
+
+#underground {
+    position: relative;
+    width: 100%;
+}
+
+#undergroundart {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    background-color: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgb(7, 16, 16) 0%, rgb(0, 0, 0) 100%);
+    overflow: hidden;
+}
+
+#undergroundcontent {
+    position: relative;
+}
+
+#grate {
+    position: absolute;
+    left: 50%;
+    z-index: -2;
+    transform: translate(-50%);
+    top: 1%; 
+    width: 25%; 
+    min-width: 250px; 
+    max-width: 500px;
+}
+
+.subwayengine {
+    position: absolute;
+    z-index: -2;
+    transform: translate(-50%);
+    width: 65%; 
+    min-width: 650px; 
+    max-width: 1950px;
+}
+
+#subwayengine01 {
+    position: absolute;
+    z-index: -1;
+    transform: translate(-50%);
+    width: 67%; 
+    min-width: 670px; 
+    max-width: 2010px;
+    animation: subwayanimationRL;
+    animation-duration: 7s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes subwayanimationRL {
+    0% { left: max(min(200%, calc(100% + 800px)), calc(100% + 400px)); }
+    100% { left: min(max(-100%, -800px), 400px); }
 }
 
 .footer {

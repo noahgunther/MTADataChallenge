@@ -148,106 +148,121 @@
         <div class="tiledivborder"></div>
 
         <!--Subway-->
-        <div class="panel">
-            <div class="panelline"></div>
-            <p class="paneltitle">A Week on the Subway</p>
-            <p class="panelsmalltext">Week of <text id="weekdaterangesubway0"></text></p>
-            <p class="paneltext">During this week, people rode the NYC Subway a total of <text id="subwayweeklyridership"></text> times.</p>
-            <p class="paneltext">The most popular day was <text id="subwaymaxdailydate"></text>, when subway ridership was <text id="subwaymaxdailyridership0"></text>.</p>
-            <p class="paneltext">Those <text id="subwaymaxdailyridership1"></text> riders would fit in about <text id="subwaymaxdailycars"></text> subway cars (at 200 riders per car).</p>
-            <p class="textbreak"></p>
-            <div class="panelline"></div>
-            <p class="panelsmalltitle">Subway Ridership by Hour</p>
-            <p class="panelsmalltext">Week of <text id="weekdaterangesubway1"></text></p>
-            <img class="chart" id="subwayweeklyridershiphourly" alt="Chart displaying ridership by hour for one week of subway service"/>
-            <a class="panellink" href="https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data" target="_blank">
-                <img class="logo" src="./assets/mtaLogo.png" alt="MTA logo" style="float: left"/>
-                <p class="panellinktext">MTA Subway Hourly Ridership Data</p>
-            </a>
-        </div>
+        <div id="underground">
+            <div id="undergroundart">
+                <img id="grate" src="./assets/grate.png" alt=""/>
+                <img id="subwayengine00" class="subwayengine" style="top: 15%; left: 50%" src="./assets/subway_engine.png" alt=""/>
+                <img id="subwayengine01" class="subwayengine" style="top: 16%" src="./assets/subway_engine.png" alt=""/>
+            </div>
+            <div id="undergroundcontent">
+                <div style="height: 20vw; max-height: 200px; min-height: 100px;"></div>
 
-        <div class="panel">
-            <div class="panelline"></div>
-            <p class="paneltitle">SUBWAY VISUALIZATION HERE</p>
-
-        </div>
-
-        <div class="panel">
-            <div class="panelline"></div>
-            <p class="paneltitle">Subway Stations of the Week</p>
-            <p class="panelsmalltext">Week of <text id="weekdaterangesubway2"></text></p>
-            <div class="panelline"></div>
-            <p class="textbreak"></p>
-            <p class="paneltext">#1 OVERALL:</p>
-            <p class="panelsmalltitle"><text id="subwaystationweekmaxstation0"></text></p>
-            <div id="subwaystationweekmaxstationserviceicons" class="subwaystationserviceicons"></div>
-            <p class="paneltext"><text id="subwaystationweekmaxstation1"></text>, located in <text id="subwaystationweekmaxborough"></text>, was the #1 most popular station this week, where <text id="subwaystationweekmaxcount"></text> people boarded the train.</p>
-            <div id="subwayweeklybronx">
-                <div class="panelline"></div>
-                <p class="textbreak"></p>
-                <p class="paneltext">#1 IN THE BRONX:</p>
-                <p class="panelsmalltitle"><text id="subwaybronxweekmaxstation0"></text></p>
-                <div id="subwayweeklybronxicons" class="subwaystationserviceicons"></div>
-                <p class="paneltext"><text id="subwaybronxweekmaxstation1"></text> was the busiest station in the Bronx this week, where <text id="subwaybronxweekmaxcount"></text> people boarded the train.</p>
-            </div>
-            <div id="subwayweeklybrooklyn">
-                <div class="panelline">
-                </div><p class="textbreak"></p>
-                <p class="paneltext">#1 IN BROOKLYN:</p>
-                <p class="panelsmalltitle"><text id="subwaybrooklynweekmaxstation0"></text></p>
-                <div id="subwayweeklybrooklynicons" class="subwaystationserviceicons"></div>
-                <p class="paneltext"><text id="subwaybrooklynweekmaxstation1"></text> was the busiest station in Brooklyn this week, where <text id="subwaybrooklynweekmaxcount"></text> people boarded the train.</p>
-            </div>
-            <div id="subwayweeklymanhattan">
-                <div class="panelline"></div>
-                <p class="textbreak"></p>
-                <p class="paneltext">#1 IN MANHATTAN:</p>
-                <p class="panelsmalltitle"><text id="subwaymanhattanweekmaxstation0"></text></p>
-                <div id="subwayweeklymanhattanicons" class="subwaystationserviceicons"></div>
-                <p class="paneltext"><text id="subwaymanhattanweekmaxstation1"></text> was the busiest station in Manhattan this week, where <text id="subwaymanhattanweekmaxcount"></text> people boarded the train.</p>
-            </div>
-            <div id="subwayweeklyqueens">
-                <div class="panelline"></div>
-                <p class="textbreak"></p>
-                <p class="paneltext">#1 IN QUEENS:</p>
-                <p class="panelsmalltitle"><text id="subwayqueensweekmaxstation0"></text></p>
-                <div id="subwayweeklyqueensicons" class="subwaystationserviceicons"></div>
-                <p class="paneltext"><text id="subwayqueensweekmaxstation1"></text> was the busiest station in Queens this week, where <text id="subwayqueensweekmaxcount"></text> people boarded the train.</p>
-            </div>
-            <div id="subwayweeklystaten">
-                <div class="panelline"></div>
-                <p class="textbreak"></p>
-                <p class="paneltext">#1 ON STATEN ISLAND:</p>
-                <p class="panelsmalltitle"><text id="subwaystatenweekmaxstation0"></text></p>
-                <div id="subwayweeklystatenicons" class="subwaystationserviceicons"></div>
-                <p class="paneltext"><text id="subwaystatenweekmaxstation1"></text> was the busiest station on the Staten Island Railway this week, where <text id="subwaystatenweekmaxcount"></text> people boarded the train.</p>
-            </div>
-            <div class="panelline"></div>
-            <div style="margin-top: 2%; margin-left: 1%; height: min(1.75vw, 30px);">
-                <p class="paneltext" style="float: left;">All stations by ridership (scroll or search)</p>
-            </div>
-            <div class="paneltablewrapper">
-                <div id="subwaystationtable">
-                    <table class="paneltable" id="subwayweeklytable" cellspacing="0"></table>
+                <div class="panel" style="box-shadow: none;">
+                    <div class="panelline"></div>
+                    <p class="paneltitle">A Week on the Subway</p>
+                    <p class="panelsmalltext">Week of <text id="weekdaterangesubway0"></text></p>
+                    <p class="paneltext">During this week, people rode the NYC Subway a total of <text id="subwayweeklyridership"></text> times.</p>
+                    <p class="paneltext">The most popular day was <text id="subwaymaxdailydate"></text>, when subway ridership was <text id="subwaymaxdailyridership0"></text>.</p>
+                    <p class="paneltext">Those <text id="subwaymaxdailyridership1"></text> riders would fit in about <text id="subwaymaxdailycars"></text> subway cars (at 200 riders per car).</p>
+                    <a class="panellink" href="https://data.ny.gov/Transportation/MTA-Daily-Ridership-Data-Beginning-2020/vxuj-8kew/about_data" target="_blank">
+                        <img class="logo" src="./assets/mtaLogo.png" alt="MTA logo" style="float: left"/>
+                        <p class="panellinktext">MTA Daily Ridership Data</p>
+                    </a>
                 </div>
-            </div>
-            <div class="panelline" style="margin-top: 0px;"></div>
-            <a class="panellink" href="https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data" target="_blank">
-                <img class="logo" src="./assets/mtaLogo.png" alt="MTA logo" style="float: left"/>
-                <p class="panellinktext">MTA Subway Hourly Ridership Data</p>
-            </a>
-        </div>
 
-        <div class="panel">
-            <div class="panelline"></div>
-            <p class="paneltitle">Top Stations By Ridership</p>
-            <p class="panelsmalltext">Week of <text id="weekdaterangesubway3"></text></p>
-            <p class="textbreak"></p>
-            <img class="chart" id="subwayweeklystationcomparison" alt="Chart displaying ridership by subway station for the top 15 busiest stations for one week of service"/>
-            <a class="panellink" href="https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data" target="_blank">
-                <img class="logo" src="./assets/mtaLogo.png" alt="MTA logo" style="float: left">
-                <p class="panellinktext">MTA Subway Hourly Ridership Data</p>
-            </a>
+                <div style="height: 80vw; max-height: 800px; min-height: 400px;"></div>
+
+                <div class="panel" style="box-shadow: none;">
+                    <div class="panelline"></div>
+                    <p class="panelsmalltitle">Subway Ridership by Hour</p>
+                    <p class="panelsmalltext">Week of <text id="weekdaterangesubway1"></text></p>
+                    <img class="chart" id="subwayweeklyridershiphourly" alt="Chart displaying ridership by hour for one week of subway service"/>
+                    <a class="panellink" href="https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data" target="_blank">
+                        <img class="logo" src="./assets/mtaLogo.png" alt="MTA logo" style="float: left"/>
+                        <p class="panellinktext">MTA Subway Hourly Ridership Data</p>
+                    </a>
+                </div>
+
+                <div class="panel" style="box-shadow: none;">
+                    <div class="panelline"></div>
+                    <p class="paneltitle">Subway Stations of the Week</p>
+                    <p class="panelsmalltext">Week of <text id="weekdaterangesubway2"></text></p>
+                    <div class="panelline"></div>
+                    <p class="textbreak"></p>
+                    <p class="paneltext">#1 OVERALL:</p>
+                    <p class="panelsmalltitle"><text id="subwaystationweekmaxstation0"></text></p>
+                    <div id="subwaystationweekmaxstationserviceicons" class="subwaystationserviceicons"></div>
+                    <p class="paneltext"><text id="subwaystationweekmaxstation1"></text>, located in <text id="subwaystationweekmaxborough"></text>, was the #1 most popular station this week, where <text id="subwaystationweekmaxcount"></text> people boarded the train.</p>
+                    <div id="subwayweeklybronx">
+                        <div class="panelline"></div>
+                        <p class="textbreak"></p>
+                        <p class="paneltext">#1 IN THE BRONX:</p>
+                        <p class="panelsmalltitle"><text id="subwaybronxweekmaxstation0"></text></p>
+                        <div id="subwayweeklybronxicons" class="subwaystationserviceicons"></div>
+                        <p class="paneltext"><text id="subwaybronxweekmaxstation1"></text> was the busiest station in the Bronx this week, where <text id="subwaybronxweekmaxcount"></text> people boarded the train.</p>
+                    </div>
+                    <div id="subwayweeklybrooklyn">
+                        <div class="panelline">
+                        </div><p class="textbreak"></p>
+                        <p class="paneltext">#1 IN BROOKLYN:</p>
+                        <p class="panelsmalltitle"><text id="subwaybrooklynweekmaxstation0"></text></p>
+                        <div id="subwayweeklybrooklynicons" class="subwaystationserviceicons"></div>
+                        <p class="paneltext"><text id="subwaybrooklynweekmaxstation1"></text> was the busiest station in Brooklyn this week, where <text id="subwaybrooklynweekmaxcount"></text> people boarded the train.</p>
+                    </div>
+                    <div id="subwayweeklymanhattan">
+                        <div class="panelline"></div>
+                        <p class="textbreak"></p>
+                        <p class="paneltext">#1 IN MANHATTAN:</p>
+                        <p class="panelsmalltitle"><text id="subwaymanhattanweekmaxstation0"></text></p>
+                        <div id="subwayweeklymanhattanicons" class="subwaystationserviceicons"></div>
+                        <p class="paneltext"><text id="subwaymanhattanweekmaxstation1"></text> was the busiest station in Manhattan this week, where <text id="subwaymanhattanweekmaxcount"></text> people boarded the train.</p>
+                    </div>
+                    <div id="subwayweeklyqueens">
+                        <div class="panelline"></div>
+                        <p class="textbreak"></p>
+                        <p class="paneltext">#1 IN QUEENS:</p>
+                        <p class="panelsmalltitle"><text id="subwayqueensweekmaxstation0"></text></p>
+                        <div id="subwayweeklyqueensicons" class="subwaystationserviceicons"></div>
+                        <p class="paneltext"><text id="subwayqueensweekmaxstation1"></text> was the busiest station in Queens this week, where <text id="subwayqueensweekmaxcount"></text> people boarded the train.</p>
+                    </div>
+                    <div id="subwayweeklystaten">
+                        <div class="panelline"></div>
+                        <p class="textbreak"></p>
+                        <p class="paneltext">#1 ON STATEN ISLAND:</p>
+                        <p class="panelsmalltitle"><text id="subwaystatenweekmaxstation0"></text></p>
+                        <div id="subwayweeklystatenicons" class="subwaystationserviceicons"></div>
+                        <p class="paneltext"><text id="subwaystatenweekmaxstation1"></text> was the busiest station on the Staten Island Railway this week, where <text id="subwaystatenweekmaxcount"></text> people boarded the train.</p>
+                    </div>
+                    <div class="panelline"></div>
+                    <div style="margin-top: 2%; margin-left: 1%; height: min(1.75vw, 30px);">
+                        <p class="paneltext" style="float: left;">All stations by ridership (scroll or search)</p>
+                    </div>
+                    <div class="paneltablewrapper">
+                        <div id="subwaystationtable">
+                            <table class="paneltable" id="subwayweeklytable" cellspacing="0"></table>
+                        </div>
+                    </div>
+                    <div class="panelline" style="margin-top: 0px;"></div>
+                    <a class="panellink" href="https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data" target="_blank">
+                        <img class="logo" src="./assets/mtaLogo.png" alt="MTA logo" style="float: left"/>
+                        <p class="panellinktext">MTA Subway Hourly Ridership Data</p>
+                    </a>
+                </div>
+
+                <div class="panel" style="margin-bottom: 0px; box-shadow: none;">
+                    <div class="panelline"></div>
+                    <p class="paneltitle">Top Stations By Ridership</p>
+                    <p class="panelsmalltext">Week of <text id="weekdaterangesubway3"></text></p>
+                    <p class="textbreak"></p>
+                    <img class="chart" id="subwayweeklystationcomparison" alt="Chart displaying ridership by subway station for the top 15 busiest stations for one week of service"/>
+                    <a class="panellink" href="https://data.ny.gov/Transportation/MTA-Subway-Hourly-Ridership-Beginning-February-202/wujg-7c2s/about_data" target="_blank">
+                        <img class="logo" src="./assets/mtaLogo.png" alt="MTA logo" style="float: left">
+                        <p class="panellinktext">MTA Subway Hourly Ridership Data</p>
+                    </a>
+                </div>
+
+                <div style="height: 20vw; max-height: 200px; min-height: 100px;"></div>
+            </div>
         </div>
 
         <!--Tile divider-->
