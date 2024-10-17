@@ -289,7 +289,6 @@ a {
     background-color: rgb(46, 46, 46);
     background: linear-gradient(180deg, rgb(90, 90, 90) 0%, rgba(0,0,0,1) 100%);
     z-index: 1;
-    will-change: transform;
 }
 
 #try0 {
@@ -341,7 +340,6 @@ a {
     right: 0;
     z-index: -1;
     background-color: rgb(0, 0, 0);
-    background: linear-gradient(180deg, rgb(7, 16, 16) 0%, rgb(0, 0, 0) 100%);
     overflow: hidden;
 }
 
@@ -360,26 +358,136 @@ a {
     max-width: 500px;
 }
 
-.subwayengine {
+#subwaystation {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 15%;
+    height: max(min(30vw, 750px), 350px);
+    z-index: -10;
+}
+
+#stationlightabove {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 5%;
+    background-color: rgb(0, 0, 0);
+    background: linear-gradient(0deg, rgb(150, 150, 150) 0%, rgb(0, 0, 0) 100%);
+}
+
+#stationlight {
+    position: absolute;
+    width: 100%;
+    top: 5%;
+    height: 1%;
+    background-color: white;
+}
+
+#stationlightbelow {
+    position: absolute;
+    width: 100%;
+    top: 6%;
+    height: 5%;
+    z-index: 10;
+    background-color: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgb(203, 203, 203) 0%, rgb(0, 0, 0, 0) 100%);
+}
+
+#stationtile {
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    top: 6%;
+    background-image: url(./tileGray.png);
+    background-size: 1.5%;
+    z-index: -10;
+}
+
+#stationtileshadow {
+    position: absolute;
+    width: 100%;
+    top: 22%;
+    height: 15%;
+    z-index: 10;
+    background-color: rgb(0, 0, 0);
+    background: linear-gradient(0deg, rgb(51, 48, 38, 0.75) 0%, rgb(51, 48, 38, 0) 100%);
+}
+
+#stationfloor {
+    position: absolute;
+    top: 36%;
+    width: 100%;
+    height: 5%;
+    z-index: 11;
+    background-color: rgb(100, 91, 57);
+    background: linear-gradient(0deg, rgb(51, 48, 38) 0%, rgb(100, 91, 57) 50%, rgb(51, 48, 38) 100%);
+}
+
+#stationwarnstrip {
+    position: absolute;
+    width: 100%;
+    top: 41%;
+    height: 2%;
+    background-color: rgb(168, 155, 22);
+}
+
+#stationdrop {
+    position: absolute;
+    width: 100%;
+    top: 43%;
+    height: 6%;
+    background-color: rgb(51, 48, 38);
+    background: linear-gradient(180deg, rgb(51, 48, 38) 0%, rgb(0, 0, 0) 100%);
+}
+
+.subwayrigy {
+    position: absolute;
+    width: 100%;
+    height: max(min(19.5vw, 500px), 200px);
+}
+
+.subwayrigx {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.subwaytrack {
+    position: absolute;
+    margin-left: 0px;
+    width: 100%;
+    height: max(min(0.8vw, 28px), 10px);
+    background-color: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgb(12, 10, 8) 0%, rgb(5, 5, 5) 100%);
+    will-change: transform;
+}
+
+.subwaytrain {
     position: absolute;
     z-index: -2;
     transform: translate(-50%);
     width: 65%; 
-    min-width: 650px; 
-    max-width: 1950px;
+    min-width: 660px;
+    max-width: 1700px;
 }
 
 #subwayengine01 {
     position: absolute;
-    z-index: -1;
-    transform: translate(-50%);
-    width: 67%; 
-    min-width: 670px; 
-    max-width: 2010px;
     animation: subwayanimationRL;
     animation-duration: 7s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+}
+
+.subwaypassengers {
+    position: absolute;
+    z-index: -3;
+    transform: translate(-50%);
+    width: 65%; 
+    min-width: 660px;
+    max-width: 1700px;
 }
 
 @keyframes subwayanimationRL {

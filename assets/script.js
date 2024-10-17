@@ -1,4 +1,11 @@
 // Todo:
+// Art:
+// - Subway:
+// -- Attach cars to engines
+// -- Station: columns, people moving on platform and in stationary train
+// -- Add lights glowing here and there in darkness (signals, misc), yellow cable lights (on pillars?)
+// -- Add more trains, animation variations (trains that pass each other, trains that come to a stop and start again)
+// -- Pizza rat easter egg?
 // Data:
 // - Review all code / math
 // JS functionality:
