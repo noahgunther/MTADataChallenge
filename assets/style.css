@@ -358,6 +358,12 @@ a {
     max-width: 500px;
 }
 
+.subwaylight {
+    position: absolute;
+    z-index: 20;
+    transform: translate(-50%);
+}
+
 #subwaystation {
     position: absolute;
     width: 100%;
@@ -417,15 +423,22 @@ a {
 #stationpillars {
     position: absolute;
     width: 100%;
-    height: 40.5%;
+    height: 40.75%;
     top: 0;
     z-index: 13;
 }
 
+.tunnelpillars {
+    position: absolute;
+    width: 100%;
+    height: max(min(16vw, 400px), 170px);
+}
+
 .pillar {
     position: absolute;
-    bottom: 0;
-    width: max(min(1.6%, 42px), 19px);
+    top: 0;
+    height: 100%;
+    transform: translate(-50%);
 }
 
 .stationpassengers {
@@ -632,6 +645,7 @@ a {
     animation-duration: 12s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+    transform: scale(-1, 1);
 }
 
 @keyframes subwayanimationLR00 {
@@ -652,6 +666,23 @@ a {
     52% { left: 46%; }
     46% { left: 49%; }
     100% { left: min(max(-400%, calc(-200% - 3200px)), calc(-200% - 1600px)); }
+}
+
+#subwayengine04 {
+    position: absolute;
+    animation: subwayanimationRL00;
+    animation-duration: 12s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#subwayengine05 {
+    position: absolute;
+    animation: subwayanimationLR00;
+    animation-duration: 9s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform: scale(-1, 1);
 }
 
 .footer {

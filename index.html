@@ -151,6 +151,18 @@
         <div id="underground">
             <div id="undergroundart">
                 <img id="grate" src="./assets/grate.png" alt=""/>
+
+                <img class="subwaylight" style="top: -2%; left: 50%; width: 12%; min-width: 120px; max-width: 360px;" src="./assets/subwayLight00.png" alt=""/>
+                <img class="subwaylight" style="top: 5%; left: 15%; width: 10%; min-width: 100px; max-width: 300px;" src="./assets/subwayLight01.png" alt=""/>
+                <img class="subwaylight" style="top: 12%; left: 77%; width: 15%; min-width: 150px; max-width: 450px;" src="./assets/subwayLight02.png" alt=""/>
+                <img class="subwaylight" style="top: 20%; left: 30%; width: 20%; min-width: 200px; max-width: 600px;" src="./assets/subwayLight03.png" alt=""/>
+                <img class="subwaylight" style="top: 30%; left: 12%; width: 15%; min-width: 150px; max-width: 450px;" src="./assets/subwayLight01.png" alt=""/>
+                <img class="subwaylight" style="top: 33%; left: 56%; width: 20%; min-width: 200px; max-width: 600px;" src="./assets/subwayLight00.png" alt=""/>
+                <img class="subwaylight" style="top: 45%; left: 68%; width: 17%; min-width: 170px; max-width: 510px;" src="./assets/subwayLight01.png" alt=""/>
+                <img class="subwaylight" style="top: 75%; left: 16%; width: 13%; min-width: 130px; max-width: 390px;" src="./assets/subwayLight00.png" alt=""/>
+                <img class="subwaylight" style="top: 80%; left: 26%; width: 15%; min-width: 150px; max-width: 450px;" src="./assets/subwayLight02.png" alt=""/>
+                <img class="subwaylight" style="top: 85%; left: 70%; width: 20%; min-width: 200px; max-width: 600px;" src="./assets/subwayLight03.png" alt=""/>
+
                 <div id="subwaystation">
                     <div id="stationlightabove"></div>
                     <div id="stationlight"></div>
@@ -181,10 +193,10 @@
 
                 <div class="subwayrigy" style="top: 16%; z-index: 0;">
                     <div class="subwayrigx" id="subwayengine00" style="left: 50%">
-                    <img class="subwaytrain" src="./assets/subway_engine.png" alt=""/>
-                    <img class="subwaypassengers" src="./assets/subway_passengers00.png" alt=""/>
-                    <img class="subwaytrain" src="./assets/subway_car.png" alt="" style="z-index: -4; transform: translate(42.5%);"/>
-                    <img class="subwaypassengers" src="./assets/subway_passengers00.png" alt="" style="z-index: -5; transform: translate(42.5%);"/>
+                    <img class="subwaytrain" src="./assets/subwayEngine.png" alt=""/>
+                    <img class="subwaypassengers" src="./assets/subwayPassengers00.png" alt=""/>
+                    <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -4; transform: translate(42.5%);"/>
+                    <img class="subwaypassengers" src="./assets/subwayPassengers01.png" alt="" style="z-index: -5; transform: translate(42.5%);"/>
                     </div>
                     <div class="subwaytrack" style="top: 64%; z-index: -2;"></div> 
                     <div class="subwaytrack" style="top: 73.5%; z-index: 1;"></div> 
@@ -192,44 +204,90 @@
 
                 <div class="subwayrigy" style="top: 18%; z-index: 1;">
                     <div class="subwayrigx" id="subwayengine01">
-                        <img class="subwaytrain" src="./assets/subway_engine.png" alt=""/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers01.png" alt=""/>
-                        <img class="subwaytrain" src="./assets/subway_car.png" alt="" style="z-index: -4; transform: translate(42.5%);"/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers00.png" alt="" style="z-index: -5; transform: translate(42.5%);"/>
-                        <img class="subwaytrain" src="./assets/subway_car.png" alt="" style="z-index: -5; transform: translate(135%);"/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers01.png" alt="" style="z-index: -6; transform: translate(135%);"/>
-                        <img class="subwaytrain" src="./assets/subway_car.png" alt="" style="z-index: -6; transform: translate(227.3%);"/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers01.png" alt="" style="z-index: -7; transform: translate(227.3%);"/>
+                        <img class="subwaytrain" src="./assets/subwayEngine.png" alt=""/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers01.png" alt=""/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -4; transform: translate(42.5%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers00.png" alt="" style="z-index: -5; transform: translate(42.5%);"/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -5; transform: translate(135%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers01.png" alt="" style="z-index: -6; transform: translate(135%);"/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -6; transform: translate(227.3%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers00.png" alt="" style="z-index: -7; transform: translate(227.3%);"/>
                     </div>
                     <div class="subwaytrack" style="top: 64%; z-index: -2;"></div> 
                     <div class="subwaytrack" style="top: 73.5%; z-index: 1;"></div> 
                 </div>
 
-                <div class="subwayrigy" style="top: 42%; z-index: 1;">
-                    <div class="subwayrigx" id="subwayengine02" style="transform: scale(-1, 1);">
-                        <img class="subwaytrain" src="./assets/subway_engine.png" alt=""/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers01.png" alt=""/>
-                        <img class="subwaytrain" src="./assets/subway_car.png" alt="" style="z-index: -4; transform: translate(42.5%);"/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers00.png" alt="" style="z-index: -5; transform: translate(42.5%);"/>
-                        <img class="subwaytrain" src="./assets/subway_car.png" alt="" style="z-index: -5; transform: translate(135%);"/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers01.png" alt="" style="z-index: -6; transform: translate(135%);"/>
-                        <img class="subwaytrain" src="./assets/subway_car.png" alt="" style="z-index: -6; transform: translate(227.3%);"/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers01.png" alt="" style="z-index: -7; transform: translate(227.3%);"/>
+                <div class="subwayrigy" style="top: 36%; z-index: 1;">
+                    <div class="subwayrigx" id="subwayengine02">
+                        <img class="subwaytrain" src="./assets/subwayEngine.png" alt=""/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers01.png" alt=""/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -4; transform: translate(42.5%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers00.png" alt="" style="z-index: -5; transform: translate(42.5%);"/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -5; transform: translate(135%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers01.png" alt="" style="z-index: -6; transform: translate(135%);"/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -6; transform: translate(227.3%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers00.png" alt="" style="z-index: -7; transform: translate(227.3%);"/>
                     </div>
                     <div class="subwaytrack" style="top: 64%; z-index: -2;"></div> 
                     <div class="subwaytrack" style="top: 73.5%; z-index: 1;"></div> 
                 </div>
 
-                <div class="subwayrigy" style="top: 44%; z-index: 1;">
+                <div class="tunnelpillars" style="top: 36.75%; z-index: 2;">
+                    <img class="pillar" src="./assets/pillar.png" style="left: 10%;"/>
+                    <img class="pillar" src="./assets/pillar.png" style="left: 30%;"/>
+                    <img class="pillar" src="./assets/pillar.png" style="left: 50%;"/>
+                    <img class="pillar" src="./assets/pillar.png" style="left: 70%;"/>
+                    <img class="pillar" src="./assets/pillar.png" style="left: 90%;"/>
+                </div>
+
+                <div class="subwayrigy" style="top: 38.5%; z-index: 3;">
                     <div class="subwayrigx" id="subwayengine03">
-                        <img class="subwaytrain" src="./assets/subway_engine.png" alt=""/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers01.png" alt=""/>
-                        <img class="subwaytrain" src="./assets/subway_car.png" alt="" style="z-index: -4; transform: translate(42.5%);"/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers00.png" alt="" style="z-index: -5; transform: translate(42.5%);"/>
-                        <img class="subwaytrain" src="./assets/subway_car.png" alt="" style="z-index: -5; transform: translate(135%);"/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers01.png" alt="" style="z-index: -6; transform: translate(135%);"/>
-                        <img class="subwaytrain" src="./assets/subway_car.png" alt="" style="z-index: -6; transform: translate(227.3%);"/>
-                        <img class="subwaypassengers" src="./assets/subway_passengers01.png" alt="" style="z-index: -7; transform: translate(227.3%);"/>
+                        <img class="subwaytrain" src="./assets/subwayEngine.png" alt=""/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers01.png" alt=""/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -4; transform: translate(42.5%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers00.png" alt="" style="z-index: -5; transform: translate(42.5%);"/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -5; transform: translate(135%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers01.png" alt="" style="z-index: -6; transform: translate(135%);"/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -6; transform: translate(227.3%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers00.png" alt="" style="z-index: -7; transform: translate(227.3%);"/>
+                    </div>
+                    <div class="subwaytrack" style="top: 64%; z-index: -2;"></div> 
+                    <div class="subwaytrack" style="top: 73.5%; z-index: 1;"></div> 
+                </div>
+
+                <div class="subwayrigy" style="top: 80%; z-index: 1;">
+                    <div class="subwayrigx" id="subwayengine04">
+                        <img class="subwaytrain" src="./assets/subwayEngine.png" alt=""/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers01.png" alt=""/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -4; transform: translate(42.5%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers00.png" alt="" style="z-index: -5; transform: translate(42.5%);"/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -5; transform: translate(135%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers01.png" alt="" style="z-index: -6; transform: translate(135%);"/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -6; transform: translate(227.3%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers00.png" alt="" style="z-index: -7; transform: translate(227.3%);"/>
+                    </div>
+                    <div class="subwaytrack" style="top: 64%; z-index: -2;"></div> 
+                    <div class="subwaytrack" style="top: 73.5%; z-index: 1;"></div> 
+                </div>
+
+                <div class="tunnelpillars" style="top: 80.75%; z-index: 2;">
+                    <img class="pillar" src="./assets/pillar.png" style="left: 10%;"/>
+                    <img class="pillar" src="./assets/pillar.png" style="left: 30%;"/>
+                    <img class="pillar" src="./assets/pillar.png" style="left: 50%;"/>
+                    <img class="pillar" src="./assets/pillar.png" style="left: 70%;"/>
+                    <img class="pillar" src="./assets/pillar.png" style="left: 90%;"/>
+                </div>
+
+                <div class="subwayrigy" style="top: 82.5%; z-index: 3;">
+                    <div class="subwayrigx" id="subwayengine05">
+                        <img class="subwaytrain" src="./assets/subwayEngine.png" alt=""/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers01.png" alt=""/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -4; transform: translate(42.5%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers00.png" alt="" style="z-index: -5; transform: translate(42.5%);"/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -5; transform: translate(135%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers01.png" alt="" style="z-index: -6; transform: translate(135%);"/>
+                        <img class="subwaytrain" src="./assets/subwayCar.png" alt="" style="z-index: -6; transform: translate(227.3%);"/>
+                        <img class="subwaypassengers" src="./assets/subwayPassengers00.png" alt="" style="z-index: -7; transform: translate(227.3%);"/>
                     </div>
                     <div class="subwaytrack" style="top: 64%; z-index: -2;"></div> 
                     <div class="subwaytrack" style="top: 73.5%; z-index: 1;"></div> 
@@ -237,9 +295,9 @@
             </div>
 
             <div id="undergroundcontent">
-                <div style="height: 20vw; max-height: 200px; min-height: 100px;"></div>
+                <div style="height: 50vw; max-height: 500px; min-height: 250px;"></div>
 
-                <div class="panel" style="box-shadow: none;">
+                <div class="panel" style="box-shadow: none; margin-top: 0px; margin-bottom: 0px;">
                     <div class="panelline"></div>
                     <p class="paneltitle">A Week on the Subway</p>
                     <p class="panelsmalltext">Week of <text id="weekdaterangesubway0"></text></p>
@@ -252,9 +310,9 @@
                     </a>
                 </div>
 
-                <div style="height: 100vw; max-height: 1000px; min-height: 500px;"></div>
+                <div style="height: 110vw; max-height: 1100px; min-height: 550px;"></div>
 
-                <div class="panel" style="box-shadow: none;">
+                <div class="panel" style="box-shadow: none; margin-top: 0px; margin-bottom: 0px;">
                     <div class="panelline"></div>
                     <p class="panelsmalltitle">Subway Ridership by Hour</p>
                     <p class="panelsmalltext">Week of <text id="weekdaterangesubway1"></text></p>
@@ -265,9 +323,9 @@
                     </a>
                 </div>
 
-                <div style="height: 120vw; max-height: 1200px; min-height: 600px;"></div>
+                <div style="height: 110vw; max-height: 1100px; min-height: 550px;"></div>
 
-                <div class="panel" style="box-shadow: none;">
+                <div class="panel" style="box-shadow: none; margin-top: 0px; margin-bottom: 0px;">
                     <div class="panelline"></div>
                     <p class="paneltitle">Subway Stations of the Week</p>
                     <p class="panelsmalltext">Week of <text id="weekdaterangesubway2"></text></p>
@@ -333,7 +391,9 @@
                     </a>
                 </div>
 
-                <div class="panel" style="margin-bottom: 0px; box-shadow: none;">
+                <div style="height: 110vw; max-height: 1100px; min-height: 550px;"></div>
+
+                <div class="panel" style="box-shadow: none; margin-top: 0px; margin-bottom: 0px;">
                     <div class="panelline"></div>
                     <p class="paneltitle">Top Stations By Ridership</p>
                     <p class="panelsmalltext">Week of <text id="weekdaterangesubway3"></text></p>

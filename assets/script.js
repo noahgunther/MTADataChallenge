@@ -1,8 +1,7 @@
 // Todo:
 // Art:
 // - Subway:
-// -- Add lights glowing here and there in darkness (signals, misc), yellow cable lights (on pillars?)
-// -- Add more trains
+// -- Add lights glowing here and there in darkness (signals, misc)
 // -- Pizza rat easter egg?
 // - Bus:
 // -- Buses on bridges, one on ground at bottom
