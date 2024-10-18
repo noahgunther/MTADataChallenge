@@ -414,6 +414,137 @@ a {
     background: linear-gradient(0deg, rgb(51, 48, 38, 0.75) 0%, rgb(51, 48, 38, 0) 100%);
 }
 
+#stationpillars {
+    position: absolute;
+    width: 100%;
+    height: 40.5%;
+    top: 0;
+    z-index: 13;
+}
+
+.pillar {
+    position: absolute;
+    bottom: 0;
+    width: max(min(1.6%, 42px), 19px);
+}
+
+.stationpassengers {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 12;
+}
+
+.stationpassenger {
+    position: absolute;
+    top: 18%;
+    width: 7%;
+}
+
+#stationpassengers00 {
+    animation: stationpassengers00;
+    animation-duration: 12s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes stationpassengers00 {
+    0% { left: -10%; }
+    50% { left: 25%; }
+    100% { left: -10%; }
+}
+
+#stationpassengers01 {
+    animation: stationpassengers01;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes stationpassengers01 {
+    0% { left: 20%; }
+    50% { left: -10%; }
+    100% { left: 20%; }
+}
+
+#stationpassengers02 {
+    animation: stationpassengers02;
+    animation-duration: 16s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes stationpassengers02 {
+    0% { left: 40%; }
+    50% { left: -10%; }
+    100% { left: 40%; }
+}
+
+#stationpassengers03 {
+    animation: stationpassengers03;
+    animation-duration: 25s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes stationpassengers03 {
+    0% { left: 60%; }
+    50% { left: -10%; }
+    100% { left: 60%; }
+}
+
+#stationpassengers04 {
+    animation: stationpassengers04;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes stationpassengers04 {
+    0% { left: 110%; }
+    50% { left: 45%; }
+    100% { left: 100%; }
+}
+
+#stationpassengers05 {
+    animation: stationpassengers05;
+    animation-duration: 25s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes stationpassengers05 {
+    0% { left: 31%; }
+    50% { left: 110%; }
+    100% { left: 31%; }
+}
+
+#stationpassengers06 {
+    animation: stationpassengers06;
+    animation-duration: 30s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes stationpassengers06 {
+    0% { left: 10%; }
+    50% { left: 110%; }
+    100% { left: 10%; }
+}
+
+#stationpassengers07 {
+    animation: stationpassengers07;
+    animation-duration: 25s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes stationpassengers07 {
+    0% { left: 40%; }
+    50% { left: 110%; }
+    100% { left: 40%; }
+}
+ 
 #stationfloor {
     position: absolute;
     top: 36%;
@@ -473,14 +604,6 @@ a {
     max-width: 1700px;
 }
 
-#subwayengine01 {
-    position: absolute;
-    animation: subwayanimationRL;
-    animation-duration: 7s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
 .subwaypassengers {
     position: absolute;
     z-index: -3;
@@ -490,9 +613,45 @@ a {
     max-width: 1700px;
 }
 
-@keyframes subwayanimationRL {
-    0% { left: max(min(200%, calc(100% + 800px)), calc(100% + 400px)); }
-    100% { left: min(max(-100%, -800px), 400px); }
+#subwayengine01 {
+    position: absolute;
+    animation: subwayanimationRL00;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes subwayanimationRL00 {
+    0% { left: max(min(800%, calc(400% + 3200px)), calc(400% + 1600px)); }
+    100% { left: min(max(-800%, calc(-400% - 3200px)), calc(-400% - 1600px)); }
+}
+
+#subwayengine02 {
+    position: absolute;
+    animation: subwayanimationLR00;
+    animation-duration: 12s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes subwayanimationLR00 {
+    0% { left: min(max(-300%, calc(-200% - 3200px)), calc(-200% - 1600px)); }
+    100% { left: max(min(300%, calc(200% + 3200px)), calc(200% + 1600px)); }
+}
+
+#subwayengine03 {
+    position: absolute;
+    animation: subwayanimationRL01;
+    animation-duration: 16s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes subwayanimationRL01 {
+    0% { left: max(min(400%, calc(200% + 3200px)), calc(200% + 1600px)); }
+    52% { left: 46%; }
+    46% { left: 49%; }
+    100% { left: min(max(-400%, calc(-200% - 3200px)), calc(-200% - 1600px)); }
 }
 
 .footer {
