@@ -233,12 +233,12 @@ a {
     cursor: pointer;
 }
 
-#sky {
+#sky00 {
     position: relative;
     width: 100%;
 }
 
-#skyart {
+#sky00art {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -250,7 +250,7 @@ a {
     overflow: hidden;
 }
 
-#skycontent {
+.content {
     position: relative;
 }
 
@@ -341,10 +341,6 @@ a {
     z-index: -1;
     background-color: rgb(0, 0, 0);
     overflow: hidden;
-}
-
-#undergroundcontent {
-    position: relative;
 }
 
 #grate {
@@ -683,6 +679,40 @@ a {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     transform: scale(-1, 1);
+}
+
+#sky01 {
+    position: relative;
+    width: 100%;
+}
+
+#sky01art {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    background-color: rgb(87, 152, 216);
+    background: linear-gradient(180deg, rgb(164, 211, 255) 0%, rgb(71, 136, 200) 100%);
+    overflow: hidden;
+}
+
+#sky02 {
+    position: relative;
+    width: 100%;
+}
+
+#sky02art {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    background-color: rgb(164, 211, 255);
+    background: linear-gradient(180deg, rgb(164, 211, 255) 0%, rgb(255, 157, 108) 50%, rgb(255, 164, 202) 100%);
+    overflow: hidden;
 }
 
 .footer {

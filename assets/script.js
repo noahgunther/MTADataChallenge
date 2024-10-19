@@ -2,16 +2,11 @@
 // Art:
 // - Bus:
 // -- Buses on bridges, one on ground at bottom
-// -- Clouds
+// -- Cloud positions
 // - All together:
-// -- Tram in far background w/ clouds, tall buildings
+// -- Tram in far background w/ clouds, tall buildings, sun
 // -- Elevated subway in midground with 6 story buildings, tall trees
 // -- Buses in foreground with short trees, bus station, sidewalk, people
-// Data:
-// - Review all code / math
-// JS functionality:
-// - Write script for subway cars, buses, combination animations (like the tramway)
-// - Do a pass for various screen widths, browsers, general functionality
 
 window.addEventListener("load", init, false);
 
