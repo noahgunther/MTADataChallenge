@@ -1,7 +1,7 @@
 // Todo:
 // Art:
 // - Bus:
-// -- Buses on bridges, one on ground at bottom
+// -- Bus unique animations
 // -- Cloud positions
 // - All together:
 // -- Tram in far background w/ clouds, tall buildings, sun

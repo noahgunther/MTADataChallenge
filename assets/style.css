@@ -256,7 +256,7 @@ a {
 
 .cloud {
     position: absolute;
-    z-index: -2;
+    z-index: -20;
     transform: translate(-50%);
 }
 
@@ -696,6 +696,120 @@ a {
     background-color: rgb(87, 152, 216);
     background: linear-gradient(180deg, rgb(164, 211, 255) 0%, rgb(71, 136, 200) 100%);
     overflow: hidden;
+}
+
+.busoverpass {
+    position: absolute;
+    width: 100%;
+    height: max(min(30vw, 750px), 350px);
+    left: 0;
+}
+
+.barrier {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(160, 160, 160);
+    background: linear-gradient(180deg, rgb(184, 184, 184) 0%, rgb(168, 168, 168) 10%, rgb(150, 150, 150) 60%, rgb(160, 160, 160) 65%, rgb(189, 189, 189) 85%, rgb(92, 92, 92) 100%);
+}
+
+.road {
+    position: absolute;
+    top: 8%;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    z-index: 1;
+    background-color: rgb(17, 17, 17);
+    background: linear-gradient(180deg, rgb(9, 9, 9) 0%, rgb(17, 17, 17) 50%, rgb(9, 9, 9) 100%);
+}
+
+.roadlinewhite {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3%;
+    background-color: rgb(205, 205, 205);
+}
+
+.roadlineyellow {
+    position: absolute;
+    top: 50%;
+    width: 7%;
+    height: 3%;
+    background-color: rgb(190, 177, 0);
+}
+
+.overpassbase {
+    position: absolute;
+    top: 35%;
+    left: 0;
+    width: 100%;
+    height: 25%;
+    z-index: 3;
+    background-color: rgb(91, 91, 91);
+    background: linear-gradient(180deg, rgb(40, 40, 40) 0%, rgb(132, 132, 132) 100%);
+}
+
+.overpasssupport {
+    position: absolute;
+    top: 20%;
+    width: min(max(7%, 70px), 300px);
+    height: 100%;
+    z-index: -15;
+    transform: translate(-50%);
+    background-color: rgb(91, 91, 91);
+    background: linear-gradient(90deg, rgb(91, 91, 91) 0%, rgb(132, 132, 132) 50%, rgb(91, 91, 91) 100%);
+}
+
+.busrigy {
+    position: absolute;
+    width: 100%;
+    height: max(min(17vw, 400px), 175px);
+}
+
+.busrigx {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.bus {
+    position: absolute;
+    top: 0;
+    transform: translate(-50%);
+    width: 50%;
+    min-width: 500px;
+    max-width: 1000px;
+}
+
+#bus00 {
+    position: absolute;
+    transform: scale(-1, 1);
+    animation: busanimationRL00;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes busanimationRL00 {
+    0% { left: max(min(200%, calc(100% + 1000px)), calc(100% + 500px)); }
+    100% { left: min(max(-200%, calc(-100% - 1000px)), calc(-100% - 500px)); }
+}
+
+#bus01 {
+    position: absolute;
+    animation: busanimationLR00;
+    animation-duration: 12s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes busanimationLR00 {
+    0% { left: min(max(-200%, calc(-100% - 1000px)), calc(-100% - 500px)); }
+    100% { left: max(min(200%, calc(100% + 1000px)), calc(100% + 500px)); }
 }
 
 #sky02 {
