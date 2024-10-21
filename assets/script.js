@@ -1,12 +1,9 @@
 // Todo:
 // Art:
-// - Bus:
-// -- Bus unique animations
-// -- Cloud positions
 // - All together:
 // -- Tram in far background w/ clouds, tall buildings, sun
 // -- Elevated subway in midground with 6 story buildings, tall trees
-// -- Buses in foreground with short trees, bus station, sidewalk, people
+// -- Buses in foreground with short trees, sidewalk, people
 
 window.addEventListener("load", init, false);
 

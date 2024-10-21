@@ -725,7 +725,7 @@ a {
     background: linear-gradient(180deg, rgb(9, 9, 9) 0%, rgb(17, 17, 17) 50%, rgb(9, 9, 9) 100%);
 }
 
-.roadlinewhite {
+.roadlineside {
     position: absolute;
     left: 0;
     width: 100%;
@@ -733,12 +733,12 @@ a {
     background-color: rgb(205, 205, 205);
 }
 
-.roadlineyellow {
+.roadlinecenter {
     position: absolute;
     top: 50%;
     width: 7%;
     height: 3%;
-    background-color: rgb(190, 177, 0);
+    background-color: rgb(205, 205, 205);
 }
 
 .overpassbase {
@@ -785,6 +785,15 @@ a {
     max-width: 1000px;
 }
 
+.accordionbus {
+    position: absolute;
+    top: 0;
+    transform: translate(-50%);
+    width: 85%;
+    min-width: 850px;
+    max-width: 1700px;
+}
+
 #bus00 {
     position: absolute;
     transform: scale(-1, 1);
@@ -801,8 +810,10 @@ a {
 
 #bus01 {
     position: absolute;
+    left: min(max(-200%, calc(-100% - 1000px)), calc(-100% - 500px));
     animation: busanimationLR00;
     animation-duration: 12s;
+    animation-delay: 4s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
@@ -810,6 +821,61 @@ a {
 @keyframes busanimationLR00 {
     0% { left: min(max(-200%, calc(-100% - 1000px)), calc(-100% - 500px)); }
     100% { left: max(min(200%, calc(100% + 1000px)), calc(100% + 500px)); }
+}
+
+#bus02 {
+    position: absolute;
+    animation: busanimationLR01;
+    animation-duration: 9s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes busanimationLR01 {
+    0% { left: min(max(-200%, calc(-100% - 1000px)), calc(-100% - 500px)); }
+    50% { left: 40%; }
+    60% { left: 60%; }
+    100% { left: max(min(200%, calc(100% + 1000px)), calc(100% + 500px)); }
+}
+
+#bus03 {
+    position: absolute;
+    transform: scale(-1, 1);
+    left: max(min(200%, calc(100% + 1000px)), calc(100% + 500px));
+    animation: busanimationRL00;
+    animation-duration: 11s;
+    animation-delay: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#bus04 {
+    position: absolute;
+    animation: busanimationLR00;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#bus05 {
+    position: absolute;
+    left: min(max(-200%, calc(-100% - 1000px)), calc(-100% - 500px));
+    animation: busanimationLR00;
+    animation-duration: 10s;
+    animation-delay: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+#bus06 {
+    position: absolute;
+    left: max(min(200%, calc(100% + 1000px)), calc(100% + 500px));
+    transform: scale(-1, 1);
+    animation: busanimationRL00;
+    animation-duration: 15s;
+    animation-delay: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
 }
 
 #sky02 {
