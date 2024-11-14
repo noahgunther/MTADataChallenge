@@ -72,9 +72,7 @@ for i in range(365):
 # Create labels for hours in week
 daysInYearLabels = []
 for i in range(len(daysInYear)):
-    if i == 0 or i == len(daysInYear)-1:
-        daysInYearLabels.append(month[int(daysInYear[i][5:7])-1] + " " + daysInYear[i][8:11] + ", " + daysInYear[i][:4])
-    elif daysInYear[i][8:11] == '01':
+    if daysInYear[i][8:11] == '01':
         daysInYearLabels.append(month[int(daysInYear[i][5:7])-1] + " 01, " + daysInYear[i][:4])
     else:
         daysInYearLabels.append('')
