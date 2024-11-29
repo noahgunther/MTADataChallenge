@@ -1,5 +1,3 @@
-'''This script runs once daily at https://gunthern.pythonanywhere.com to retrieve, calculate and cache site data for https://noahgunther.com/mta'''
-
 import requests
 import json
 from pathlib import Path
@@ -486,7 +484,7 @@ data = {
 #print(data)
 
 # Write json
-with open('./data/data.json', 'w') as f:
+with open('./data.json', 'w') as f:
     json.dump(data, f)
 
 # Create graphs
@@ -545,7 +543,7 @@ for i in range(168):
 
 # Output
 plt.tight_layout()
-plt.savefig('./mysite/media/weeklytramridership.png', transparent=True, dpi=144.0)
+plt.savefig('./media/weeklytramridership.png', transparent=True, dpi=144.0)
 
 plt.clf()
 fig, ax = plt.subplots()
@@ -596,7 +594,7 @@ for i in range(168):
 
 # Output
 plt.tight_layout()
-plt.savefig('./mysite/media/weeklysubwayridership.png', transparent=True, dpi=144.0)
+plt.savefig('./media/weeklysubwayridership.png', transparent=True, dpi=144.0)
 
 plt.clf()
 fig, ax = plt.subplots()
@@ -628,7 +626,7 @@ plt.ylabel('Ridership (week)', font=fpathbold, fontsize=26)
 
 # Output
 plt.tight_layout()
-plt.savefig('./mysite/media/weeklystationcomparison.png', transparent=True, dpi=144.0)
+plt.savefig('./media/weeklystationcomparison.png', transparent=True, dpi=144.0)
 
 plt.clf()
 fig, ax = plt.subplots()
@@ -679,7 +677,7 @@ for i in range(168):
 
 # Output
 plt.tight_layout()
-plt.savefig('./mysite/media/weeklybusridership.png', transparent=True, dpi=144.0)
+plt.savefig('./media/weeklybusridership.png', transparent=True, dpi=144.0)
 
 plt.clf()
 fig, ax = plt.subplots()
@@ -708,7 +706,7 @@ plt.ylabel('Ridership (week)', font=fpathbold, fontsize=26)
 
 # Output
 plt.tight_layout()
-plt.savefig('./mysite/media/weeklyroutecomparison.png', transparent=True, dpi=144.0)
+plt.savefig('./media/weeklyroutecomparison.png', transparent=True, dpi=144.0)
 
 plt.clf()
 fig, ax = plt.subplots()
@@ -755,7 +753,7 @@ for i in range(365):
 
 # Output
 plt.tight_layout()
-plt.savefig('./mysite/media/yearlysubwayridership.png', transparent=True, dpi=144.0)
+plt.savefig('./media/yearlysubwayridership.png', transparent=True, dpi=144.0)
 
 plt.clf()
 fig, ax = plt.subplots()
@@ -802,7 +800,7 @@ for i in range(365):
 
 # Output
 plt.tight_layout()
-plt.savefig('./mysite/media/yearlybusridership.png', transparent=True, dpi=144.0)
+plt.savefig('./media/yearlybusridership.png', transparent=True, dpi=144.0)
 
 plt.clf()
 fig, ax = plt.subplots()
@@ -827,4 +825,4 @@ plt.legend(handles=[subway_patch, bus_patch], prop={'size': 15, 'family': 'monos
 
 # Output
 plt.tight_layout()
-plt.savefig('./mysite/media/meandayofweekcomparison.png', transparent=True, dpi=144.0)
+plt.savefig('./media/meandayofweekcomparison.png', transparent=True, dpi=144.0)
