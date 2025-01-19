@@ -36,11 +36,11 @@ def queryDateConstructor(date):
 datasetTimeQuery = []
 timestamps = []
 # Get most recent available daily set date
-datasetTimeQuery.append("http://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$order=date+DESC&$limit=1")
+datasetTimeQuery.append("https://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$order=date+DESC&$limit=1")
 # Get most recent available hourly subway/tram set date
-datasetTimeQuery.append("https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$order=transit_timestamp+DESC&$limit=1")
+datasetTimeQuery.append("https://data.ny.gov/resource/5wq4-mkjj.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$order=transit_timestamp+DESC&$limit=1")
 # Get most recent available hourly bus set date
-datasetTimeQuery.append("https://data.ny.gov/resource/kv7t-n8in.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$order=transit_timestamp+DESC&$limit=1")
+datasetTimeQuery.append("https://data.ny.gov/resource/gxb3-akrn.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$order=transit_timestamp+DESC&$limit=1")
 for i in range(len(datasetTimeQuery)):
     data = requests.get(datasetTimeQuery[i]).json()
     if i == 0:
@@ -106,7 +106,7 @@ for i in range(len(hoursInWeek)):
         hoursInWeekLabels.append('')
 
 # Get latest year of data from daily ridership set
-url = "http://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$limit=365&$order=date+DESC&$where=date+between+%27" + queryDateConstructor(dateYearStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27"
+url = "https://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$limit=365&$order=date+DESC&$where=date+between+%27" + queryDateConstructor(dateYearStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27"
 data = requests.get(url).json()
 
 # Latest week of ridership from daily data
@@ -255,7 +255,7 @@ for i in range(7):
 # Get latest week of data from hourly subway / tram set
 
 # Tram
-url = "https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&transit_mode=tram&$where=transit_timestamp+between%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=10000"
+url = "https://data.ny.gov/resource/5wq4-mkjj.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&transit_mode=tram&$where=transit_timestamp+between%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=10000"
 data = requests.get(url).json()
 tramWeeklyRidership = 0.0
 tramDailyRidership = [0,0,0,0,0,0,0]
@@ -327,7 +327,7 @@ for h in range(len(hoursInWeek)):
 
 for i in range(636):
     stationComplexId = str(i+1)
-    url = "https://data.ny.gov/resource/wujg-7c2s.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=" + stationComplexId + "&$where=transit_timestamp+between+%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=10000"
+    url = "https://data.ny.gov/resource/5wq4-mkjj.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&station_complex_id=" + stationComplexId + "&$where=transit_timestamp+between+%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=10000"
     data = requests.get(url).json()
     if (data != []):
         stationWeeklyRidership = 0.0
@@ -403,7 +403,7 @@ for i in range(len(busRoute)):
         borough = 'J Train Shuttle Bus'
     elif route[:1] == 'L':
         borough = 'L Train Shuttle Bus'
-    url = "https://data.ny.gov/resource/kv7t-n8in.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&bus_route=" + route + "&$where=transit_timestamp+between+%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=10000"
+    url = "https://data.ny.gov/resource/gxb3-akrn.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&bus_route=" + route + "&$where=transit_timestamp+between+%27" + queryDateConstructor(dateWeekStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27&$order=transit_timestamp+DESC&$limit=10000"
         
     data = requests.get(url).json()
     if (data != []):
