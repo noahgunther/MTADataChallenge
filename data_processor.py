@@ -36,7 +36,7 @@ def queryDateConstructor(date):
 datasetTimeQuery = []
 timestamps = []
 # Get most recent available daily set date
-datasetTimeQuery.append("https://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$order=date+DESC&$limit=1")
+datasetTimeQuery.append("https://data.ny.gov/resource/sayj-mze2.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$order=date+DESC&$limit=1")
 # Get most recent available hourly subway/tram set date
 datasetTimeQuery.append("https://data.ny.gov/resource/5wq4-mkjj.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$order=transit_timestamp+DESC&$limit=1")
 # Get most recent available hourly bus set date
@@ -106,29 +106,33 @@ for i in range(len(hoursInWeek)):
         hoursInWeekLabels.append('')
 
 # Get latest year of data from daily ridership set
-url = "https://data.ny.gov/resource/vxuj-8kew.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&$limit=365&$order=date+DESC&$where=date+between+%27" + queryDateConstructor(dateYearStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27"
-data = requests.get(url).json()
+subwayUrl = "https://data.ny.gov/resource/sayj-mze2.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&mode=Subway&$limit=365&$order=date+DESC&$where=date+between+%27" + queryDateConstructor(dateYearStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27"
+subwayData = requests.get(subwayUrl).json()
+
+busUrl = "https://data.ny.gov/resource/sayj-mze2.json?$$app_token=fIErfxuaUHt3vyktfOyK1XFRS&mode=Bus&$limit=365&$order=date+DESC&$where=date+between+%27" + queryDateConstructor(dateYearStart) + "%27+and+%27" + queryDateConstructor(dateMostRecent) + "%27"
+busData = requests.get(busUrl).json()
 
 # Latest week of ridership from daily data
 subwayWeeklyRidership = 0
 subwayMaxDailyRidershipWeekly = 0
 subwayMaxDailyDateWeekly = ''
+
 busWeeklyRidership = 0
 busMaxDailyRidershipWeekly = 0
 busMaxDailyDateWeekly = ''
 for i in range(7):
-    subwayRidership = int(data[i]['subways_total_estimated_ridership'])
-    busRidership = int(data[i]['buses_total_estimated_ridersip'])
+    subwayRidership = int(float(subwayData[i]['count']))
+    busRidership = int(float(busData[i]['count']))
 
     subwayWeeklyRidership += subwayRidership
     if (subwayRidership > subwayMaxDailyRidershipWeekly):
         subwayMaxDailyRidershipWeekly = subwayRidership
-        subwayMaxDailyDateWeekly = longDateConstructor(dateDeconstructor(data[i]['date']))
+        subwayMaxDailyDateWeekly = longDateConstructor(dateDeconstructor(subwayData[i]['date']))
 
     busWeeklyRidership += busRidership
     if (busRidership > busMaxDailyRidershipWeekly):
         busMaxDailyRidershipWeekly = busRidership
-        busMaxDailyDateWeekly = longDateConstructor(dateDeconstructor(data[i]['date']))
+        busMaxDailyDateWeekly = longDateConstructor(dateDeconstructor(busData[i]['date']))
 
 # Latest year of ridership from daily data
 subwayYearlyRidership = 0
@@ -151,17 +155,16 @@ busMaxAnnualDateRidership = 0
 busMaxAnnualDate = ''
 busMinAnnualDateRidership = 0
 busMinAnnualDate = ''
-for d in data:
+
+for d in subwayData:
     day = longDateConstructor(dateDeconstructor(d['date']))
 
-    subwayRidership = int(d['subways_total_estimated_ridership'])
-    busRidership = int(d['buses_total_estimated_ridersip'])
+    subwayRidership = int(float(d['count']))
 
     # Daily ridership for subway / bus
     for t in range(len(daysInYear)):
-           if d['date'][:10] == daysInYear[t]:
+        if d['date'][:10] == daysInYear[t]:
             subwayDailyRidership[t] += subwayRidership
-            busDailyRidership[t] += busRidership
 
     if subwayRidership > subwayMaxAnnualDateRidership:
         subwayMaxAnnualDateRidership = subwayRidership
@@ -170,6 +173,40 @@ for d in data:
         subwayMinAnnualDateRidership = subwayRidership
         subwayMinAnnualDate = day
 
+    subwayYearlyRidership += subwayRidership
+
+    if day[:3] == 'Mon':
+        subwayDaysOfWeekTally[0] += 1
+        subwayDaysOfWeekRidership[0] += subwayRidership
+    elif day[:3] == 'Tue':
+        subwayDaysOfWeekTally[1] += 1
+        subwayDaysOfWeekRidership[1] += subwayRidership
+    elif day[:3] == 'Wed':
+        subwayDaysOfWeekTally[2] += 1
+        subwayDaysOfWeekRidership[2] += subwayRidership
+    elif day[:3] == 'Thu':
+        subwayDaysOfWeekTally[3] += 1
+        subwayDaysOfWeekRidership[3] += subwayRidership
+    elif day[:3] == 'Fri':
+        subwayDaysOfWeekTally[4] += 1
+        subwayDaysOfWeekRidership[4] += subwayRidership
+    elif day[:3] == 'Sat':
+        subwayDaysOfWeekTally[5] += 1
+        subwayDaysOfWeekRidership[5] += subwayRidership
+    elif day[:3] == 'Sun':
+        subwayDaysOfWeekTally[6] += 1
+        subwayDaysOfWeekRidership[6] += subwayRidership
+
+for d in busData:
+    day = longDateConstructor(dateDeconstructor(d['date']))
+
+    busRidership = int(float(d['count']))
+
+    # Daily ridership for subway / bus
+    for t in range(len(daysInYear)):
+        if d['date'][:10] == daysInYear[t]:
+            busDailyRidership[t] += busRidership
+
     if busRidership > busMaxAnnualDateRidership:
         busMaxAnnualDateRidership = busRidership
         busMaxAnnualDate = day
@@ -177,42 +214,27 @@ for d in data:
         busMinAnnualDateRidership = busRidership
         busMinAnnualDate = day
 
-    subwayYearlyRidership += subwayRidership
     busYearlyRidership += busRidership
 
     if day[:3] == 'Mon':
-        subwayDaysOfWeekTally[0] += 1
-        subwayDaysOfWeekRidership[0] += subwayRidership
         busDaysOfWeekTally[0] += 1
         busDaysOfWeekRidership[0] += busRidership
     elif day[:3] == 'Tue':
-        subwayDaysOfWeekTally[1] += 1
-        subwayDaysOfWeekRidership[1] += subwayRidership
         busDaysOfWeekTally[1] += 1
         busDaysOfWeekRidership[1] += busRidership
     elif day[:3] == 'Wed':
-        subwayDaysOfWeekTally[2] += 1
-        subwayDaysOfWeekRidership[2] += subwayRidership
         busDaysOfWeekTally[2] += 1
         busDaysOfWeekRidership[2] += busRidership
     elif day[:3] == 'Thu':
-        subwayDaysOfWeekTally[3] += 1
-        subwayDaysOfWeekRidership[3] += subwayRidership
         busDaysOfWeekTally[3] += 1
         busDaysOfWeekRidership[3] += busRidership
     elif day[:3] == 'Fri':
-        subwayDaysOfWeekTally[4] += 1
-        subwayDaysOfWeekRidership[4] += subwayRidership
         busDaysOfWeekTally[4] += 1
         busDaysOfWeekRidership[4] += busRidership
     elif day[:3] == 'Sat':
-        subwayDaysOfWeekTally[5] += 1
-        subwayDaysOfWeekRidership[5] += subwayRidership
         busDaysOfWeekTally[5] += 1
         busDaysOfWeekRidership[5] += busRidership
     elif day[:3] == 'Sun':
-        subwayDaysOfWeekTally[6] += 1
-        subwayDaysOfWeekRidership[6] += subwayRidership
         busDaysOfWeekTally[6] += 1
         busDaysOfWeekRidership[6] += busRidership
 
