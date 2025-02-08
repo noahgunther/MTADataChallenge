@@ -275,7 +275,7 @@ function init() {
         document.getElementById('subwayyearlyridershipdaily').setAttribute('src', './media/yearlysubwayridership.png?dummy' + Date.now());
         document.getElementById('busyearlyridershipdaily').setAttribute('src', './media/yearlybusridership.png?dummy' + Date.now());
     }
-    xhttp.open("GET", "./data.json");
+    xhttp.open("GET", "./data.json?dummy" + Date.now());
     xhttp.send();
 
     // Extract subway line identifiers from station name
